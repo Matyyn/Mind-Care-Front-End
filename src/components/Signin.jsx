@@ -47,8 +47,8 @@ export default function SignIn() {
     >
       <Stack>
         <Image
-          src="src\assets\Images\brain.png"
-          alt="Depression Image"
+          src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fbrain.png?alt=media&token=b9f9b1e6-d4d9-46c4-8440-fc51f7c33e75"
+          alt="logo"
           height="75px"
           width="75px"
           marginLeft="40%"
