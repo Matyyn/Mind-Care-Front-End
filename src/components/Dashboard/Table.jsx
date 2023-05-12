@@ -124,7 +124,7 @@ const imageUrl = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z_YOZX
   };
 
   return (
-    <div width={'100wh'}>
+    <div width={'auto'}>
       <Stack style={{ flexDirection: "row", }} marginRight={'2%'}>
         <Text fontSize="2xl" style={{ fontWeight: "bold", marginLeft: "2%" }}>
           Appointments

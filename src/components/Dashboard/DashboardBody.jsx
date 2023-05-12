@@ -36,7 +36,7 @@ import SideBar from "../Sidebar";
 function DashboardBody() {
   return (
     <>
-    <Box p={4} marginLeft={'3%'}>
+    <Box p={4} marginLeft={'3%'} width={'auto'}>
         <Grid templateColumns="repeat(7, 1fr)" gap={2}>
           <GridItem
             width="auto"

@@ -44,7 +44,7 @@ import {
 
   const RechartsExample = () => {
     return (
-      <Flex style={{flexDirection:"row"}}>      
+      <Flex style={{flexDirection:"row"}}width={'auto'}>      
       <LineChart width={600} height={300} data={data} margin={{
             top: 20,
             right: 20,
