@@ -150,7 +150,7 @@ function DashboardBody() {
         </Grid>
       </Box>
       <Box>
-        <Grid templateColumns="repeat(3, 1fr)" gap={1}>
+        <Grid templateColumns="repeat(3, 1fr)" gap={1} width={'auto'}>
           <GridItem colSpan={1}>
             <LineGraph />
           </GridItem>
