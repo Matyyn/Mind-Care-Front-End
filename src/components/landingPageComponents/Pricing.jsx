@@ -88,7 +88,7 @@ function Pricing() {
             {showImage && (
               <GridItem order={{ sm: 1, md: 1 }}>
                 <Image
-                  src="src\assets\Images\E-Wallet-pana (1).png"
+                  src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FE-Wallet-pana%20(1).png?alt=media&token=b41152e6-ed0d-4547-8ab6-bf6110ae7076"
                   alt="Credit Card Image"
                   height="100%"
                   width="100%"

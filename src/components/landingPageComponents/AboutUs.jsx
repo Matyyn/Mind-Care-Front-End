@@ -134,7 +134,7 @@ function AboutUs() {
               <GridItem order={{ sm: 1, md: 1 }}>
                 {showImage && (
                   <Image
-                    src="src\assets\Images\Psychologist-amico (1).png"
+                    src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FPsychologist-amico.png?alt=media&token=ff2d20a8-6088-4997-ab50-a80e9e80cfd2"
                     alt="Depression Image"
                     height="100%"
                     width="100%"

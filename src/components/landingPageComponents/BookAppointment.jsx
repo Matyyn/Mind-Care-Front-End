@@ -99,7 +99,7 @@ function BookAppointment() {
                       </Text>
                       <Center>
                         <Image
-                          src="src\assets\Images\depression.png"
+                          src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fdepression.png?alt=media&token=12c115ce-ac5d-4842-a384-9b1514406e10"
                           alt="Depression Image"
                           height="120px"
                           width="100px"
@@ -151,7 +151,7 @@ function BookAppointment() {
                       </Text>
                       <Center>
                         <Image
-                          src="src\assets\Images\nervous.png"
+                          src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fnervous.png?alt=media&token=ea27bb6c-34e4-4944-8a65-0c32504b6329"
                           alt="Nervous Image"
                           height="120px"
                           width="100px"
@@ -204,7 +204,7 @@ function BookAppointment() {
                       </Text>
                       <Center>
                         <Image
-                          src="src\assets\Images\low-speed (1).png"
+                          src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Flow-speed%20(1).png?alt=media&token=90e2c259-2fe0-4550-9cf3-c5f3433e1319"
                           alt="Speed Image"
                           height="120px"
                           width="100px"
@@ -255,8 +255,8 @@ function BookAppointment() {
                       </Text>
                       <Center>
                         <Image
-                          src="src\assets\Images\fatigue.png"
-                          alt="Depression Image"
+                          src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Ffatigue.png?alt=media&token=fc767160-6648-4a16-9dbe-eb554a6a3efc"
+                          alt="Fatigue Image"
                           height="120px"
                           width="100px"
                         />

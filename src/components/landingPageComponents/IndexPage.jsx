@@ -90,8 +90,8 @@ function IndexPage() {
               <GridItem>
                 <Box position="relative" maxW="lg">
                   <Image
-                    src="src\assets\Images\Mental health-bro (1).png"
-                    alt="Image"
+                    src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FMental%20health-bro%20(1).png?alt=media&token=dec5327d-c881-4337-a667-6bdb708e99dc"
+                    alt="Hero Image"
                     opacity="1"
                     borderRadius="md"
                     marginLeft={{ base: "0", lg: "5%" }}
