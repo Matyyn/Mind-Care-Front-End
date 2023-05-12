@@ -54,7 +54,7 @@ function AboutUs() {
       <div className="parentDiv">
         <div
           className="columns"
-          style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%",height:'100vh' }}
+          style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%",height:'auto' ,width:'auto'}}
         >
           <Box>
             <Grid

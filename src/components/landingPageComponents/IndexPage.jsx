@@ -16,7 +16,7 @@ function IndexPage() {
     <div className="parentDiv">
       <div
         className="columns"
-        style={{ marginLeft: "10%", marginRight: "10%", marginTop: "1%" ,width:'100vw'}}
+        style={{ marginLeft: "10%", marginRight: "10%", marginTop: "1%" ,width:'auto'}}
       >
         {isLargerThanLg ? (
           <Box>

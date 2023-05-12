@@ -52,6 +52,7 @@ function Pricing() {
           marginLeft: "10%",
           marginRight: "10%",
           marginTop: showMarginTop ? "2%" : "0",
+          width:'auto'
         }}
       >
         <Box>
