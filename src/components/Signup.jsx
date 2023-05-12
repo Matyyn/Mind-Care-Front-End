@@ -206,7 +206,7 @@ export default function Signup() {
             height="75px"
             width="75px"
             marginTop={"0%"}
-            marginLeft="48%"
+            marginLeft="45%"
           />
           <Text
             fontSize="32"
