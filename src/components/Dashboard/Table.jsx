@@ -185,7 +185,7 @@ const imageUrl = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z_YOZX
             <option value="cancelled">Cancelled</option>
           </Select>
         </Stack>
-        <InputGroup size="md" width={"25%"} style={{ marginLeft: "auto", justifyContent: "flex-end" }}>
+        <InputGroup size="md" width={"20%"} style={{ marginLeft: "auto", justifyContent: "flex-end" }}>
   <InputLeftElement pointerEvents="none">
     <SearchIcon color="gray.300" />
   </InputLeftElement>
