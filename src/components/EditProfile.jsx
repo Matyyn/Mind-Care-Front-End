@@ -110,7 +110,7 @@ const FormikForm = () => {
           <AiOutlineClose fontSize={20} onClick={() => setShowAlert(false)} />
         </Alert>
       )} */}
-      <Grid templateColumns="1fr" gap={0} height={'5vh'}> 
+      <Grid templateColumns="1fr" gap={0} height={'auto'}> 
         <Formik
           initialValues={initialValues}
           onSubmit={(values,{resetForm}) => {
