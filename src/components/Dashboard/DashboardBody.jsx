@@ -163,7 +163,7 @@ function DashboardBody() {
         </Grid>
       </Box>
       <Box>
-        <Grid templateColumns="repeat(1, 1fr)">
+        <Grid templateColumns="repeat(1, 1fr)" width={'auto'}>
           <GridItem>
             <Table/>
           </GridItem>
