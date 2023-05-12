@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from './landingPage/Navbar'
-import BookAppointment from "./landingPage/BookAppointment";
-import Stats from "./landingPage/Stats";
-import Pricing from "./landingPage/Pricing";
-import FAQs from "./landingPage/FAQs";
-import AboutUs from "./landingPage/AboutUs";
-import IndexPage from './landingPage/IndexPage';
+import Navbar from './landingPageComponents/Navbar'
+import BookAppointment from "./landingPageComponents/BookAppointment";
+import Stats from "./landingPageComponents/Stats";
+import Pricing from "./landingPageComponents/Pricing";
+import FAQs from "./landingPageComponents/FAQs";
+import AboutUs from "./landingPageComponents/AboutUs";
+import IndexPage from './landingPageComponents/IndexPage';
 import { Divider } from '@chakra-ui/react';
 function landingPage() {
   return (
