@@ -1,9 +1,9 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
 import colors from "../Colors";
 import { Link } from "react-router-dom"
 import {
   Box,
-  Flex,
+  Flex,Spinner,
   Text,
   IconButton,
   Button,
@@ -26,7 +26,11 @@ import {
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
-
+  const [isLoading, setIsLoading] = useState(true);
+  //for spinner
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
   return (
     <Box width={'100%'}>
       <Flex
@@ -62,17 +66,21 @@ export default function WithSubnavigation() {
             style={{ fontWeight: "bolder" }}
             color={useColorModeValue("gray.800", "white")}
           >
-            <Stack flexDirection={'row'} marginRight={'40%'}>
-          <Image
-          src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fbrain.png?alt=media&token=b9f9b1e6-d4d9-46c4-8440-fc51f7c33e75"
-          alt="Logo"
-          height="40px"
-          marginTop={'7%'}
-          width="40px"
-          marginLeft="40%"
-        />
-        <span style={{marginTop:'20%'}}>Mind</span>
-        <span style={{marginTop:'20%'}}>Care</span>
+            <Stack flexDirection={'row'} >
+            <div>
+             {isLoading && <Spinner size="lg" />}
+            <Image
+            src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fbrain.png?alt=media&token=b9f9b1e6-d4d9-46c4-8440-fc51f7c33e75"
+            alt="Logo"
+            height="40px"
+            marginTop={'7%'}
+            width="65px"          
+            onLoad={handleImageLoad}
+            
+            style={{ display: isLoading ? "none" : "block" }}
+          />
+          </div>
+        <span style={{marginTop:'10%',color:colors.secondary}}>Mind Care</span>        
         </Stack>
           </Text>        
           <Flex display={{ base: "none", md: "flex" }} ml={20}>

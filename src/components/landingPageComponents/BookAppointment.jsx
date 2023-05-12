@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
 import colors from "../Colors";
 import { SimpleGrid, GridItem, Grid } from "@chakra-ui/react";
 import {
-  Box,
+  Box,Spinner,
   Flex,
   Center,
   Text,
@@ -38,6 +38,11 @@ import {
 } from "@chakra-ui/icons";
 
 function BookAppointment() {
+  const [isLoading, setIsLoading] = useState(true);
+  //for spinner
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
   return (
     
       <div className="parentDiv">
@@ -98,12 +103,17 @@ function BookAppointment() {
                         Low Mood and Wellbeing
                       </Text>
                       <Center>
+                      <div>
+                        {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fdepression.png?alt=media&token=12c115ce-ac5d-4842-a384-9b1514406e10"
                           alt="Depression Image"
                           height="120px"
                           width="100px"
+                          onLoad={handleImageLoad}
+                          style={{ display: isLoading ? "none" : "block" }}
                         />
+                        </div>
                       </Center>
                       <p
                         color="blue.600"
@@ -150,12 +160,17 @@ function BookAppointment() {
                         Anxiety & worry
                       </Text>
                       <Center>
+                      <div>
+                        {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fnervous.png?alt=media&token=ea27bb6c-34e4-4944-8a65-0c32504b6329"
                           alt="Nervous Image"
                           height="120px"
                           width="100px"
+                          onLoad={handleImageLoad}
+                          style={{ display: isLoading ? "none" : "block" }}
                         />
+                        </div>
                       </Center>
                       <p
                         color="blue.600"
@@ -203,12 +218,17 @@ function BookAppointment() {
                         Low productivity & Output
                       </Text>
                       <Center>
+                      <div>
+                        {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Flow-speed%20(1).png?alt=media&token=90e2c259-2fe0-4550-9cf3-c5f3433e1319"
                           alt="Speed Image"
                           height="120px"
                           width="100px"
+                          onLoad={handleImageLoad}
+                          style={{ display: isLoading ? "none" : "block" }}
                         />
+                        </div>
                       </Center>
                       <p
                         color="blue.600"
@@ -254,12 +274,17 @@ function BookAppointment() {
                         Stress & burnout
                       </Text>
                       <Center>
+                        <div>
+                        {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Ffatigue.png?alt=media&token=fc767160-6648-4a16-9dbe-eb554a6a3efc"
                           alt="Fatigue Image"
                           height="120px"
                           width="100px"
+                          onLoad={handleImageLoad}
+                          style={{ display: isLoading ? "none" : "block" }}
                         />
+                        </div>
                       </Center>
                       <p
                         color="blue.600"

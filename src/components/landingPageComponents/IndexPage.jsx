@@ -1,10 +1,14 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
 import colors from "../Colors";
-import { GridItem, Grid, useBreakpointValue } from "@chakra-ui/react"
-import { Box, Text, Button, Stack, Image } from "@chakra-ui/react"
+import { GridItem, Grid,Spinner, useBreakpointValue ,Box, Text, Button, Stack, Image } from "@chakra-ui/react"
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@chakra-ui/react"
 function IndexPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  //for spinner
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
   const columnCount = useBreakpointValue({ base: 1, md: 2, lg: 2, xl: 2 });
 
   const [isLargerThanLg] = useMediaQuery("(min-width: 1350px)")
@@ -89,15 +93,20 @@ function IndexPage() {
               </GridItem>
               <GridItem>
                 <Box position="relative" maxW="lg">
-                  <Image
+                <div>
+                    {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
+                    <Image                  
                     src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FMental%20health-bro%20(1).png?alt=media&token=dec5327d-c881-4337-a667-6bdb708e99dc"
                     alt="Hero Image"
                     opacity="1"
+                    onLoad={handleImageLoad}
+                    style={{ display: isLoading ? "none" : "block" }}
                     borderRadius="md"
                     marginLeft={{ base: "0", lg: "5%" }}
                     height="auto"
                     width={"auto"}
-                  />                  
+                  />
+                  </div>                  
                 </Box>
               </GridItem>
             </Grid>

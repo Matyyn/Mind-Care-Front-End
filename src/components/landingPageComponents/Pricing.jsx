@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
 import { SimpleGrid, GridItem, Grid } from "@chakra-ui/react";
 import {
@@ -18,7 +18,7 @@ import {
   StackDivider,
   Stack,
   Collapse,
-  Icon,
+  Icon,Spinner,
   Link,
   Image,
   Popover,
@@ -39,7 +39,11 @@ import {
 function Pricing() {
   const showImage = useBreakpointValue({ base: false, md: false ,lg:true});
   const showMarginTop = useBreakpointValue({ sm: false,md:true,lg:true });
-
+  const [isLoading, setIsLoading] = useState(true);
+  //for spinner
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
   return (
     <div className="parentDiv">
       <div
@@ -85,15 +89,21 @@ function Pricing() {
                 </p>
               </Stack>
             </GridItem>
+            
             {showImage && (
               <GridItem order={{ sm: 1, md: 1 }}>
-                <Image
+                 <div>
+                  {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
+                  <Image
                   src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FE-Wallet-pana%20(1).png?alt=media&token=b41152e6-ed0d-4547-8ab6-bf6110ae7076"
                   alt="Credit Card Image"
                   height="100%"
                   width="100%"
                   // display={{ sm: 'none', lg: 'block' }}
+                  onLoad={handleImageLoad}
+                  style={{ display: isLoading ? "none" : "block" }}
                 />
+                </div>
               </GridItem>
             )}
           </Grid>

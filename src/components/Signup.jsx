@@ -12,10 +12,10 @@ import {
   Flex,
   Alert,
   AlertIcon,
-  Text,
+  Text, Spinner,
   Select,
   Button,
-  Stack,useToast,
+  Stack, useToast,
   FormErrorMessage,
   Image, Grid, GridItem,
   VStack,
@@ -40,13 +40,18 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Signup() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrl] = useState([]);
-  const [imagePreviewUrl,setImagePreviewUrl]=useState([])
+  const [imagePreviewUrl, setImagePreviewUrl] = useState([])
   const [imageUploads, setImageUploads] = useState([]);
   const [imageUrl, setImageUrls] = useState([]);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showPreviousButton, setShowPreviousButton] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
   const imageListRef = ref(storage, "Therapist/documents/");
+  //for spinner
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   //for multiple pictures
 
   const uploadFiles = (setFieldValue) => {
@@ -200,14 +205,20 @@ export default function Signup() {
         width={"100vw"}
       >
         <Stack marginBottom={"20"}>
-          <Image
-            src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fbrain.png?alt=media&token=b9f9b1e6-d4d9-46c4-8440-fc51f7c33e75"
-            alt="Logo"
-            height="75px"
-            width="75px"
-            marginTop={"0%"}
-            marginLeft="46%"
-          />
+          <div style={{
+            marginTop: "0%"
+            ,marginLeft: "46%"
+          }}>
+            {isLoading && <Spinner size="xl" />}
+            <Image
+              src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fbrain.png?alt=media&token=b9f9b1e6-d4d9-46c4-8440-fc51f7c33e75"
+              alt="Logo"
+              onLoad={handleImageLoad}
+              style={{ display: isLoading ? "none" : "block" }}
+              height="75px"
+              width="75px"
+            />
+          </div>
           <Text
             fontSize="32"
             fontWeight="700"
@@ -307,47 +318,47 @@ export default function Signup() {
                         {/* <Text style={{ fontSize: "30px", fontWeight: "500" }}>
                           Step 2
                         </Text> */}
-<Image
-  src={imageUrls}
-  width={"120px"}
-  height={"120px"}
-  borderRadius={"50%"}
-  border={"1px solid black"}
-></Image>
-<FormControl
-  isInvalid={errors.picture && touched.picture}
-  style={{ display: "flex", alignItems: "center" }}
->
-  <Box>
-    <input
-      type="file"
-      accept="image/jpeg,image/jpg,image/png"
-      onChange={(event) => {
-        const file = event.target.files[0];
-        if (file) {
-          const imageRef = ref(
-            storage,
-            `Therapist/picture/${file.name + v4()}`
-          );
-          uploadBytes(imageRef, file).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-              setImageUrl([url]);
-              setFieldValue("picture", [url]);
-              console.log("Image upload success!");
-            });
-          });
-        }
-      }}
-    />
-  </Box>
-  <div style={{ flexDirection: "column" }}>
-    <FormErrorMessage marginLeft={"30%"}>
-      {errors.picture}
-    </FormErrorMessage>
-  </div>
-</FormControl>
+                        <Image
+                          src={imageUrls}
+                          width={"120px"}
+                          height={"120px"}
+                          borderRadius={"50%"}
+                          border={"1px solid black"}
+                        ></Image>
+                        <FormControl
+                          isInvalid={errors.picture && touched.picture}
+                          style={{ display: "flex", alignItems: "center" }}
+                        >
+                          <Box>
+                            <input
+                              type="file"
+                              accept="image/jpeg,image/jpg,image/png"
+                              onChange={(event) => {
+                                const file = event.target.files[0];
+                                if (file) {
+                                  const imageRef = ref(
+                                    storage,
+                                    `Therapist/picture/${file.name + v4()}`
+                                  );
+                                  uploadBytes(imageRef, file).then((snapshot) => {
+                                    getDownloadURL(snapshot.ref).then((url) => {
+                                      setImageUrl([url]);
+                                      setFieldValue("picture", [url]);
+                                      console.log("Image upload success!");
+                                    });
+                                  });
+                                }
+                              }}
+                            />
+                          </Box>
+                          <div style={{ flexDirection: "column" }}>
+                            <FormErrorMessage marginLeft={"30%"}>
+                              {errors.picture}
+                            </FormErrorMessage>
+                          </div>
+                        </FormControl>
 
-{/* <Image
+                        {/* <Image
   src={imagePreviewUrl || imageUrls}
   width={"120px"}
   height={"120px"}
@@ -496,43 +507,43 @@ export default function Signup() {
                                 {errors.downloadURL}
                               </FormErrorMessage>
                             </div> */}
-      <FormControl
-  isInvalid={errors.downloadURL && touched.downloadURL}
-  style={{ display: "flex", alignItems: "center" }}
->
-  <Box>
-    <input
-      type="file"
-      accept=".pdf,.doc,.docx"
-      onChange={(event) => {
-        const file = event.target.files[0];
-        if (file) {
-          const documentRef = ref(
-            storage,
-            `Therapist/documents/${file.name + v4()}`
-          );
-          const documentTask = uploadBytes(documentRef, file);
-          documentTask
-            .then((snapshot) => {
-              return getDownloadURL(snapshot.ref);
-            })
-            .then((url) => {
-              setFieldValue("downloadURL", url);
-              console.log("Document upload success!");
-            })
-            .catch((error) => {
-              console.error("Document upload error:", error);
-            });
-        }
-      }}
-    />
-  </Box>
-  <div style={{ flexDirection: "column" }}>
-    <FormErrorMessage marginLeft={"30%"}>
-      {errors.downloadURL}
-    </FormErrorMessage>
-  </div>
-</FormControl>
+                            <FormControl
+                              isInvalid={errors.downloadURL && touched.downloadURL}
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <Box>
+                                <input
+                                  type="file"
+                                  accept=".pdf,.doc,.docx"
+                                  onChange={(event) => {
+                                    const file = event.target.files[0];
+                                    if (file) {
+                                      const documentRef = ref(
+                                        storage,
+                                        `Therapist/documents/${file.name + v4()}`
+                                      );
+                                      const documentTask = uploadBytes(documentRef, file);
+                                      documentTask
+                                        .then((snapshot) => {
+                                          return getDownloadURL(snapshot.ref);
+                                        })
+                                        .then((url) => {
+                                          setFieldValue("downloadURL", url);
+                                          console.log("Document upload success!");
+                                        })
+                                        .catch((error) => {
+                                          console.error("Document upload error:", error);
+                                        });
+                                    }
+                                  }}
+                                />
+                              </Box>
+                              <div style={{ flexDirection: "column" }}>
+                                <FormErrorMessage marginLeft={"30%"}>
+                                  {errors.downloadURL}
+                                </FormErrorMessage>
+                              </div>
+                            </FormControl>
 
 
                           </div>

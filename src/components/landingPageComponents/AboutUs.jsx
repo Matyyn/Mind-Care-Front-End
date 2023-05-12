@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import colors from "../Colors";
 import { SimpleGrid, GridItem, Grid } from "@chakra-ui/react";
 import {
@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import {
   Box,
-  Flex,
+  Flex,Spinner,
   Center,
   Text,
   Divider,
@@ -42,8 +42,13 @@ import {
 } from "@chakra-ui/react";
 
 function AboutUs() {
+  const [isLoading, setIsLoading] = useState(true);
   const showImage = useBreakpointValue({ base: false, md: false, lg: true });
   const showMarginTop = useBreakpointValue({ sm: false, md: true, lg: true });
+  //for spinner
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
   return (
     <div>
       <div className="parentDiv">
@@ -133,13 +138,18 @@ function AboutUs() {
               </GridItem>
               <GridItem order={{ sm: 1, md: 1 }}>
                 {showImage && (
-                  <Image
+                 <div>
+                 {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
+                 <Image
                     src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FPsychologist-amico.png?alt=media&token=ff2d20a8-6088-4997-ab50-a80e9e80cfd2"
                     alt="Depression Image"
+                    onLoad={handleImageLoad}
+                    style={{ display: isLoading ? "none" : "block" }}
                     height="100%"
                     width="100%"
                     // display={{ sm: 'none', lg: 'block' }}
                   />
+                </div>
                 )}
               </GridItem>
             </Grid>

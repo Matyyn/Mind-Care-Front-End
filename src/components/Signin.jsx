@@ -1,11 +1,11 @@
 import { Formik, Field, Form } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import colors from "./Colors";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import {
   Box,
-  Flex,
+  Flex,Spinner,
   Text,
   Button,Select,
   Stack,
@@ -35,6 +35,11 @@ const handleSubmit = (values) => {
 };
 
 export default function SignIn() {
+  const [isLoading, setIsLoading] = useState(true);
+  //for spinner
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
   return (
     <Flex
       bg="white "
@@ -46,13 +51,20 @@ export default function SignIn() {
       paddingBottom={"4%"}
     >
       <Stack>
-        <Image
+      <div style={{
+            marginTop: "0%"
+            ,marginLeft: "40%"
+          }}>
+            {isLoading && <Spinner size="xl" />}
+            <Image
           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fbrain.png?alt=media&token=b9f9b1e6-d4d9-46c4-8440-fc51f7c33e75"
           alt="logo"
+          onLoad={handleImageLoad}
+          style={{ display: isLoading ? "none" : "block" }}
           height="75px"
           width="75px"
-          marginLeft="40%"
         />
+        </div>
         <Text
           fontSize="32"
           fontWeight="700"
