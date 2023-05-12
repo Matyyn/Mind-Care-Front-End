@@ -82,7 +82,7 @@ function AboutUs() {
                   </Text>
                   <p
                     color="blue.600"
-                    style={{ fontSize: "7", textAlign: "center",fontSize:'17px' }}
+                    style={{textAlign: "center",fontSize:'17px' }}
                   >
                     Our mission is to make mental health supportradically more
                     accessible, preventative, and stigma-free

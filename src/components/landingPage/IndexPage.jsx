@@ -29,7 +29,7 @@ function IndexPage() {
                   <Text
                     fontSize= "52px"
                     style={{
-                      textAlign: "left",
+                      
                       fontWeight: "bolder",
                       marginTop: "0",
                       color: colors.secondary,
@@ -44,7 +44,7 @@ function IndexPage() {
 
                   <p
                     color={colors.secondary}
-                    style={{ fontSize: "6 ", textAlign: "center",fontSize:'px' }}>
+                    style={{ textAlign: "center",fontSize:'12px' }}>
                     For people looking to proactively care for their mental wellbeing, Mind
                     Care takes the guesswork out with our mental health platform. Speak with
                     licensed therapists or take on self-guided programs, entirely within a

@@ -75,7 +75,7 @@ function Pricing() {
                 </Text>
                 <p
                   color="blue.600"
-                  style={{ fontSize: "17px", textAlign: "center" }}
+                  style={{ textAlign: "center" }}
                 >
                   Mind Care provides majority of the features for free
                   although therapy is paid. Powered by Stripe, benefits of
