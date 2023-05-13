@@ -44,9 +44,9 @@ function BookAppointment() {
     setIsLoading(false);
   };
   return (
-    
-    <div className="parentDiv" marginBottom={'5%'}>
-        <div style={{ marginLeft: "10%", marginRight: "10%", marginTop: "1%",width:'auto' }}>
+    <>
+    <div className="parentDiv" >
+        <div style={{ marginLeft: "10%", marginRight: "10%", marginTop: "5%", width:'auto' }}>
           <strong>
             <Text fontSize="52" style={{ textAlign: "center" }}>
               <span style={{ color: colors.secondary }}>People need </span>
@@ -117,28 +117,28 @@ function BookAppointment() {
                         </div>
                       </Center>
                       <p
-                        color="blue.600"
-                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"bold"}}
+                        color="colors.secondary"
+                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"600"}}
                       >
                         A state of emotional distress
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
                           textAlign: "center",
-                          fontWeight:"bold"
+                          fontWeight:"600"
                         }}
                       >
                         which can impact overall
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
-                          textAlign: "center",fontWeight:"bold"
+                          textAlign: "center",fontWeight:"600"
                         }}
                       >
                         well-being and quality of life
@@ -174,29 +174,29 @@ function BookAppointment() {
                         </div>
                       </Center>
                       <p
-                        color="blue.600"
-                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"bold"}}
+                        color="colors.secondary"
+                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"600"}}
                       >
                         Feelings of fear and
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
                           textAlign: "center",
-                          fontWeight:"bold"
+                          fontWeight:"600"
                         }}
                       >
                         apprehension that can
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
                           textAlign: "center",
-                          fontWeight:"bold"
+                          fontWeight:"600"
                         }}
                       >
                         interfere with daily activities
@@ -232,27 +232,27 @@ function BookAppointment() {
                         </div>
                       </Center>
                       <p
-                        color="blue.600"
-                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"bold"}}
+                        color="colors.secondary"
+                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"600"}}
                       >
                         A decrease in work efficiency,
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
-                          textAlign: "center",fontWeight:"bold"
+                          textAlign: "center",fontWeight:"600"
                         }}
                       >
                         output caused by stress,
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
-                          textAlign: "center",fontWeight:"bold"
+                          textAlign: "center",fontWeight:"600"
                         }}
                       >
                         burnout,mental health issues.
@@ -288,27 +288,27 @@ function BookAppointment() {
                         </div>
                       </Center>
                       <p
-                        color="blue.600"
-                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"bold"}}
+                        color="colors.secondary"
+                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:"600"}}
                       >
                         A state of emotional, physical,
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
-                          textAlign: "center",fontWeight:"bold"
+                          textAlign: "center",fontWeight:"600"
                         }}
                       >
                         mental exhaustion which can
                       </p>
                       <p
-                        color="blue.600"
+                        color="colors.secondary"
                         style={{
                           fontSize: "14",
                           marginTop: "0",
-                          textAlign: "center",fontWeight:"bold"
+                          textAlign: "center",fontWeight:"600"
                         }}
                       >
                         lead to decreased productivity
@@ -322,13 +322,15 @@ function BookAppointment() {
           <Center>
             <Button backgroundColor={colors.primary} variant="outline" style={{
               marginTop: "20px",
-              marginBottom: "20px",
+              marginBottom: "7%",
             }}>
               Book Appointment
             </Button>
           </Center>
         </div>
       </div>
+      <Divider/>
+      </>
   );
 }
 

@@ -10,17 +10,7 @@ import { Divider } from '@chakra-ui/react';
 function landingPage() {
   return (
     <div>
-      <Navbar/>
-      <IndexPage/>
-      <Divider/>
-      <BookAppointment/>
-      <Divider/>
-      <Stats/>
-      <Divider/>
-      <Pricing/>      
-      <FAQs/>   
-      <Divider/>
-      <AboutUs/>   
+      <Navbar/>       
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 //import { css } from "@emotion/react";
+import colors from "../Colors";
 import {
   Box,
   Accordion,
@@ -12,11 +13,11 @@ import {
 } from "@chakra-ui/react";
 function FAQs() {
   return (
-    <div className="parentDiv" style={{marginBottom:'5%'}}>
+    <>
+    <div className="parentDiv">
       <div
         className="columns"
-        style={{  marginTop: "1%" ,width:'auto'}}
-      >
+        style={{  marginTop: "1%" ,width:'auto',marginTop:'5%',marginBottom:'5%'}}>
       <Text
         fontSize="52"
         style={{
@@ -24,7 +25,7 @@ function FAQs() {
           fontWeight: "bolder",
           marginTop: "5%",
           marginBottom: "0",
-          color: "#2D3748",          
+          color: colors.secondary,          
         }}
       >
         Frequently Asked Questions
@@ -45,7 +46,7 @@ function FAQs() {
         and transparency to clients seeking mental health support
       </p>
       <Accordion
-        style={{ marginRight: "25%", marginLeft: "25%",marginBottom:'2%', color: "#2D3748" }}>
+        style={{ marginRight: "25%", marginLeft: "25%",marginBottom:'2%', color: colors.secondary }}>
         <AccordionItem>
           <h2>
             <AccordionButton>
@@ -133,6 +134,8 @@ function FAQs() {
       </Accordion>
      </div>
     </div>
+    <Divider/>
+    </>
   );
 }
 

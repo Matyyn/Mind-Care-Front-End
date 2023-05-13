@@ -12,14 +12,14 @@ const data = [
 
 const EmotionsTable = () => {
   return (
-    <Table variant="simple">
+    <Table variant="simple" >
       <Thead>
         <Tr>
-          <Th>Weekday</Th>
-          <Th>Mood</Th>
-          <Th>Emotion</Th>
-          <Th>Reason</Th>
-          <Th>Stress Level</Th>
+          <Th color={colors.secondary}>Weekday</Th>
+          <Th color={colors.secondary}>Mood</Th>
+          <Th color={colors.secondary}>Emotion</Th>
+          <Th color={colors.secondary}>Reason</Th>
+          <Th color={colors.secondary}>Stress Level</Th>
         </Tr>
       </Thead>
       <Tbody>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import colors from "../Colors";
-import { GridItem, Grid,Spinner, useBreakpointValue ,Box, Text, Button, Stack, Image } from "@chakra-ui/react"
+import { GridItem, Grid,Spinner, useBreakpointValue ,Box, Text, Button, Stack, Image, Divider } from "@chakra-ui/react"
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@chakra-ui/react"
 function IndexPage() {
@@ -13,11 +13,11 @@ function IndexPage() {
 
   const [isLargerThanLg] = useMediaQuery("(min-width: 1350px)")
   return (
+    <>
     <div className="parentDiv" style={{marginBottom:'5%'}}>
       <div
         className="columns"
-        style={{ marginLeft: "10%", marginRight: "10%", marginTop: "1%" ,width:'auto'}}
-      >
+        style={{ marginLeft: "10%", marginRight: "10%", marginTop: "1%" ,width:'auto'}}>
         {isLargerThanLg ? (
           <Box>
             <Grid
@@ -32,8 +32,7 @@ function IndexPage() {
                 <Stack mt="6" spacing="3">
                   <Text
                     fontSize= "52px"
-                    style={{
-                      
+                    style={{                      
                       fontWeight: "bolder",
                       marginTop: "0",
                       color: colors.secondary,
@@ -103,9 +102,10 @@ function IndexPage() {
                     onLoad={handleImageLoad}
                     style={{ display: isLoading ? "none" : "block" }}
                     borderRadius="md"
+                    marginTop={'10%'}
                     marginLeft={{ base: "0", lg: "5%" }}
-                    height="auto"
-                    width={"auto"}
+                    height="100%"
+                    width="100%"
                   />
                   </div>                  
                 </Box>
@@ -196,6 +196,8 @@ function IndexPage() {
         )}
       </div>
     </div>
+    <Divider/>
+    </>
   )
 }
 export default IndexPage

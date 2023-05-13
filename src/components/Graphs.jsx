@@ -52,7 +52,7 @@ const RechartsExample = () => {
     <>
       <LineChart
         width={400}
-        height={300}
+        height={400}
         data={data}
         margin={{
           top: 20,
@@ -64,7 +64,7 @@ const RechartsExample = () => {
           type="monotone"
           dataKey="clients"
           stroke={colors.secondary}
-          name="Weekly Mood"
+          name="Weekly Clients Graph"
         />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="weekdayname" />
@@ -72,39 +72,7 @@ const RechartsExample = () => {
         <Tooltip />
         <Legend />
       </LineChart>
-      <Box>
-        <Grid templateColumns="repeat(1, 1fr)" gap={1} marginLeft={"12%"}>
-          <GridItem
-            w="90%"
-            h="10"
-            height={"auto"}
-            
-            margin={"4"}
-            borderRadius={"10"}
-            paddingTop={"10%"}
-            paddingBottom={"10%"}
-          >
-            <Text fontSize={22} fontWeight={"700"} textAlign={"center"}>
-              Frequent Emotions
-            </Text>
-            <Text textAlign={"center"}>
-              <p>Top 3 emotions experienced in this period</p>
-            </Text>
-            <HStack spacing={4} marginLeft={"18%"} marginTop={"3%"}>
-              <Tag size={"lg"} variant="solid" colorScheme="teal">
-                Sad
-              </Tag>
-              <Tag size={"lg"} variant="solid" colorScheme="teal">
-                Optimistic
-              </Tag>
-              <Tag size={"lg"} variant="solid" colorScheme="teal">
-                Relaxed
-              </Tag>
-            </HStack>
-          </GridItem>
-        </Grid>
-      </Box>
-    </>
+          </>
   );
 };
 export default RechartsExample;

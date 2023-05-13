@@ -133,17 +133,19 @@ const FormikForm = () => {
                   {/* <Text fontSize={'20'} fontWeight={'700'}>Profile</Text> */}
                 </Stack>
                 <Grid templateRows="repeat(5, 1fr)" gap={4} height={'120vh'}>
-                  <Flex alignItems="left" width={'100%'} py={0}>
+                  <Flex alignItems="left" width={'100%'} py={0}>             
+                   <Stack marginLeft={'10%'}>
+                    <Text marginLeft={'18%'} fontWeight={'600'}>Profile Picture</Text>     
                     <Image
                       src={imageUrls}
                       width={"200px"}
                       height={"175px"}
                       borderRadius={"50%"}
-                      border={"1px solid black"}
+                      //border={"1px solid black"}
                     />
                     <FormControl
                       isInvalid={errors.picture && touched.picture}
-                      width="25%" mr={2} marginTop={'5%'}>
+                      width="25%" marginTop={'5%'}>
                         <Box>
                       <input
                         type="file"
@@ -174,8 +176,9 @@ const FormikForm = () => {
                         Upload Image
                       </Button> */}
                     </FormControl>
+                    </Stack>
                     <FormControl
-                      isInvalid={errors.firstName && touched.firstName} width="26%" mr={2} marginTop={'6%'}>
+                      isInvalid={errors.firstName && touched.firstName} width="28%" mr={2} marginTop={'6%'}>
                       <FormLabel htmlFor="firstName">First Name</FormLabel>
                       <Input
                         type="text"
@@ -186,7 +189,7 @@ const FormikForm = () => {
                       />
                     </FormControl>
                     <FormControl
-                      isInvalid={errors.lastName && touched.lastName} width="26%" mr={2} marginTop={'6%'}>
+                      isInvalid={errors.lastName && touched.lastName} width="28%" mr={2} marginTop={'6%'}>
                       <FormLabel htmlFor="lastName">Last Name</FormLabel>
                       <Input
                         type="text"
@@ -369,7 +372,7 @@ const FormikForm = () => {
                           </Button>
                         )}
                       </div>
-                      <div style={{marginRight: '10%' }}>
+                      <div style={{marginRight: '12%' }}>
                         <Button type="submit" size={'md'} mt={5} backgroundColor={colors.secondary} color={'white'}>Submit</Button>
                       </div>
                     </Box>

@@ -231,7 +231,7 @@ function AboutUs() {
                       borderBottomEndRadius={"5px"}
                     />
                   </InputGroup>
-                  <p style={{fontWeight:'600'}}>
+                  <p>
                     Hello, we are Mind Care. Our goal is to translate the
                     positive effects from revolutionizing digital therapy
                   </p>

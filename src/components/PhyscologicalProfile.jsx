@@ -31,11 +31,11 @@ export default function Simple() {
       {/* navbar */}
       <Navbar/>
       <Box p={4}>
-        <Text fontSize={18} fontWeight={"500"} marginLeft={'1%'}>
+        <Text fontSize={20} fontWeight={"500"} marginLeft={'2%'}>
           Client Name: Mahnoor Hashmi
         </Text>
-        <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-          <GridItem
+        <Grid templateColumns="repeat(5, 1fr)" gap={6} marginLeft={'2%'}>
+          {/* <GridItem
             w="100%"
             h="10"
             height={"auto"}
@@ -47,50 +47,80 @@ export default function Simple() {
               Daily Check Ins
             </Text>
             <Mood />
-          </GridItem>
+          </GridItem> */}
 
           <GridItem
             w="100%"
             h="10"
+            boxShadow={'lg'}
             height={"auto"}            
             padding={3}
             borderRadius={"10"}
           >
-            <Text textAlign={"left"} fontWeight={"bolder"}>
+            <Text textAlign={"center"} fontWeight={"bolder"} fontSize={18}>
               {" "}
               Anxiety Test Score
             </Text>
-            <Text textAlign={"left"} fontWeight={"600"}>
+            <Text textAlign={"center"} fontWeight={"600"}>
               {" "}
               Total Score:31
             </Text>
-            <HStack spacing={4}>
+            <HStack spacing={4} marginLeft={'20%'} marginTop={'6%'}>
               <Tag size={"lg"} variant="solid" backgroundColor={colors.primary}>
                 Mild Anxiety
               </Tag>
             </HStack>
           </GridItem>
+          
+          <GridItem
+            w="100%"
+            h="10"
+            boxShadow={'lg'}
+            height={"auto"}            
+            padding={3}
+            borderRadius={"10"}                        
+          >
+            <Text fontSize={18} fontWeight={"700"} textAlign={"center"}>
+              {" "}
+              Depression Test Score
+            </Text>
+            <Text textAlign={"center"} fontWeight={"600"}>
+              {" "}
+              Total Score : 29
+            </Text>
+            <HStack spacing={4} marginLeft={'20%'} marginTop={'6%'}>
+              <Tag size={"lg"} variant="solid" backgroundColor="#E53E3E">
+                Mild Depression
+              </Tag>
+            </HStack>
+          </GridItem>
+          
           <GridItem
             w="100%"
             h="10"
             height={"auto"}
             padding={3}
             borderRadius={"10"}
-          >
-            <Text textAlign={"left"} fontWeight={"bolder"}>
-              {" "}
-              Depression Test Score
+            colSpan={2}
+            boxShadow={'lg'}>
+          <Text fontSize={18} fontWeight={"700"} textAlign={"center"}>
+              Frequent Emotions
             </Text>
-            <Text textAlign={"left"} fontWeight={"600"}>
-              {" "}
-              Total Score : 29
+            <Text textAlign={"center"} fontWeight={'600'}>
+              <p>Top 3 emotions experienced in this period</p>
             </Text>
-
-            <HStack spacing={4}>
-              <Tag size={"lg"} variant="solid" backgroundColor="#E53E3E">
-                Mild Depression
+            <HStack spacing={4} marginLeft={'25%'} marginTop={"3%"} >
+              <Tag size={"lg"} variant="solid" colorScheme="teal" width={'auto'} textAlign={'center'}>
+                Sad
+              </Tag>
+              <Tag size={"lg"} variant="solid" colorScheme="teal" width={'auto'}>
+                Optimistic
+              </Tag>
+              <Tag size={"lg"} variant="solid" colorScheme="teal" width={'auto'}>
+                Relaxed
               </Tag>
             </HStack>
+
           </GridItem>
         </Grid>
       </Box>
@@ -101,19 +131,22 @@ export default function Simple() {
             w="100%"
             h="10"
             height={"auto"}
+            
             margin={"4"}
             borderRadius={"10"}
           >
-            <Text fontWeight={"700"} fontSize={20} marginLeft={"3%"}>
+            <Text fontWeight={"700"} fontSize={25} marginLeft={"4%"}>
               Daily Logs
             </Text>
-            <Text marginLeft={"3%"} fontWeight={'700'}>Mood Check In are displayed here</Text>
+            <Text marginLeft={"4%"} fontWeight={'500'}>Mood Check In are displayed here</Text>
             <MoodTable />
           </GridItem>
-          <GridItem>
+          <GridItem marginTop={'12%'}>
+          <Text fontWeight={"700"} fontSize={20} marginLeft={"18%"}>Weekly Clients Graph</Text>
             <Graphs />
           </GridItem>
-          <GridItem>
+          <GridItem marginTop={'12%'}>
+          <Text fontWeight={"700"} fontSize={20} marginLeft={"18%"}>Weekly Clients Graph</Text>
             <Graphs />
           </GridItem>
         </Grid>

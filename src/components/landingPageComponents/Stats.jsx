@@ -45,7 +45,8 @@ function Stats() {
     setIsLoading(false);
   };
   return (
-    <div>
+    <>
+    
       <div className="parentDiv" style={{marginBottom:'5%'}}>
         <div style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%",width:'auto' }}>
           <strong>
@@ -116,7 +117,7 @@ function Stats() {
                       </Text>
                       <p
                         color="blue.600"
-                        style={{ fontSize: "13", textAlign: "center" ,fontWeight:'bold'}}>
+                        style={{ fontSize: "13", textAlign: "center" ,fontWeight:'600'}}>
                         of all people signed up for the Mind Care app within the
                         first year
                       </p>
@@ -157,7 +158,7 @@ function Stats() {
                       </Text>
                       <p
                         color="blue.600"
-                        style={{ fontSize: "13", textAlign: "center" ,fontWeight:'bold'}}
+                        style={{ fontSize: "13", textAlign: "center" ,fontWeight:'600'}}
                       >
                         of employees reported improved ability to regulate their
                         
@@ -200,7 +201,7 @@ function Stats() {
                       </Text>
                       <p
                         color="blue.600"
-                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:'bold'}}
+                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:'600'}}
                       >
                         clients experienced a decrease in anxiety levels after
                         4-6 weeks of utilisation
@@ -242,7 +243,7 @@ function Stats() {
                       </Text>
                       <p
                         color="blue.600"
-                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:'bold'}}
+                        style={{ fontSize: "14", textAlign: "center" ,fontWeight:'600'}}
                       >
                         user satisfaction rating across
                       </p>
@@ -251,7 +252,7 @@ function Stats() {
                         style={{
                           fontSize: "14",
                           marginTop: "0",
-                          textAlign: "center",fontWeight:'bold'
+                          textAlign: "center",fontWeight:'600'
                         }}
                       >
                         3 million registered users on our app
@@ -285,7 +286,8 @@ function Stats() {
         </div>
       </div>
     </div>
-    </div>
+    <Divider/>
+    </>
   );
 }
 
