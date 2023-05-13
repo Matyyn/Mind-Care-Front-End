@@ -149,7 +149,7 @@ function DashboardBody() {
           </GridItem>
         </Grid>
       
-        <Grid templateColumns="repeat(3, 1fr)" gap={1}>
+        <Grid templateColumns="repeat(3, 1fr)" gap={1} style={{marginTop:'3%',marginBottom:'3%'}}>
           <GridItem colSpan={1}>
             <LineGraph />
           </GridItem>

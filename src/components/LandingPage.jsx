@@ -17,8 +17,7 @@ function landingPage() {
       <Divider/>
       <Stats/>
       <Divider/>
-      <Pricing/>
-      <Divider/>
+      <Pricing/>      
       <FAQs/>   
       <Divider/>
       <AboutUs/>   

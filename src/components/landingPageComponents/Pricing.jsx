@@ -45,7 +45,7 @@ function Pricing() {
     setIsLoading(false);
   };
   return (
-    <div className="parentDiv">
+    <div className="parentDiv" style={{marginBottom:'3%'}}>
       <div
         className="columns"
         style={{

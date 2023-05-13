@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 function FAQs() {
   return (
-    <div className="parentDiv">
+    <div className="parentDiv" style={{marginBottom:'3%'}}>
       <div
         className="columns"
         style={{  marginTop: "1%" ,width:'auto'}}

@@ -46,7 +46,7 @@ function Stats() {
   };
   return (
     <div>
-      <div className="parentDiv">
+      <div className="parentDiv" style={{marginBottom:'3%'}}>
         <div style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%",width:'auto' }}>
           <strong>
             <Text fontSize="52" style={{ textAlign: "center" }}>
