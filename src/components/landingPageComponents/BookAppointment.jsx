@@ -45,7 +45,7 @@ function BookAppointment() {
   };
   return (
     
-    <div className="parentDiv" marginBottom={'3%'}>
+    <div className="parentDiv" marginBottom={'5%'}>
         <div style={{ marginLeft: "10%", marginRight: "10%", marginTop: "1%",width:'auto' }}>
           <strong>
             <Text fontSize="52" style={{ textAlign: "center" }}>

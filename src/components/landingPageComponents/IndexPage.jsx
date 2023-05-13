@@ -13,7 +13,7 @@ function IndexPage() {
 
   const [isLargerThanLg] = useMediaQuery("(min-width: 1350px)")
   return (
-    <div className="parentDiv" style={{marginBottom:'3%'}}>
+    <div className="parentDiv" style={{marginBottom:'5%'}}>
       <div
         className="columns"
         style={{ marginLeft: "10%", marginRight: "10%", marginTop: "1%" ,width:'auto'}}

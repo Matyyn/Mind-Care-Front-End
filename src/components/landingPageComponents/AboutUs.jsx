@@ -51,7 +51,7 @@ function AboutUs() {
   };
   return (
     <div>
-      <div className="parentDiv"  style={{marginTop:'3%'}}>
+      <div className="parentDiv"  style={{marginTop:'5%'}}>
         <div
           className="columns"
           style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%",height:'auto' ,width:'auto'}}

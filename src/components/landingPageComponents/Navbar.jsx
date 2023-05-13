@@ -74,7 +74,7 @@ export default function WithSubnavigation() {
             alt="Logo"
             height="50px"
             marginTop={'1%'}
-            width="60px"          
+            width="55px"          
             onLoad={handleImageLoad}
             
             style={{ display: isLoading ? "none" : "block" }}
