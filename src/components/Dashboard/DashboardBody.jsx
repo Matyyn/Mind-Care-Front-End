@@ -149,18 +149,22 @@ function DashboardBody() {
           </GridItem>
         </Grid>
       
-        <Grid templateColumns="repeat(3, 1fr)" gap={1}>
-          <GridItem colSpan={1}>
-            <LineGraph />
-          </GridItem>
-          <GridItem marginLeft={'10%'}>
-            <BarGraph />
-          </GridItem>
+        <Grid templateRows="repeat(2, 1fr)" gap={1}>
           <GridItem>
-            <PieGraph />
-          </GridItem>
+          <Grid templateColumns="repeat(3, 1fr)" gap={1}>
+            <GridItem colSpan={1}>
+              <LineGraph />
+            </GridItem>
+            <GridItem marginLeft={'10%'}>
+              <BarGraph />
+            </GridItem>
+            <GridItem>
+              <PieGraph />
+            </GridItem>
+          </Grid>   
+          </GridItem>       
           <GridItem>
-          <Table/>
+            <Table/>
           </GridItem>
         </Grid>
       
