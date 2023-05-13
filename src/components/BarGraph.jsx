@@ -13,7 +13,7 @@ const data = [
 
 const BarGraph = () => {
   return (
-    <BarChart width={400} height={290} data={data}>
+    <BarChart width={450} height={290} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="age" />
       <YAxis />

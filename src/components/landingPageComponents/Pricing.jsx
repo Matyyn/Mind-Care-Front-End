@@ -74,13 +74,14 @@ function Pricing() {
                     marginTop: "0",
                     marginBottom: "0",
                     color: "#2D3748",
+
                   }}
                 >
                   Pay only for the therapy
                 </Text>
                 <p
                   color="blue.600"
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "center" ,fontSize:'17px',fontWeight:'600'}}
                 >
                   Mind Care provides majority of the features for free
                   although therapy is paid. Powered by Stripe, benefits of

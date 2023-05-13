@@ -201,7 +201,7 @@ const imageUrl = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z_YOZX
 </InputGroup>
 
       </Stack>
-      <div className="Tables" width={'auto'}>
+      <div className="Tables" width={'90vw'}>
         <Table  marginTop={"3%"} marginLeft={'1%'}>
           <Thead>
             <Tr>

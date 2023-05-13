@@ -36,7 +36,8 @@ function FAQs() {
           marginLeft: "20%",
           marginTop: "2%",
           marginBottom:"2%",
-          fontSize:'17px'
+          fontSize:'17px',
+          fontWeight:'600'
         }}
       >
         Mind Care FAQ:provide answers to common questions about mental health

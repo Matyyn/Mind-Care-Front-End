@@ -62,7 +62,8 @@ function Stats() {
               marginRight: "15%",
               marginLeft: "15%",
               marginTop: "2%",
-              fontSize:'17px'
+              fontSize:'17px',
+              fontWeight:'600'
             }}>
             Clinical data that showcases substantial improvements in the
             wellbeing, stress,and anxiety levels of members who utilise our

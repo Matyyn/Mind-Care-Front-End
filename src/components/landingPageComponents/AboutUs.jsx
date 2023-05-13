@@ -87,7 +87,7 @@ function AboutUs() {
                   </Text>
                   <p
                     color="blue.600"
-                    style={{textAlign: "center",fontSize:'17px' }}
+                    style={{textAlign: "center",fontSize:'17px',fontWeight:'600'}}
                   >
                     Our mission is to make mental health supportradically more
                     accessible, preventative, and stigma-free
@@ -231,7 +231,7 @@ function AboutUs() {
                       borderBottomEndRadius={"5px"}
                     />
                   </InputGroup>
-                  <p>
+                  <p style={{fontWeight:'600'}}>
                     Hello, we are Mind Care. Our goal is to translate the
                     positive effects from revolutionizing digital therapy
                   </p>

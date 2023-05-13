@@ -37,9 +37,9 @@ function DashboardBody() {
   return (
     <>
     <Box p={4} marginLeft={'3%'} width={'auto'}>
-        <Grid templateColumns="repeat(7, 1fr)" gap={2}>
+        <Grid templateColumns="repeat(6, 1fr)" gap={1} width={'90vw'} padding={0}>
           <GridItem
-            width="auto"
+            width="14vw"
             height={"auto"}
             padding={3}
             boxShadow={'lg'}
@@ -61,7 +61,7 @@ function DashboardBody() {
           </GridItem>
 
           <GridItem
-            width="auto"
+            width="14vw"
             h="10"
             height={"auto"}
             boxShadow={'lg'}
@@ -84,7 +84,7 @@ function DashboardBody() {
           </GridItem>
 
           <GridItem
-            width="auto"            
+            width="14vw"            
             height={"auto"}
             boxShadow={'lg'}
             padding={3}
@@ -106,7 +106,7 @@ function DashboardBody() {
           </GridItem>
 
           <GridItem
-            width="auto"
+            width="14vw"
             boxShadow={'lg'}
             height={"auto"}
             padding={3}
@@ -127,7 +127,7 @@ function DashboardBody() {
             </HStack>
           </GridItem>
           <GridItem
-            width="auto"
+            width="14vw"
             height={"auto"}
             boxShadow={'lg'}
             padding={3}
@@ -163,7 +163,7 @@ function DashboardBody() {
         </Grid>
       </Box>
       <Box>
-        <Grid templateColumns="repeat(1, 1fr)" width={'auto'}>
+        <Grid templateColumns="repeat(1, 1fr)" width={'100vw'}>
           <GridItem>
             <Table/>
           </GridItem>

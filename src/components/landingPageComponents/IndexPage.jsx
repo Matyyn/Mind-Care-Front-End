@@ -48,7 +48,8 @@ function IndexPage() {
 
                   <p
                     color={colors.secondary}
-                    style={{ textAlign: "center",fontSize:'12px' }}>
+                    style={{ textAlign: "center",fontSize:'17px'
+                    ,fontWeight:'600' }}>
                     For people looking to proactively care for their mental wellbeing, Mind
                     Care takes the guesswork out with our mental health platform. Speak with
                     licensed therapists or take on self-guided programs, entirely within a
@@ -138,6 +139,7 @@ function IndexPage() {
                       textAlign: "center",
                       marginLeft: "10%",
                       marginRight: "10%",fontSize:'17px'
+                      ,fontWeight:'700'
                     }}                    
                   >
                     For people looking to proactively care for their mental
