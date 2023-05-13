@@ -37,7 +37,7 @@ function DashboardBody() {
   return (
     <>
     <Box p={4} marginLeft={'3%'} width={'auto'}>
-        <Grid templateColumns="repeat(6, 1fr)" gap={1} width={'90vw'} padding={0}>
+        <Grid templateColumns="repeat(6, 1fr)" gap={1} width={'auto'} padding={0}>
           <GridItem
             width="14vw"
             height={"auto"}
@@ -148,9 +148,8 @@ function DashboardBody() {
             </HStack>
           </GridItem>
         </Grid>
-      </Box>
-      <Box>
-        <Grid templateColumns="repeat(3, 1fr)" gap={1} width={'auto'}>
+      
+        <Grid templateColumns="repeat(3, 1fr)" gap={1}>
           <GridItem colSpan={1}>
             <LineGraph />
           </GridItem>
@@ -161,14 +160,13 @@ function DashboardBody() {
             <PieGraph />
           </GridItem>
         </Grid>
-      </Box>
-      <Box>
-        <Grid templateColumns="repeat(1, 1fr)" width={'100vw'}>
+      
+        <Grid templateColumns="repeat(1, 1fr)" >
           <GridItem>
             <Table/>
           </GridItem>
         </Grid>
-      </Box>
+      </Box> 
       </>
   );
 }
