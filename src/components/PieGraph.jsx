@@ -10,7 +10,7 @@ const COLORS = [colors.primary,colors.secondary];
 
 const PieGraph = () => {
   return (
-    <PieChart width={400} height={285} padding={0} margin={0}>
+    <PieChart width={300} height={285} padding={0} margin={0}>
       <Pie
         dataKey="value"
         isAnimationActive={false}

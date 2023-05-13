@@ -201,7 +201,7 @@ const imageUrl = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z_YOZX
 </InputGroup>
 
       </Stack>
-      <div className="Tables" width={'90vw'}>
+      <div className="Tables" >
         <Table  marginTop={"3%"} marginLeft={'1%'}>
           <Thead>
             <Tr>
@@ -221,7 +221,7 @@ const imageUrl = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z_YOZX
                 Status
               </Th>
               <Th fontSize={"15"}>Actions</Th>
-              <Th fontSize={"15"}>Generate Report</Th>
+              <Th fontSize={"15"} padding={0}>Generate Report</Th>
             </Tr>
           </Thead>
           <Tbody>
