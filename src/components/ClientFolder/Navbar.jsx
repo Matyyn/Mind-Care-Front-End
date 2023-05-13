@@ -28,7 +28,7 @@ import Test from "../Sidebar"
 export default function WithSubnavigation() {
   //const { isOpen, onToggle } = useDisclosure()
   return (
-    <Box width={{ base: '100vw', md: '100vw' }}>
+    <Box width={{ base: 'auto', md: 'auto' }}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
