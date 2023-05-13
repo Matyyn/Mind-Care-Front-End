@@ -159,6 +159,9 @@ function DashboardBody() {
           <GridItem>
             <PieGraph />
           </GridItem>
+          <GridItem>
+          <Table/>
+          </GridItem>
         </Grid>
       
         {/* <Grid templateColumns="repeat(1, 1fr)" >
