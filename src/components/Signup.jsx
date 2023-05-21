@@ -1,7 +1,9 @@
 //backend imports
-import axios from 'axios';
-import therapistBaseurl from "../utils/axios";
+import axios from 'axios'
+
 //front end imports
+import { redirect } from "react-router-dom";
+
 import React, { useState, useEffect } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
@@ -10,8 +12,6 @@ import colors from "./Colors";
 import {
   Box,
   Flex,
-  Alert,
-  AlertIcon,
   Text, Spinner,
   Select,
   Button,
@@ -39,7 +39,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function Signup() {
   const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrls, setImageUrl] = useState([]);
+  const [imageUrls, setImageUrl] = useState();
   const [imagePreviewUrl, setImagePreviewUrl] = useState([])
   const [imageUploads, setImageUploads] = useState([]);
   const [imageUrl, setImageUrls] = useState([]);
@@ -140,15 +140,26 @@ export default function Signup() {
   }
   const toast = useToast();
   async function handleSubmit(values, { resetForm }) {
+    var result;
     console.log("entered values are", values);
+    result = await axios.post('/signup',values
+    )
     //await uploadFiles();
+    if(result){
+      console.log(result)
     toast({
       title: "Signup form Submitted.",
       status: "success",
       duration: 3000,
       isClosable: true,
     });
-    resetForm();
+   //resetForm();
+   // window.location.href = 'https://127.0.0.1:5173/signin';
+    //redirect("/signin");
+
+    }
+
+    
 
     // try {
     //   const response = await axios.post('/signup', values);
@@ -171,19 +182,19 @@ export default function Signup() {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
-    picture: Yup.array().required("Required"),
+    picture: Yup.string().required("Required"),
     // Dateofbirth: Yup.date().required("Date of Birth is required"),
     gender: Yup.string().required("Gender is required"),
     specialization: Yup.string().required("Specialization Field is required"),
     experience: Yup.string().required("Experience is required"),
-    downloadURL: Yup.array().min(1, "Required").required("Required"),
+    downloadURL: Yup.string().min(1, "Required").required("Required"),
   });
   const initialValues = {
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    Dateofbirth: new Date(),
+    dateofBirth: new Date(),
     gender: "",
     picture: "",
     specialization: "",
@@ -191,7 +202,7 @@ export default function Signup() {
     SessionCharges: "",
     Start_DateTime: "",
     End_DateTime: "",
-    downloadURL: [],
+    downloadURL: "",
   }
 
   return (
@@ -298,13 +309,13 @@ export default function Signup() {
                         <FormControl>
                           <FormLabel>Date of Birth</FormLabel>
                           <DatePicker
-                            selected={values.Dateofbirth}
+                            selected={values.dateofBirth}
                             dateFormat="MMMM d, yyyy"
                             className="form-control"
-                            name="Dateofbirth"
+                            name="dateofBirth"
                             onChange={(date) =>
                               setFieldValue(
-                                "Dateofbirth",
+                                "dateofBirth",
                                 date
                               )
                             }
@@ -342,8 +353,8 @@ export default function Signup() {
                                   );
                                   uploadBytes(imageRef, file).then((snapshot) => {
                                     getDownloadURL(snapshot.ref).then((url) => {
-                                      setImageUrl([url]);
-                                      setFieldValue("picture", [url]);
+                                      setImageUrl(url);
+                                      setFieldValue("picture", url);
                                       console.log("Image upload success!");
                                     });
                                   });

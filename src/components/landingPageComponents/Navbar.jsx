@@ -80,7 +80,7 @@ const Navbar = () => {
             onLoad={handleImageLoad}            
             style={{ display: isLoading ? "none" : "block" }}
           />
-          <span style={{marginTop:'12%',color:colors.secondary,fontWeight:'600'}}>Mind Care</span>  
+          <span style={{marginTop:'12%',color:colors.secondary,fontWeight:'700'}}>Mind Care</span>  
           </Stack>
           </div>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>

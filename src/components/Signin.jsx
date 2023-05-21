@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Formik, Field, Form } from "formik";
 import React, { useState, useEffect } from "react";
 import colors from "./Colors";
@@ -30,8 +31,13 @@ const validationSchema = Yup.object().shape({
       .required("Password is required"),
 });
 
-const handleSubmit = (values) => {
+const handleSubmit = async (values, resetForm) => {
   console.log(values); // replace with your logic for submitting the form
+  var result;
+  result = await axios.post('/login', values)
+  console.log(result)
+
+  //resetForm()
 };
 
 export default function SignIn() {
@@ -45,7 +51,7 @@ export default function SignIn() {
       bg="white "
       align="center"
       justify="center"
-      h="auto"
+      minHeight="100vh"
       paddingTop={"2%"}
       width={"100vw"}
       paddingBottom={"4%"}
