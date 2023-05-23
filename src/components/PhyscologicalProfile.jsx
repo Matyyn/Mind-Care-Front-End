@@ -25,7 +25,17 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import Test from "./Sidebar"
+import { useLocation } from "react-router-dom";
 export default function Simple() {
+  const location = useLocation();
+  //console.log('Local State',location)
+  const therapistJson = location.state
+  
+  // const therapist = location.state ? location.state.therapist : null;
+  //console.log('Therapist Data :', therapistJson.picture);
+
+  console.log('settings screen',therapistJson)
+
   return (
     <>
       {/* navbar */}

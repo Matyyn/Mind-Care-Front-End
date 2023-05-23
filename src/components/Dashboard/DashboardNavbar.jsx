@@ -25,8 +25,16 @@ import {
   ChevronRightIcon
 } from "@chakra-ui/icons"
 import Test from "../Sidebar"
-export default function WithSubnavigation() {
+export default function WithSubnavigation({therapist}) {
   const { isOpen, onToggle } = useDisclosure()
+ // var therapistJson = JSON.stringify(therapist)
+ //console.log(therapist)
+ const therapistData = localStorage.getItem('therapist');
+
+  // Parse the retrieved string back into an object
+  const therapistLocal = JSON.parse(therapistData);
+    
+  //var therapistJson = therapist
   return (
     <Box width={{ base: 'auto', md: 'auto' }}>
       <Flex
@@ -55,7 +63,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Test />
+          <Test therapist={therapist} />
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"inter"}
@@ -87,8 +95,8 @@ export default function WithSubnavigation() {
             fontSize={"25"}
           />
 
-    <Link to={"/therapistprofile"}>
-      <Avatar size={"md"} src={"src/assets/Images/depression.png"}>
+    <Link to={"/therapistprofile"} state={therapist} >
+      <Avatar size={"md"} src={therapistLocal.picture}>
         <AvatarBadge boxSize="1.25em" bg="green.500" />
       </Avatar>
     </Link>

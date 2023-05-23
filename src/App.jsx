@@ -14,8 +14,9 @@ import Multi from "./components/Multiple";
 import Test from "./components/Sidebar";
 import Picture from "./components/Picture";
 import Sidebar from './components/Sidebar'
+import axios from 'axios'
 import Profile from "./components/PhyscologicalProfile"
-
+axios.defaults.baseURL = "https://mind-care.up.railway.app/api/v1/therapist"
 function App() {
   return (
     <ChakraProvider>

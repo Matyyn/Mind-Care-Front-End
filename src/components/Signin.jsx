@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Field, Form } from "formik";
 import React, { useState, useEffect } from "react";
@@ -13,7 +14,7 @@ import {
   Image,
   VStack,
   FormControl,
-  FormLabel,
+  FormLabel,useToast,
   Input,
   FormErrorMessage,
   Checkbox,
@@ -23,25 +24,49 @@ const initialValues = {
   email: "",
   password: "",
 };
-
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
+  password: Yup.string()
+  .min(8, "Password must be at least 8 characters")
+  .required("Password is required"),
 });
 
-const handleSubmit = async (values, resetForm) => {
-  console.log(values); // replace with your logic for submitting the form
-  var result;
-  result = await axios.post('/login', values)
-  console.log(result)
-
-  //resetForm()
-};
-
+  
 export default function SignIn() {
+  const toast = useToast();
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+async function handleSubmit(values, resetForm)  {
+  try {
+    //console.log(values); // replace with your logic for submitting the form
+    const result = await axios.post('/login', values);
+    const { accessToken, refreshToken ,therapist} = result.data;
+    // Store tokens in local storage
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);  
+    localStorage.setItem('therapist', JSON.stringify(therapist));
+    // console.log('Access Token:', accessToken);
+    // console.log('Refresh Token:', refreshToken);
+    // console.log('Therapist Date',therapist)
+    toast({
+      title: "You have sign in successfully",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    navigate('/dashboard',{ state: { therapist } });
+    // resetForm();
+  } catch (error) {
+    // Handle login error
+    //console.error('Login failed:', error);
+    toast({
+      title: "Sign In Failure",
+      status: "danger",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+};
   //for spinner
   const handleImageLoad = () => {
     setIsLoading(false);

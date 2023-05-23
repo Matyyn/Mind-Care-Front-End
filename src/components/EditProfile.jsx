@@ -1,8 +1,10 @@
+import { useLocation } from 'react-router-dom';
 import Navbar from './EditProfile/Navbar'
 import React, { useState, useEffect } from "react";
 import { Formik, Field, Form } from "formik";
 import colors from './Colors'
 import * as Yup from "yup";
+import axios from 'axios';
 import { AiOutlineClose } from "react-icons/ai";
 import Modals from './settingsModals/Modals'
 import {
@@ -29,21 +31,7 @@ import { v4 } from "uuid";
 //import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 //import SideBar from "./Sidebar";
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  Dateofbirth: new Date(),
-  gender: "",
-  picture: "",
-  specialization: "",
-  experience: "",
-  SessionCharges: "",
-  Start_DateTime: "",
-  End_DateTime: "",
-  downloadURL: ""
-};
+
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string(),
@@ -52,15 +40,44 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().min(8, 'Password must be at least 6 characters'),
   Dateofbirth: Yup.date(),
   gender: Yup.string(),
-  picture: Yup.array(),
+  picture: Yup.string(),
   specialization: Yup.string(),
   experience: Yup.string(),
   SessionCharges: Yup.string().required('Session Charges are required'),
   Start_DateTime: Yup.date().required('Start Date/Time is required'),
   End_DateTime: Yup.date().required('End Date/Time is required'),
-  downloadURL: Yup.array()
+  downloadURL: Yup.string()
 });
 const FormikForm = () => {
+  // const location = useLocation();
+  // //console.log('Local State',location)
+  // const therapistJson = location.state  
+  // const therapist = location.state ? location.state.therapist : null;
+  //console.log('Therapist Data :', therapistJson.picture);
+  const therapistData = localStorage.getItem('therapist');
+
+  // Parse the retrieved string back into an object
+  const therapistLocal = JSON.parse(therapistData);
+    
+  //console.log('settings screen',therapistJson)
+  const initialValues = {
+    firstName:`${therapistLocal.firstName}`,
+    lastName: `${therapistLocal.lastName}`,
+    email: `${therapistLocal.email}`,
+    password: "",
+    Dateofbirth:Date.now(),
+    gender:`${therapistLocal.gender}`,
+    picture: "therapistJson.picture",
+    specialization: `${therapistLocal.specialization}`,
+    experience: `${therapistLocal.experience}`,
+    SessionCharges: "",
+    Start_DateTime: "",
+    End_DateTime: "",
+    downloadURL: ""
+  };
+
+
+
   const [showAlert, setShowAlert] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrl] = useState([]);
@@ -97,6 +114,18 @@ const FormikForm = () => {
   }, []);
   const toast = useToast();
   const [showPreviousButton, setShowPreviousButton] = useState(false);
+  const handleSubmit =async(values,{resetForm}) => {
+            console.log(values);
+            const result = axios.patch('/updateProfile',values)            
+            localStorage.setItem('therapist', JSON.stringify(result));
+            toast({
+              title: "Edit Profile Form Submitted.",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
+            resetForm()
+          }
   return (
     <>
       <Navbar />
@@ -113,16 +142,7 @@ const FormikForm = () => {
       <Grid templateColumns="1fr" gap={0} height={'auto'}> 
         <Formik
           initialValues={initialValues}
-          onSubmit={(values,{resetForm}) => {
-            console.log(values);
-            toast({
-              title: "Edit Profile Form Submitted.",
-              status: "success",
-              duration: 3000,
-              isClosable: true,
-            });
-            resetForm()
-          }}
+          onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           {({ values, errors, touched, handleChange, handleBlur, isValid,setFieldValue }) => (
@@ -159,8 +179,8 @@ const FormikForm = () => {
                             );
                             uploadBytes(imageRef, file).then((snapshot) => {
                               getDownloadURL(snapshot.ref).then((url) => {
-                                setImageUrl([url]);
-                                setFieldValue("picture", [url]);
+                                setImageUrl(url);
+                                setFieldValue("picture", url);
                                 console.log("Image upload success!");
                               });
                             });

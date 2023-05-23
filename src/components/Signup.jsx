@@ -2,8 +2,7 @@
 import axios from 'axios'
 
 //front end imports
-import { redirect } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
@@ -139,11 +138,12 @@ export default function Signup() {
     setStep(step - 1);
   }
   const toast = useToast();
+  const navigate = useNavigate();
   async function handleSubmit(values, { resetForm }) {
+    
     var result;
     console.log("entered values are", values);
-    result = await axios.post('/signup',values
-    )
+    result = await axios.post('/signup',values)
     //await uploadFiles();
     if(result){
       console.log(result)
@@ -153,6 +153,7 @@ export default function Signup() {
       duration: 3000,
       isClosable: true,
     });
+    navigate('/signin')
    //resetForm();
    // window.location.href = 'https://127.0.0.1:5173/signin';
     //redirect("/signin");

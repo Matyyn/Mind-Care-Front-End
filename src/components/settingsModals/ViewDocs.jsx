@@ -14,8 +14,15 @@ import { v4 } from "uuid";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function ViewDocs() {
+  const therapistData = localStorage.getItem('therapist');
+
+  // Parse the retrieved string back into an object
+  const therapist = JSON.parse(therapistData);
   const [imageUploads, setImageUploads] = useState([]);
-  const [imageUrl, setImageUrls] = useState([]);
+  const [imageUrl, setImageUrls] = useState([therapist.downloadURL]);
+
+  
+    
 
   const deleteFile = (url) => {
     // Get the file name from the URL

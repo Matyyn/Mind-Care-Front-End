@@ -27,6 +27,11 @@ import {
 import Test from "../Sidebar"
 export default function WithSubnavigation() {
   //const { isOpen, onToggle } = useDisclosure()
+  const therapistData = localStorage.getItem('therapist');
+
+  // Parse the retrieved string back into an object
+  const therapist = JSON.parse(therapistData);
+    
   return (
     <Box width={{ base: '98vw', md: '98vw' }}>
       <Flex
@@ -88,7 +93,7 @@ export default function WithSubnavigation() {
           />
 
 <Link to={"/therapistprofile"}>
-      <Avatar size={"md"} src={"src/assets/Images/depression.png"}>
+      <Avatar size={"md"} src={therapist.picture}>
         <AvatarBadge boxSize="1.25em" bg="green.500" />
       </Avatar>
     </Link>
