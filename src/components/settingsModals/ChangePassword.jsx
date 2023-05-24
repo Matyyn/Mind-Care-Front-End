@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import colors from "../Colors";
 import * as Yup from "yup";
+import axios from 'axios'
 import {
   FormControl,
   FormLabel,
@@ -27,8 +28,9 @@ const SignupForm = () => {
   return (
     <Formik
       initialValues={{ email: "", password: "", confirmPassword: "" }}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async(values) => {
+        result = await axios.post('/changePaswword',values)
+        console.log(result.status);
       }}
       validationSchema={validationSchema}
     >
