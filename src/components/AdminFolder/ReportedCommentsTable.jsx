@@ -4,7 +4,7 @@ import colors from "../Colors";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
 import { FaFileDownload, FaEdit, FaRegTrashAlt } from "react-icons/fa";
-import addNotification from "react-push-notification";
+
 import {
   Text,
   Button,
@@ -55,14 +55,14 @@ const data = [
 
 function table() {
   //for push notifications
-  const clickToNotify =()=>{
-    addNotification({
-      title:'Comments',
-      message:'One Record Removed',
-      duration:4000,
-      native:true,  
-    })
-  }
+  // const clickToNotify =()=>{
+  //   addNotification({
+  //     title:'Comments',
+  //     message:'One Record Removed',
+  //     duration:4000,
+  //     native:true,  
+  //   })
+  // }
 
   //redux
   const dispatch = useDispatch();
@@ -323,7 +323,7 @@ function table() {
                     fontSize={"20"}
                     color={"black"}
                     size="md"
-                    onClick={() => {handleDelete(row.name);clickToNotify()}}
+                    onClick={() => {handleDelete(row.name)}}
                   />
                 </Td>
 

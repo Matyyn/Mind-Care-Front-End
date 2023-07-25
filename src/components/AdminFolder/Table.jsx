@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import { setArray } from "../redux/slices/accountsReducer";
 import { deleteItemFromStore } from "../redux/actions/deleteAccountsActions";
 import { useSelector } from "react-redux";
-import addNotification from "react-push-notification";
+
 
 const data = [
   {
@@ -58,14 +58,14 @@ const data = [
 
 function AccountsTable() {
   //for push notifications
-  const clickToNotify =()=>{
-    addNotification({
-      title:'Accounts',
-      message:'One Record Removed',
-      duration:4000,
-      native:true,  
-    })
-  }
+  // const clickToNotify =()=>{
+  //   addNotification({
+  //     title:'Accounts',
+  //     message:'One Record Removed',
+  //     duration:4000,
+  //     native:true,  
+  //   })
+  // }
   //for redux
   const dispatch = useDispatch();
   useEffect(() => {
@@ -254,7 +254,7 @@ function AccountsTable() {
                     fontSize={"20"}
                     color={"black"}
                     size="md"
-                    onClick={() => {handleDelete(row.name);clickToNotify()}}
+                    onClick={() => {handleDelete(row.name)}}
                   />
                 </Td>
               </Tr>
