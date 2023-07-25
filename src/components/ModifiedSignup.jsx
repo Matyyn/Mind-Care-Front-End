@@ -3,14 +3,23 @@ import axios from 'axios'
 
 //front end imports
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect, useState } from 'react';
+import * as tf from '@tensorflow/tfjs';
+import * as mobilenet from '@tensorflow-models/mobilenet';
 import { Formik, Field, Form } from "formik";
+import ImageRecognition from './nSignup'
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import colors from "./Colors";
 import {
   Box,
-  Flex,
+  Flex, useDisclosure, Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
   Text, Spinner,
   Select,
   Button,
@@ -36,26 +45,29 @@ import Multiple from "./Multiple";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function Signup({ matchedImageAddress }) {
-  //for matched image address
-  useEffect(() => {
-    if (matchedImageAddress) {
-      // Use the matchedImageAddress in your signup component
-      console.log('Matched image address:', matchedImageAddress);
-    }
-  }, [matchedImageAddress]);
+export default function Signup() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [imageUpload, setImageUpload] = useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState([])
   const [imageUrls, setImageUrl] = useState();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState([])
   const [imageUploads, setImageUploads] = useState([]);
   const [imageUrl, setImageUrls] = useState([]);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showPreviousButton, setShowPreviousButton] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const imageListRef = ref(storage, "Therapist/documents/");
   //for spinner
-  const [isLoading, setIsLoading] = useState(true);
   const handleImageLoad = () => {
     setIsLoading(false);
+  };
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   //for multiple pictures
@@ -95,7 +107,6 @@ export default function Signup({ matchedImageAddress }) {
     });
   };
 
-  
   // const [multiplePictures, setmultiplePictures] = useState([]);
   const imagesListRef = ref(storage, "Therapist/picture/");
   // const uploadFile = () => {
@@ -136,39 +147,31 @@ export default function Signup({ matchedImageAddress }) {
       });
     });
   }, []);
-  const [step, setStep] = useState(1);
 
-  function nextStep() {
-    setStep(step + 1);
-  }
-
-  function previousStep() {
-    setStep(step - 1);
-  }
   const toast = useToast();
   const navigate = useNavigate();
   async function handleSubmit(values, { resetForm }) {
-    
+
     var result;
     console.log("entered values are", values);
-    result = await axios.post('/signup',values)
+    result = await axios.post('/signup', values)
     //await uploadFiles();
-    if(result){
+    if (result) {
       console.log(result)
-    toast({
-      title: "Signup form Submitted.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-    navigate('/signin')
-   //resetForm();
-   // window.location.href = 'https://127.0.0.1:5173/signin';
-    //redirect("/signin");
+      toast({
+        title: "Signup form Submitted.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      navigate('/signin')
+      //resetForm();
+      // window.location.href = 'https://127.0.0.1:5173/signin';
+      //redirect("/signin");
 
     }
 
-    
+
 
     // try {
     //   const response = await axios.post('/signup', values);
@@ -177,9 +180,9 @@ export default function Signup({ matchedImageAddress }) {
     //   console.log(error);
     // }
   }
+  //
 
-
-
+  //
   //validation schema
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
@@ -227,7 +230,7 @@ export default function Signup({ matchedImageAddress }) {
         <Stack marginBottom={"20"}>
           <div style={{
             marginTop: "0%"
-            ,marginLeft: "46%"
+            , marginLeft: "46%"
           }}>
             {isLoading && <Spinner size="xl" />}
             <Image
@@ -338,18 +341,40 @@ export default function Signup({ matchedImageAddress }) {
                         {/* <Text style={{ fontSize: "30px", fontWeight: "500" }}>
                           Step 2
                         </Text> */}
-                        <Image
+                        {/* <Image
                           src={imageUrls}
                           width={"120px"}
                           height={"120px"}
                           borderRadius={"50%"}
                           border={"1px solid black"}
-                        ></Image>
+                        ></Image> */}
                         <FormControl
                           isInvalid={errors.picture && touched.picture}
-                          style={{ display: "flex", alignItems: "center" }}
-                        >
-                          <Box>
+                          style={{ display: "flex", alignItems: "center" }}>
+                          <>
+                            <div flexDirection='column' style={{marginTop:'3%'}}>
+                              <FormLabel>Upload Image</FormLabel>
+                              <Button onClick={handleOpenModal}>Upload Image</Button>
+
+                              <Modal isOpen={showModal} onClose={handleCloseModal}>
+                                <ModalOverlay />
+                                <ModalContent>
+                                  <ModalHeader>Image Matching Modal</ModalHeader>
+                                  <ModalCloseButton />
+                                  <ModalBody>
+                                    <ImageRecognition />
+                                  </ModalBody>
+                                  <ModalFooter>
+                                    <Button colorScheme="blue" mr={3} onClick={handleCloseModal}>
+                                      Close
+                                    </Button>
+                                    <Button variant="ghost">Secondary Action</Button>
+                                  </ModalFooter>
+                                </ModalContent>
+                              </Modal>
+                            </div>
+                          </>
+                          {/* <Box>
                             <input
                               type="file"
                               accept="image/jpeg,image/jpg,image/png"
@@ -375,9 +400,13 @@ export default function Signup({ matchedImageAddress }) {
                             <FormErrorMessage marginLeft={"30%"}>
                               {errors.picture}
                             </FormErrorMessage>
-                          </div>
+                          </div> */}
                         </FormControl>
+                        {/* check */}
 
+
+
+                        {/* discarded */}
                         {/* <Image
   src={imagePreviewUrl || imageUrls}
   width={"120px"}
@@ -413,9 +442,7 @@ export default function Signup({ matchedImageAddress }) {
 </FormControl> */}
 
                         <FormControl
-                          isInvalid={errors.password && touched.password}
-
-                        >
+                          isInvalid={errors.password && touched.password}>
                           <FormLabel>Password</FormLabel>
                           <Input
                             type="password"
@@ -554,7 +581,6 @@ export default function Signup({ matchedImageAddress }) {
                                         .catch((error) => {
                                           console.error("Document upload error:", error);
                                         });
-                                        fileupload();
                                     }
                                   }}
                                 />

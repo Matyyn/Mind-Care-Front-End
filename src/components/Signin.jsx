@@ -39,22 +39,42 @@ export default function SignIn() {
 async function handleSubmit(values, resetForm)  {
   try {
     //console.log(values); // replace with your logic for submitting the form
-    const result = await axios.post('/login', values);
+    const result = await axios.post('/login', values);    
+    if(result.data.status == 'OK'){
     const { accessToken, refreshToken ,therapist} = result.data;
+    console.log("therapist",therapist)
     // Store tokens in local storage
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);  
-    localStorage.setItem('therapist', JSON.stringify(therapist));
+    //localStorage.setItem('therapist', JSON.stringify(therapist));
     // console.log('Access Token:', accessToken);
     // console.log('Refresh Token:', refreshToken);
     // console.log('Therapist Date',therapist)
     toast({
-      title: "You have sign in successfully",
+      title: "You have logined Successfully",
       status: "success",
-      duration: 3000,
+      duration: 2000,
       isClosable: true,
     });
-    navigate('/dashboard',{ state: { therapist } });
+    //navigate('/dashboard',{ state: { therapist } });
+    }  
+    else if (values.email.toLowerCase() === 'admin@gmail.com' && values.password === 'admin123') {
+      toast({
+        title: "Admin Logined Successfully",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+      navigate('/Admin');
+    }     
+    else{
+      toast({
+        title: "Please enter correct credentials to Log in",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
     // resetForm();
   } catch (error) {
     // Handle login error

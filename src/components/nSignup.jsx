@@ -1,29 +1,3 @@
-//backend imports
-import axios from 'axios';
-import therapistBaseurl from "../utils/axios";
-//front end imports
-import React, { useState, useEffect } from "react";
-import { Formik, Field, Form } from "formik";
-import { Link } from "react-router-dom";
-import * as Yup from "yup";
-import colors from "./Colors";
-import {
-  Box,
-  Flex,
-  Alert,
-  AlertIcon,
-  Text,
-  Select,
-  Button,
-  Stack,useToast,
-  FormErrorMessage,
-  Image, Grid, GridItem,
-  VStack,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
-} from "@chakra-ui/react";
 import {
   ref,
   uploadBytes,
@@ -33,473 +7,309 @@ import {
 } from "firebase/storage";
 import { storage } from "../utils/firebase";
 import { v4 } from "uuid";
-import Multiple from "./Multiple";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
-export default function Signup() {
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrls, setImageUrl] = useState([]);
-  const [imageUploads, setImageUploads] = useState([]);
-  const [imageUrl, setImageUrls] = useState([]);
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [showPreviousButton, setShowPreviousButton] = useState(false);
+import React, { useRef, useEffect, useState } from 'react';
+import * as tf from '@tensorflow/tfjs';
+import * as mobilenet from '@tensorflow-models/mobilenet';
+import {
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@chakra-ui/react";
 
-  const imageListRef = ref(storage, "Therapist/documents/");
-  //for multiple pictures
+function ImageMatchingComponent({ onClose }) {
+  const fileInputRef = useRef(null);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [isMatching, setIsMatching] = useState(false);
+  const [isMatched, setIsMatched] = useState(false);
+  const [similarityScore, setSimilarityScore] = useState(0);
+  const [matchedImageAddress, setMatchedImageAddress] = useState(null);
 
-  const uploadFiles = (setFieldValue) => {
-    // Pass setFieldValue as a parameter
-    if (imageUploads.length === 0) return;
+  useEffect(() => {
+    loadModel();
+  }, []);
 
-    const uploadPromises = [];
-    const downloadURLs = [];
+  async function loadModel() {
+    await tf.ready();
+    console.log('TensorFlow.js and MobileNet model loaded');
+  }
 
-    for (let i = 0; i < imageUploads.length; i++) {
-      const imageUpload = imageUploads[i];
-      const imageRef = ref(
-        storage,
-        `Therapist/documents/${imageUpload.name + v4()}`
-      );
+  async function classifyImage(imageElement) {
+    const model = await mobilenet.load();
 
-      const uploadPromise = uploadBytes(imageRef, imageUpload)
-        .then((snapshot) => {
-          return getDownloadURL(snapshot.ref);
-        })
-        .then((url) => {
-          downloadURLs.push(url);
-          console.log("Image upload success!");
-          setFieldValue("downloadURL", downloadURLs);
-          // Set the formik value
+    const tfImage = tf.browser.fromPixels(imageElement);
+    const resizedImage = tf.image.resizeBilinear(tfImage, [50, 50]);
+    const batchedImage = resizedImage.expandDims(0);
+    const preprocessedImage = batchedImage.toFloat().div(tf.scalar(127)).sub(tf.scalar(1));
+
+    const predictions = await model.classify(preprocessedImage);
+
+    tfImage.dispose();
+    resizedImage.dispose();
+    batchedImage.dispose();
+    preprocessedImage.dispose();
+
+    return predictions;
+  }
+
+  function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const imageElement = document.createElement('img');
+        imageElement.onload = () => {
+          setUploadedImage(imageElement);
+          setIsMatching(true);
+          setIsMatched(false);
+          setSimilarityScore(0);
+        };
+        imageElement.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function startCamera() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          videoRef.current.srcObject = stream;
         })
         .catch((error) => {
-          console.error("Image upload error:", error);
+          console.error('Error accessing camera:', error);
         });
-      uploadPromises.push(uploadPromise);
     }
+  }
 
-    Promise.allSettled(uploadPromises).then(() => {
-      setImageUrls(downloadURLs);
-    });
-  };
+function stopCamera() {
+  if (videoRef.current && videoRef.current.srcObject) {
+    videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
+  }
+}
 
-  // const [multiplePictures, setmultiplePictures] = useState([]);
-  const imagesListRef = ref(storage, "Therapist/picture/");
-  const uploadFile = () => {
-    if (imageUpload == null) return;
-    const imageRef = ref(
-      storage,
-      `Therapist/picture/${imageUpload.name + v4()}`
-    );
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageUrl(url);
-        // setFieldValue('picture',url)
-        console.log("Image upload success!");
-      });
-    });
-  };
+
+  function captureImage() {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const capturedImageElement = document.createElement('img');
+    capturedImageElement.onload = async () => {
+      setCapturedImage(capturedImageElement);
+      setIsMatching(true);
+      setIsMatched(false);
+      setSimilarityScore(0);
+    };
+    capturedImageElement.src = canvas.toDataURL('image/jpeg');
+
+    stopCamera();
+  }
+
   useEffect(() => {
-    listAll(imageListRef)
-      .then((response) => {
-        const latestItems = response.items.slice(-5); // Get the last 5 items
-        const downloadURLPromises = latestItems.map((item) =>
-          getDownloadURL(item)
-        );
-        return Promise.all(downloadURLPromises);
-      })
-      .then((urls) => {
-        setImageUrls(urls); // Set the image URLs of the last 5 items
-      })
-      .catch((error) => {
-        console.error("Image download error:", error);
-      });
-  }, []);
+    if (uploadedImage && capturedImage && isMatching) {
+      const matchImages = async () => {
+        const uploadedPredictions = await classifyImage(uploadedImage);
+        const capturedPredictions = await classifyImage(capturedImage);
+
+        const uploadedClasses = uploadedPredictions.map((prediction) => prediction.className);
+        const capturedClasses = capturedPredictions.map((prediction) => prediction.className);
+
+        const similarity = uploadedClasses.filter((className) => capturedClasses.includes(className)).length;
+        const similarityScore = (similarity / uploadedClasses.length) * 100;
+
+        setIsMatched(similarityScore > 66.67);
+        setSimilarityScore(similarityScore.toFixed(2));
+        setIsMatching(false);
+        console.log(uploadedImage.src)
+        //localStorage.setItem('matched image address',uploadedImage.src)
+          const imageUrl = await uploadImageToFirebase(uploadedImage.src);
+          localStorage.setItem('matched image address', imageUrl);
+          console.log('Image uploaded to Firebase:', imageUrl);
+        if (similarityScore > 66.67) {
+          //setMatchedImageAddress(capturedImage.src);
+        }
+      };
+
+      matchImages();
+    }
+  }, [uploadedImage, capturedImage, isMatching]);
+
   useEffect(() => {
-    listAll(imagesListRef).then((response) => {
-      const latestItem = response.items[response.items.length - 1]; // Get the latest item
-      getDownloadURL(latestItem).then((url) => {
-        setImageUrl([url]); // Set the image URL of the latest item
-      });
-    });
+    startCamera();
+    return () => stopCamera();
   }, []);
-  const [step, setStep] = useState(1);
+// image upload code 
+async function uploadImageToFirebase(imageDataURL) {
+  const file = dataURLtoFile(imageDataURL);
+  const uniqueFileName = generateUniqueFileName(file.name);
+  const imageRef = ref(storage, `Therapist/picture/${uniqueFileName}`);
 
-  function nextStep() {
-    setStep(step + 1);
+  try {
+    const snapshot = await uploadBytes(imageRef, file);
+    const imageUrl = await getDownloadURL(snapshot.ref);
+
+    // Set the image URL in local storage
+    localStorage.setItem('uploaded image url', imageUrl);
+
+    return imageUrl;
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    throw error;
+  }
+}
+function dataURLtoFile(dataURL) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], 'uploadedImage', { type: mime });
+}
+
+function generateUniqueFileName(fileName) {
+  const timestamp = Date.now();
+  const uniqueIdentifier = Math.random().toString(36).substring(7);
+  const extension = fileName.split('.').pop();
+  return `${timestamp}-${uniqueIdentifier}.${extension}`;
+}
+//ends here
+  function resetComponent() {
+    setUploadedImage(null);
+    setCapturedImage(null);
+    setIsMatching(false);
+    setIsMatched(false);
+    setSimilarityScore(0);
+    setMatchedImageAddress(null);
+    startCamera();
   }
 
-  function previousStep() {
-    setStep(step - 1);
-  }
-  const toast = useToast();
-  async function handleSubmit(values, { resetForm }) {
-    console.log("entered values are", values);
-    toast({
-      title: "Signup form Submitted.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-    // try {
-    //   const response = await axios.post('/signup', values);
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  function closeComponent() {
+    stopCamera();
+    setUploadedImage(null);
+    setCapturedImage(null);
+    setIsMatching(false);
+    setIsMatched(false);
+    setSimilarityScore(0);
+    setMatchedImageAddress(null);
+  
+    if (isMatched) {
+      // Save the matched image address
+      
+    }
+    setMatchedImageAddress(null);
+    onClose();
   }
 
-
-
-  //validation schema
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("First Name is required"),
-    lastName: Yup.string().required("Last Name is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirm Password is required"),
-    picture: Yup.array().required("Required"),
-    // Dateofbirth: Yup.date().required("Date of Birth is required"),
-    gender: Yup.string().required("Gender is required"),
-    specialization: Yup.string().required("Specialization Field is required"),
-    experience: Yup.string().required("Experience is required"),
-    downloadURL: Yup.array().min(1, "Required").required("Required"),
-  });
-  const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    Dateofbirth: new Date(),
-    gender: "",
-    picture: "",
-    specialization: "",
-    experience: "",
-    SessionCharges: "",
-    Start_DateTime: "",
-    End_DateTime: "",
-    downloadURL: [],
+  function saveMatchedImageAddress(address) {
+    // Implement your logic to save the image address
+    console.log('Matched image address:', address);
   }
 
   return (
-    <>
-      <Flex
-        bg="white"
-        align="center"
-        justify="center"
-        h="auto"
-        paddingTop={"2%"}
-        width={"100vw"}
-      >
-        <Stack marginBottom={"20"}>
-          <Image
-            src="src\assets\Images\brain.png"
-            alt="Depression Image"
-            height="75px"
-            width="75px"
-            marginTop={"0%"}
-            marginLeft="48%"
+    <div>
+      <div>
+        <h2 style={{ fontWeight: 700 }}>Uploaded Image</h2>
+        {uploadedImage && (
+          <img
+            src={uploadedImage.src}
+            alt="Uploaded"
+            width={10}
+            height={10}
+            style={{ borderRadius: '50%', objectFit: 'cover' }}
           />
-          <Text
-            fontSize="32"
-            fontWeight="700"
-            style={{ textAlign: "center", marginTop: "1%", marginBottom: "1%" }}
-          >
-            Registration
-          </Text>
-          <Text style={{ textAlign: "center", marginBottom: "2%" }}>
-            <span style={{ marginRight: "8px" }}>Already have an account?</span>
-            <Link fontWeight="bold" to="/signin">
-              Login
-            </Link>
-          </Text>
-          <Box
-            bg="white"
-            p={6}
-            rounded="md"
-            w={'auto'}
-            boxShadow={"lg"}
-            height={"auto"}
-          >
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            //isInitialValid={validationSchema.isValidSync(initialValues)}
-            >
-              {({ values, dirty, isValid, handleChange, setFieldValue, errors, touched, isSubmitting }) => (
-                <Form>
-                  <Grid templateColumns={{
-                    sm: "repeat(1, 1fr)",
-                    md: "repeat(2, 1fr)",
-                    lg: "repeat(3, 1fr)"
-                  }} gap={6}>
-                    <GridItem>
-                      <VStack spacing={4} style={{ marginTop: "4%" }}>
-                        {/* <Text style={{ fontSize: "30px", fontWeight: "500" }}>
-                          Step 1
-                        </Text> */}
-                        <FormControl
-                          isInvalid={errors.firstName && touched.firstName}
-                          style={{ marginTop: "0%" }}
-                        >
-                          <FormLabel>First Name</FormLabel>
-                          <Input
-                            name="firstName"
-                            value={values.firstName}
-                            type="text"
-                            onChange={handleChange}
-                          />
-                          <FormErrorMessage>{errors.firstName}</FormErrorMessage>
-                        </FormControl>
-                        <FormControl
-                          isInvalid={errors.lastName && touched.lastName}
+        )}
+        <input type="file" accept="image/jpeg,image/jpg,image/png" onChange={handleFileUpload} ref={fileInputRef} />
+      </div>
 
-                        >
-                          <FormLabel>Last Name</FormLabel>
-                          <Input
-                            name="lastName"
-                            type="text"
-                            value={values.lastName}
-                            onChange={handleChange}
-                          />
-                          <FormErrorMessage>{errors.lastName}</FormErrorMessage>
-                        </FormControl>
+      <div>
+        <h2 style={{ fontWeight: 700 }}>Captured Image</h2>
+        {capturedImage ? (
+          <img
+            src={capturedImage.src}
+            alt="Captured"
+            width={20}
+            height={20}
+            style={{ borderRadius: '50%', objectFit: 'contain' }}
+          />
+        ) : (
+          <div>
+            <video ref={videoRef} width={400} height={150} style={{ objectFit: 'cover' }} autoPlay />
+            <canvas ref={canvasRef} style={{ display: 'none' }} />
+            <button onClick={captureImage}>Capture</button>
+          </div>
+        )}
+      </div>
 
-                        <FormControl isInvalid={errors.email && touched.email} >
-                          <FormLabel>Email Address</FormLabel>
-                          <Input
-                            type="email"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange}
-                          />
-                          <FormErrorMessage>{errors.email}</FormErrorMessage>
-                        </FormControl>
-                        <FormControl>
-                          <FormLabel>Date of Birth</FormLabel>
-                          <DatePicker
-                            selected={values.Dateofbirth}
-                            dateFormat="MMMM d, yyyy"
-                            className="form-control"
-                            name="Dateofbirth"
-                            onChange={(date) =>
-                              setFieldValue(
-                                "Dateofbirth",
-                                date
-                              )
-                            }
-                          />
-                        </FormControl>
-
-                      </VStack>
-                    </GridItem>
-                    <GridItem>
-                      <VStack spacing={4}>
-                        {/* <Text style={{ fontSize: "30px", fontWeight: "500" }}>
-                          Step 2
-                        </Text> */}
-
-                        <Image
-                          src={imageUrls}
-                          width={"120px"}
-                          height={"120px"}
-                          borderRadius={"50%"}
-                          border={"1px solid black"}
-                        ></Image>
-                        <FormControl
-                          isInvalid={errors.picture && touched.picture}
-                          style={{ display: "flex", alignItems: "center" }}
-                        >
-                          <Box>
-                            <input
-                              type="file"
-                              accept="image/jpeg,image/jpg,image/png"
-                              onChange={(event) => {
-                                setImageUpload(event.target.files[0]);
-                                values.picture = imageUrls;
-                              }}
-                            />
-                          </Box>
-                          <div style={{ flexDirection: "column" }}>
-
-                            <Button
-                              type="button"
-                              size={'md'}
-                              onClick={uploadFile}
-                            >
-                              Upload Image
-                            </Button>
-                            <FormErrorMessage marginLeft={'30%'}>{errors.picture}</FormErrorMessage>
-                          </div>
-                        </FormControl>
-                        <FormControl
-                          isInvalid={errors.password && touched.password}
-
-                        >
-                          <FormLabel>Password</FormLabel>
-                          <Input
-                            type="password"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange}
-                          />
-                          <FormErrorMessage>{errors.password}</FormErrorMessage>
-                        </FormControl>
-                        <FormControl
-                          isInvalid={!!(errors.confirmPassword && touched.confirmPassword)}
-                        >
-                          <FormLabel>Confirm Password</FormLabel>
-                          <Input
-                            type="password"
-                            name="confirmPassword"
-                            value={values.confirmPassword}
-                            onChange={handleChange}
-                          />
-                          <FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
-                        </FormControl>
-
-                      </VStack>
-                    </GridItem>
-                    <GridItem>
-                      <VStack spacing={4} marginTop={'4%'}>
-                        {/* <Text style={{ fontSize: "30px", fontWeight: "500" }}>
-                          Step 3
-                        </Text> */}
-
-                        <FormControl isInvalid={errors.gender && touched.gender}>
-                          <FormLabel>Gender</FormLabel>
-                          <Field name="gender">
-                            {({ field }) => (
-                              <Select {...field}>
-                                <option value="none">Select a Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Female">Other</option>
-                              </Select>
-                            )}
-                          </Field>
-                          <FormErrorMessage>{errors.gender}</FormErrorMessage>
-                        </FormControl>
-                        <FormControl
-                          isInvalid={
-                            errors.specialization && touched.specialization
-                          }
-                        >
-                          <FormLabel>Specialization Field</FormLabel>
-                          <Field name="specialization">
-                            {({ field }) => (
-                              <Select {...field}>
-                                <option value="none">
-                                  Select Specialization Field
-                                </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                              </Select>
-                            )}
-                          </Field>
-                          <FormErrorMessage>
-                            {errors.specialization}
-                          </FormErrorMessage>
-                        </FormControl>
-                        <FormControl
-                          isInvalid={errors.experience && touched.experience}
-                        >
-                          <FormLabel>Experience Years</FormLabel>
-                          <Input
-                            type="number"
-                            name="experience"
-                            value={values.experience}
-                            onChange={handleChange}
-                            min={"1"}
-                            max={"10"}
-                          />
-                          <FormErrorMessage>{errors.experience}</FormErrorMessage>
-                        </FormControl>
-
-                        <FormLabel style={{ marginRight: "50%" }}>
-                          Upload Relevant Documents
-                        </FormLabel>
-                        <FormControl
-                          style={{ display: "flex", alignItems: "center" }}
-                          isInvalid={errors.downloadURL && touched.downloadURL}
-                        >
-                          <div style={{ display: "flex", alignItems: "center" }}>
-                            <Box>
-                              <Field
-                                type="file"
-                                name="imageUploads"
-                                multiple
-                                onChange={(event) => {
-                                  const files = event.target.files;
-                                  setImageUploads(files);
-                                }}
-                              />
-                            </Box>
-                            <div style={{ flexDirection: "column" }}>
-                              <Button
-                                type="button"
-                                size={'md'}
-                                onClick={() => uploadFiles(setFieldValue)}
-                              >
-                                Upload Files
-                              </Button>
-                              <FormErrorMessage style={{ marginLeft: "30%" }}>
-                                {errors.downloadURL}
-                              </FormErrorMessage>
-                            </div>
-                          </div>
-                        </FormControl>
-
-                        <Checkbox
-                          size="md"
-                          colorScheme="blue"
-                          name="agreeTerms"
-                          isChecked={termsAccepted}
-                          onChange={(e) => setTermsAccepted(e.target.checked)}
-                        >
-                          I agree with the terms and conditions.
-                        </Checkbox>
-                        <Box
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            width: "100%"
-                          }}
-                        >
-                          <div style={{ width: "20%" }}>
-                            {showPreviousButton && (
-                              <Button onClick={previousStep} width="100%">
-                                Previous
-                              </Button>
-                            )}
-                          </div>
-                          <div style={{ width: "20%" }}>
-                            <Button
-                              type="submit"
-                              style={{ width: "100%" }}
-                              isDisabled={!termsAccepted}
-                              backgroundColor={colors.secondary}
-                              color="white"
-                            >
-                              Submit
-                            </Button>
-                          </div>
-                        </Box>
-
-                      </VStack>
-                    </GridItem>
-                  </Grid>
-                </Form>
-              )}
-            </Formik>
-          </Box>
-        </Stack>
-      </Flex>
-    </>
+      {isMatching && <p>Matching...</p>}
+      {!isMatching && (
+        <div>
+          <p>Matched: {isMatched ? 'Yes' : 'No'}</p>
+          {isMatched &&
+           <><p>Similarity Score: {similarityScore}%</p>
+            <div>
+            <button onClick={resetComponent} width={'50%'}>Reset</button>
+            <button onClick={closeComponent}>Close</button>
+          </div></>
+          }
+          {!isMatched && (
+            <div>
+              <button onClick={resetComponent} width={'50%'}>Reset</button>
+              <button onClick={closeComponent}>Close</button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <div>
+      <Button colorScheme="purple" onClick={handleOpenModal}>Upload Image</Button>
+
+      <Modal isOpen={isOpen} onClose={handleCloseModal} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Image Matching</ModalHeader>
+          <ModalBody>
+            {/* <ImageMatchingComponent onClose={handleCloseModal} /> */}
+            <ImageMatchingComponent onClose={handleCloseModal} />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="purple" onClick={handleCloseModal}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+}
+
+export default App;
