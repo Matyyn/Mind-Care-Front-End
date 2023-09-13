@@ -73,9 +73,9 @@ function AboutUs() {
               >
                 <Stack mt="6" spacing="3">
                   <Text
-                    fontSize="52"
+                    fontSize="44"
                     style={{
-                      textAlign: "left",
+                      textAlign: "center",
                       fontWeight: "bolder",
                       marginTop: "0",
                       marginBottom: "0",
@@ -86,7 +86,7 @@ function AboutUs() {
                     Redefining mental healthcare for people
                   </Text>
                   <p
-                    color="blue.600"
+                    color={colors.third}
                     style={{textAlign: "center",fontSize:'17px',fontWeight:'600'}}
                   >
                     Our mission is to make mental health supportradically more
@@ -97,7 +97,7 @@ function AboutUs() {
                 <div
                   className="buttons"
                   style={{
-                    marginTop: "2%",
+                    marginTop: "5%",
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "flex-end",
@@ -107,7 +107,7 @@ function AboutUs() {
                     leftIcon={<Icon as={FaGooglePlay} boxSize={7} />}
                     backgroundColor="white"
                     borderColor={"black"}
-                    width={"25%"}
+                    size='md'                  
                     padding={"4%"}
                   >
                     <Stack>
@@ -121,10 +121,10 @@ function AboutUs() {
                     leftIcon={<Icon as={FaApple} boxSize={7} />}
                     backgroundColor="white"
                     borderColor={"black"}
-                    width={"28%"}
+                    //width={"28%"}
+                    size='md'
                     padding={'4%'}
-                    style={{ marginLeft: "10px" }}
-                  >
+                    style={{ marginLeft: "10px" }}>
                     <Stack>
                       <Text fontSize={"12"} style={{ textAlign: "left" }}>
                         Download on the

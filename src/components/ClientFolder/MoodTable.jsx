@@ -12,7 +12,7 @@ const data = [
 
 const EmotionsTable = () => {
   return (
-    <Table variant="simple" >
+    <Table variant="striped" boxShadow={'lg'}>
       <Thead>
         <Tr>
           <Th color={colors.secondary}>Weekday</Th>

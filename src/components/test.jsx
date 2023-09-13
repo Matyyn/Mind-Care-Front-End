@@ -565,6 +565,7 @@ export default function SignIn() {
                 dateFormat="MMMM d, yyyy"
                 className="form-control"
                 name="dateofBirth"
+                maxDate={new Date()}
                 onChange={(date) =>
                   setFieldValue(
                     "dateofBirth",

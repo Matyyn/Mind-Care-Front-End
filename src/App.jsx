@@ -2,8 +2,10 @@ import { ChakraProvider, Button, Divider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditProfile from "./components/EditProfile"
 import LandingPage from "./components/LandingPage";
+import SessionsList from "./components/VideoCall/sessionsList";
 import SignUpform from "./components/Signup";
 import Signin from "./components/Signin";
+import TimeCheck from './components/TimeCheckFile'
 import ViewPosts from "./components/AdminFolder/ReportedPostsDashboard"
 import AboutUs from "./components/landingPageComponents/AboutUs";
 import Pricing from "./components/landingPageComponents/Pricing";
@@ -18,11 +20,11 @@ import Picture from "./components/Picture";
 import Sidebar from './components/Sidebar'
 import ViewComments from './components/AdminFolder/ReportedCommentsDashboard'
 import Appeals from './components/AdminFolder/AppealsDashboard'
-import VideoCall from './components/VideoCall'
+import VideoCall from './components/Video Calls/VC'
 import Redux from './components/ReduxExample'
 //import Messaging from './components/Messaging'
 import Admin from './components/AdminFolder/AdminDashboard'
-import Room from './components/Room'
+import Sessions from './components/VideoCall/sessionScreen'
 import axios from 'axios'
 import Profile from "./components/PhyscologicalProfile"
 axios.defaults.baseURL = "http://localhost:8080/api/v1/therapist"
@@ -37,7 +39,6 @@ function App() {
           <Route path="/" element={<LandingPage/>} />
           <Route path="/signin" element={<Signin/>} />
           <Route path="/signup" element={<Test/>} />
-          <Route path="/room/:roomId" element={<Room/>} />
           <Route path="/aboutus" element={<AboutUs/>} />
           <Route path="/pricing" element={<Pricing/>} />
           <Route path="/faqs" element={<FAQs/>} />
@@ -50,6 +51,8 @@ function App() {
           <Route path="/AdminPosts" element={<ViewPosts/>}/>
           <Route path="/AdminComments" element={<ViewComments/>}/>
           <Route path="/Appeals" element={<Appeals/>}/>
+          <Route path="/SessionList" element={<SessionsList/>}/>
+          <Route path="/VC" element={<VideoCall/>}/>
         </Routes>
       </Router>
       {/* <LandingPage/>    */}

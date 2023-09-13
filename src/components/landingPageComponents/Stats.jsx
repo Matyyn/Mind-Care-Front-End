@@ -50,12 +50,12 @@ function Stats() {
       <div className="parentDiv" style={{marginBottom:'5%'}}>
         <div style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%",width:'auto' }}>
           <strong>
-            <Text fontSize="52" style={{ textAlign: "center" }}>
+            <Text fontSize="44" style={{ textAlign: "center" }}>
               <span style={{ color: colors.secondary }}>Better </span>
               <span style={{color:colors.primary}}>mental health benefits</span>
               <span style={{ color: colors.secondary}}>,better</span>
             </Text>
-            <h1 style={{ textAlign: "center", marginTop: "0",color:colors.secondary }}>outcomes</h1>
+            <Text fontSize='44'style={{ textAlign: "center", marginTop: "0",color:colors.secondary }}>Outcomes</Text>
           </strong>
           <p
             style={{
@@ -64,7 +64,8 @@ function Stats() {
               marginLeft: "15%",
               marginTop: "2%",
               fontSize:'17px',
-              fontWeight:'600'
+              fontWeight:'500',
+              color:colors.third
             }}>
             Clinical data that showcases substantial improvements in the
             wellbeing, stress,and anxiety levels of members who utilise our
@@ -86,7 +87,7 @@ function Stats() {
             >
               <GridItem >
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
+                  bg: colors.third,
                   color: 'white'
                 }}boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
@@ -127,7 +128,7 @@ function Stats() {
               </GridItem>
               <GridItem >
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
+                  bg: colors.third,
                   color: 'white'
                 }}boxShadow='lg' size={'sm'}paddingBottom={'2%'}>
                   <CardBody>
@@ -170,7 +171,7 @@ function Stats() {
               </GridItem>
               <GridItem >
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
+                  bg: colors.third,
                   color: 'white'
                 }}boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
@@ -212,7 +213,7 @@ function Stats() {
               </GridItem>
               <GridItem >
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
+                  bg: colors.third,
                   color: 'white',
                 }}boxShadow='lg' size={'sm'} marginBottom={'2%'} paddingBottom={'2%'}>
                   <CardBody>
@@ -275,10 +276,15 @@ function Stats() {
             <Button
               bg={colors.primary}
               variant="outline"
-              style={{
-                marginTop: "20px",
-                marginBottom: "20px",
-              }}
+              style={{              
+              marginTop:'4%'
+            }}                          
+            _hover={{
+              bg: colors.secondary,
+              borderColor: colors.secondary,
+              color:'white'
+            }}
+            size='md'
             >
               Book Appointment
             </Button>

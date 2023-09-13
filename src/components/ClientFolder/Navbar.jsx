@@ -19,17 +19,16 @@ import {
   useDisclosure
 } from "@chakra-ui/react"
 import {
-  HamburgerIcon,
-  CloseIcon,
+
   ChevronDownIcon,
   ChevronRightIcon
 } from "@chakra-ui/icons"
 import Test from "../Sidebar"
 export default function WithSubnavigation() {
   //const { isOpen, onToggle } = useDisclosure()
-  const therapistData = localStorage.getItem('therapist');
-  // Parse the retrieved string back into an object
-  const therapist = JSON.parse(therapistData);
+  // const therapistData = localStorage.getItem('therapist');
+  // // Parse the retrieved string back into an object
+  // const therapist = JSON.parse(therapistData);
     
   return (
     <Box width={{ base: 'auto', md: 'auto' }}>
@@ -91,7 +90,7 @@ export default function WithSubnavigation() {
             fontSize={"25"}
           />
             <Link to={"/therapistprofile"}>
-      <Avatar size={"md"} src={therapist.picture}>
+      <Avatar size={"md"} >
         <AvatarBadge boxSize="1.25em" bg="green.500" />
       </Avatar>
     </Link>

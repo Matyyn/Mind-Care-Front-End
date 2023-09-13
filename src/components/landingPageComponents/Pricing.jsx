@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
+import colors from "../Colors";
 import { SimpleGrid, GridItem, Grid } from "@chakra-ui/react";
 import {
   Box,
@@ -68,21 +69,20 @@ function Pricing() {
             <GridItem style={{ marginTop: showMarginTop ? "25%" : "5%",marginBottom:"10%" }}>
               <Stack mt="6" spacing="3">
                 <Text
-                  fontSize="52"
+                  fontSize="44"
                   style={{
                     textAlign: "center",
                     fontWeight: "bolder",
                     marginTop: "0",
-                    marginBottom: "0",
-                    color: "#2D3748",
-
+                    marginBottom: "0",                      
+                    color:colors.secondary
                   }}
                 >
                   Pay only for the therapy
                 </Text>
                 <p
-                  color="blue.600"
-                  style={{ textAlign: "center" ,fontSize:'17px',fontWeight:'600'}}
+                  
+                  style={{ textAlign: "center" ,fontSize:'17px',fontWeight:'500',color:colors.third}}
                 >
                   Mind Care provides majority of the features for free
                   although therapy is paid. Powered by Stripe, benefits of

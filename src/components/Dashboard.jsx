@@ -30,13 +30,15 @@ import {
 import DashboardBody from "./Dashboard/DashboardBody";
 
 export default function Simple() {
-  const location = useLocation();
-  const therapist = location.state ? location.state.therapist : null;
+  // const location = useLocation();
+  // const therapist = location.state ? location.state.therapist : null;
 
   //console.log('Therapist Data:', therapist);
   return (
     <>
-      <DashboardNavbar therapist={therapist}/>
+      <DashboardNavbar 
+      // therapist={therapist}
+      />
       <DashboardBody/> 
     </>
   );

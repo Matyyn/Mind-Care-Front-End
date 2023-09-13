@@ -25,14 +25,16 @@ import {
   ChevronRightIcon
 } from "@chakra-ui/icons"
 import Test from "../Sidebar"
-export default function WithSubnavigation({therapist}) {
-  const { isOpen, onToggle } = useDisclosure()
- // var therapistJson = JSON.stringify(therapist)
- //console.log(therapist)
- const therapistData = localStorage.getItem('therapist');
+export default function WithSubnavigation(
+  // {therapist}
+  ) {
+   const { isOpen, onToggle } = useDisclosure()
+//  // var therapistJson = JSON.stringify(therapist)
+//  //console.log(therapist)
+//  const therapistData = localStorage.getItem('therapist');
 
-  // Parse the retrieved string back into an object
-  const therapistLocal = JSON.parse(therapistData);
+//   // Parse the retrieved string back into an object
+//   const therapistLocal = JSON.parse(therapistData);
     
   //var therapistJson = therapist
   return (
@@ -63,7 +65,9 @@ export default function WithSubnavigation({therapist}) {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Test therapist={therapist} />
+          <Test 
+          // therapist={therapist}
+           />
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"inter"}
@@ -95,8 +99,8 @@ export default function WithSubnavigation({therapist}) {
             fontSize={"25"}
           />
 
-    <Link to={"/therapistprofile"} state={therapist} >
-      <Avatar size={"md"} src={therapistLocal.picture}>
+    <Link to={"/therapistprofile"}>
+      <Avatar size={"md"} >
         <AvatarBadge boxSize="1.25em" bg="green.500" />
       </Avatar>
     </Link>

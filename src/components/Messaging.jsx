@@ -115,16 +115,40 @@
 // export default Chatting;
 
 
-import { ChatEngine } from "react-chat-engine";
+// import { ChatEngine } from "react-chat-engine";
 
-export const chat = ()=>{
-    return(
-        <ChatEngine 
-            height="100vh"
-            projectID=""
-            userName = ""
-            userSecret = ""
+// export const chat = ()=>{
+//     return(
+//         <ChatEngine 
+//             height="100vh"
+//             projectID=""
+//             userName = ""
+//             userSecret = ""
         
-        />
-    )
-}
+//         />
+//     )
+// }
+
+
+ // App.js
+//  import React, {Component} from 'react';
+//  import {EaseApp} from "agora-chat-uikit"
+
+//  class App extends Component {
+//  render() {
+//      return (
+//      <div className="container" style={{height:'100%',width:'100%'}}>
+//          <EaseApp
+//              // The App key for your chat project
+//              appkey= "611006306#1174987"
+//              // The user ID of the current user
+//              username= "Mateen"
+//              // The <Vg k="COMPANY" /> token
+//              agoraToken= "007eJxTYDgcnX3U9omuiIc+m9qRxT9PbOD890K7WPF8tq/t2fqjxn8UGEySUwwMjJJNDC2SDUxMUlMSU8zTkpLTkozNLS2TDFOMz/EeSWkIZGTwfJTFwMjACsRMDCA+AwMAr4keqQ=="
+//              /> 
+//      </div>
+//      );
+//    }
+//  }
+
+//  export default App;

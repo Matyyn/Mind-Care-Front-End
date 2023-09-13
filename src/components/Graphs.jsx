@@ -34,13 +34,13 @@ import {
 } from "@chakra-ui/react";
 
 const data = [
-  { weekdayname: "Mon", clients: 4},
-  { weekdayname: "Tue", clients: 2},
-  { weekdayname: "Wed", clients: 3},
-  { weekdayname: "Thur", clients: 4},
-  { weekdayname: "Fri", clients: 5},
-  { weekdayname: "Sat", clients: 4},
-  { weekdayname: "Sun", clients: 5},
+  { weekdayname: "Mon", Intensity: 4},
+  { weekdayname: "Tue", Intensity: 2},
+  { weekdayname: "Wed", Intensity: 3},
+  { weekdayname: "Thur", Intensity: 4},
+  { weekdayname: "Fri", Intensity: 5},
+  { weekdayname: "Sat", Intensity: 4},
+  { weekdayname: "Sun", Intensity: 5},
 ];
 
 const RechartsExample = () => {
@@ -61,10 +61,9 @@ const RechartsExample = () => {
           left: 20,
         }}>
         <Line
-          type="monotone"
-          dataKey="clients"
-          stroke={colors.secondary}
-          name="Weekly Clients Graph"
+          type="natural"
+          dataKey="Intensity"
+          stroke={colors.secondary}          
         />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="weekdayname" />

@@ -74,18 +74,18 @@ const Navbar = () => {
              <Image
             src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fbrain.png?alt=media&token=b9f9b1e6-d4d9-46c4-8440-fc51f7c33e75"
             alt="Logo"
-            height="50px"
+            height="35px"
             marginTop={'1%'}
-            width="55px"          
+            width="35px"          
             onLoad={handleImageLoad}            
             style={{ display: isLoading ? "none" : "block" }}
           />
-          <span style={{marginTop:'12%',color:colors.secondary,fontWeight:'700'}}>Mind Care</span>  
+          <span style={{marginTop:'8%',color:colors.secondary,fontWeight:'700'}}>Mind Care</span>  
           </Stack>
           </div>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               {Links.map((link) => (
-                <NavLink key={link} onClick={() => scrollToSection(link.toLowerCase())} color={colors.secondary}>
+                <NavLink key={link} onClick={() => scrollToSection(link.toLowerCase())} color={colors.primary} >
                   {link}
                 </NavLink>
               ))}
@@ -93,21 +93,30 @@ const Navbar = () => {
           </HStack>
           <Flex alignItems={'center'}>
             <Link to="/signin">
-            <Button color={colors.secondary} variant="ghost" mr={4}>
+            <Button color={colors.secondary} variant="ghost" mr={4}
+            size='md'
+              _hover={{
+                bg: colors.primary,
+                color: 'white',
+                borderColor:colors.primary
+              }}
+            >
               Sign In
             </Button>
             </Link>
             <Link to="/signup">
             <Button 
-                          display={{ base: "none", md: "inline-flex" }}
+              display={{ base: "none", md: "inline-flex" }}
               fontSize={"md"}
+              size='md'
               fontWeight={'500'}
               color={"white"}
               bg={colors.secondary}
               href={"#"}
               _hover={{
                 bg: colors.primary,
-                color: colors.secondary
+                color: 'white',
+                borderColor:colors.primary
               }}>
               Sign Up
             </Button>
@@ -122,7 +131,7 @@ const Navbar = () => {
                 <NavLink
                   key={link}
                   onClick={() => scrollToSection(link.toLowerCase())}
-                  mb={2}
+                  mb={2}                  
                 >
                   {link}
                 </NavLink>

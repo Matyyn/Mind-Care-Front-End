@@ -19,18 +19,18 @@ function FAQs() {
         className="columns"
         style={{  marginTop: "1%" ,width:'auto',marginTop:'5%',marginBottom:'5%'}}>
       <Text
-        fontSize="52"
+        fontSize="44"
         style={{
           textAlign: "center",
           fontWeight: "bolder",
           marginTop: "5%",
-          marginBottom: "0",
+          marginBottom: "3%",
           color: colors.secondary,          
         }}
       >
         Frequently Asked Questions
       </Text>
-      <p
+      {/* <p
         style={{
           textAlign: "center",
           marginRight: "20%",
@@ -42,12 +42,11 @@ function FAQs() {
         }}
       >
         Mind Care FAQ:provide answers to common questions about mental health
-        services provided by Mind Care. Mind Care's FAQ,help to provide clarity
-        and transparency to clients seeking mental health support
-      </p>
+        services provided by Mind Care.
+      </p> */}
       <Accordion
         style={{ marginRight: "25%", marginLeft: "25%",marginBottom:'2%', color: colors.secondary }}>
-        <AccordionItem>
+        <AccordionItem >
           <h2>
             <AccordionButton>
               <Box as="span" flex="1" textAlign="left">
@@ -57,10 +56,7 @@ function FAQs() {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          "Mind Care" is an innovative project designed to detect anxiety and depression early on, leveraging advanced AI algorithms to analyze user behavior and emotional cues. Through continuous monitoring and personalized interventions, our solution aims to promote mental well-being and provide timely support to those in need, fostering a healthier and happier society. Join us in the journey towards a more emotionally resilient world with Mind Care.
           </AccordionPanel>
         </AccordionItem>
 
@@ -74,10 +70,7 @@ function FAQs() {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          Mind Care services offer valuable support to individuals dealing with anxiety and depression, as well as providing useful tools for mental health professionals to monitor and treat their clients. Employers can also benefit by fostering a healthier work environment through Mind Care services for their employees.
           </AccordionPanel>
         </AccordionItem>
 
@@ -91,10 +84,7 @@ function FAQs() {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          Cognitive-Behavioral Therapy (CBT) aims to change negative thought patterns and behaviors to alleviate anxiety and depression. Talk therapy provides a supportive environment for individuals to discuss emotions and foster self-reflection. Mindfulness-Based Therapy cultivates present-moment awareness, reducing stress and enhancing mental well-being.
           </AccordionPanel>
         </AccordionItem>
 
@@ -108,10 +98,7 @@ function FAQs() {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          To schedule an appointment with Mind Care, simply download the Mind Care mobile app and follow the user-friendly interface to book appointments conveniently from your smartphone.
           </AccordionPanel>
         </AccordionItem>
 
@@ -125,10 +112,7 @@ function FAQs() {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          The cost of therapy at Mind Care can vary depending on the therapist's qualifications and experience. Rates for therapy sessions are typically based on a sliding scale, with therapists charging different fees to accommodate various budgets. It's advisable to check the app for specific pricing details and therapist profiles.
           </AccordionPanel>
         </AccordionItem>
       </Accordion>

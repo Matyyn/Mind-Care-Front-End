@@ -426,8 +426,7 @@ export default function Signup({ matchedImageAddress }) {
                           <FormErrorMessage>{errors.password}</FormErrorMessage>
                         </FormControl>
                         <FormControl
-                          isInvalid={!!(errors.confirmPassword && touched.confirmPassword)}
-                        >
+                          isInvalid={!!(errors.confirmPassword && touched.confirmPassword)}>
                           <FormLabel>Confirm Password</FormLabel>
                           <Input
                             type="password"
