@@ -53,7 +53,7 @@ function Stats() {
             <Text fontSize="44" style={{ textAlign: "center" }}>
               <span style={{ color: colors.secondary }}>Better </span>
               <span style={{color:colors.primary}}>mental health benefits</span>
-              <span style={{ color: colors.secondary}}>,better</span>
+              <span style={{ color: colors.secondary}}>, better</span>
             </Text>
             <Text fontSize='44'style={{ textAlign: "center", marginTop: "0",color:colors.secondary }}>Outcomes</Text>
           </strong>
@@ -98,7 +98,7 @@ function Stats() {
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fgrowth.png?alt=media&token=d8858105-91b6-4781-8909-08bcf83fc0d3"
                           alt="Growth Image"
-                          height="120px"
+                          height="100px"
                           width="100px"
                           onLoad={handleImageLoad}
                           style={{ display: isLoading ? "none" : "block" }}
@@ -139,7 +139,7 @@ function Stats() {
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fcolumn.png?alt=media&token=fcee5319-9b65-4910-acab-7175ac4eec9f"
                           alt="Nervous Image"
-                          height="120px"
+                          height="100px"
                           width="100px"
                           onLoad={handleImageLoad}
                           style={{ display: isLoading ? "none" : "block" }}
@@ -182,7 +182,7 @@ function Stats() {
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fline-graph.png?alt=media&token=c94c6d6b-798d-4a23-b7ad-c9b477de04d4"
                           alt="Line graph Image"
-                          height="120px"
+                          height="100px"
                           width="100px"
                           onLoad={handleImageLoad}
                           style={{ display: isLoading ? "none" : "block" }}
@@ -224,7 +224,7 @@ function Stats() {
                         <Image
                           src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Frating.png?alt=media&token=c177b1cf-e43d-4b4e-96ad-70209fa68930"
                           alt="rating Image"
-                          height="120px"
+                          height="100px"
                           width="100px"
                           onLoad={handleImageLoad}
                           style={{ display: isLoading ? "none" : "block" }}
