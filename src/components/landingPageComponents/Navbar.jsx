@@ -135,13 +135,13 @@ const Navbar = () => {
             </>
             ):(<>
             <Link to="/signin">
-            <Button color={colors.secondary} variant="ghost" mr={4}
+            <Button  mr={4}
             size='md'
-              _hover={{
-                bg: colors.primary,
-                color: 'white',
-                borderColor:colors.primary
-              }}
+              // _hover={{
+              //   bg: colors.primary,
+              //   color: 'white',
+              //   borderColor:colors.primary
+              // }}
             >
               Sign In
             </Button>

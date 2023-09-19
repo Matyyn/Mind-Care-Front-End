@@ -205,7 +205,7 @@ function Stats() {
                         style={{ fontSize: "14", textAlign: "center" ,fontWeight:'600'}}
                       >
                         clients experienced a decrease in anxiety levels after
-                        4-6 weeks of utilisation
+                        4-6 weeks.
                       </p>
                     </Stack>
                   </CardBody>
