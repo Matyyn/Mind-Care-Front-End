@@ -78,17 +78,13 @@ function Pricing() {
                     color:colors.secondary
                   }}
                 >
-                  Powered By Stripe
+                  Pay only for the therapy
                 </Text>
                 <p
                   
                   style={{ textAlign: "center" ,fontSize:'17px',fontWeight:'500',color:colors.third}}
                 >
-                  Mind Care provides majority of the features for free
-                  although therapy is paid. Powered by Stripe, benefits of
-                  Stripe is its flexibility, as it supports a wide range of
-                  payment methods, including credit cards, debit cards, and
-                  digital wallets.
+                  Stripe's payment prowess fuels our platform, providing you with a seamless payment experience that's second to none.
                 </p>
               </Stack>
             </GridItem>
