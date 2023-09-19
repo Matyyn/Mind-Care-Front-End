@@ -88,8 +88,7 @@ function AboutUs() {
                   >
                     Redefining mental healthcare for people
                   </Text>
-                  <p
-                    
+                  <p                    
                     style={{textAlign: "center",fontSize:'17px',fontWeight:'600',color:colors.third}}
                   >
                     Our mission is to make mental health supportradically more
@@ -244,9 +243,10 @@ function AboutUs() {
                     }}
                   />                                        
                   </InputGroup>
-                  <p style={{fontSize:18,fontWeight:'Bold',color:colors.third}}>
-                    Powered By Stripe
-                    </p>
+                  <p>
+                      Hello, we are Mind Care. Our goal is to translate the
+                      positive effects from revolutionizing digital therapy
+                  </p>
                 </Stack>
               </GridItem>
             </Grid>

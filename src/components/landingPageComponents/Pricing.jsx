@@ -78,7 +78,7 @@ function Pricing() {
                     color:colors.secondary
                   }}
                 >
-                  Pay only for the therapy
+                  Powered By Stripe
                 </Text>
                 <p
                   
