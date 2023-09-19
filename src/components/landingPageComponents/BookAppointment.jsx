@@ -88,7 +88,7 @@ function BookAppointment() {
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
-                }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
+                }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
                   <CardBody >
                     <Stack mt="6" spacing="3">
                       <Text
@@ -145,7 +145,7 @@ function BookAppointment() {
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
-                }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
+                }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Text
@@ -203,7 +203,7 @@ function BookAppointment() {
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
-                }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
+                }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Text
@@ -229,7 +229,7 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        A decrease in work efficiency, output caused by stress, burnout, mental health issues.
+                        A decrease in work efficiency, output caused by stress, mental health issues.
                       </p>                      
                     </Stack>
                   </CardBody>
@@ -239,7 +239,7 @@ function BookAppointment() {
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
-                }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
+                }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Text

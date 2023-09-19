@@ -89,7 +89,7 @@ function Stats() {
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'  
-                }}boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
+                }}boxShadow='lg' size={'md'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
@@ -130,7 +130,7 @@ function Stats() {
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'
-                }}boxShadow='lg' size={'sm'}paddingBottom={'2%'}>
+                }}boxShadow='lg' size={'md'}paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
@@ -173,7 +173,7 @@ function Stats() {
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'
-                }}boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
+                }}boxShadow='lg' size={'md'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
@@ -215,7 +215,7 @@ function Stats() {
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'
-                }}boxShadow='lg' size={'sm'} marginBottom={'2%'} paddingBottom={'2%'}>
+                }}boxShadow='lg' size={'md'} marginBottom={'2%'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
