@@ -172,7 +172,7 @@ function Stats() {
               <GridItem >
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.third,
-                  color: 'white'
+                  color: 'white',height:'auto'
                 }}boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
@@ -238,7 +238,7 @@ function Stats() {
                           fontWeight: "bolder",
                           marginTop: "0",
                           marginBottom: "0",
-                        }}
+                         }}
                       >
                         4.5/5
                       </Text>

@@ -114,7 +114,7 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        A state of emotional distress
+                        A state of emotional distress which can impact overall well-being and quality of life
                       </p>
                       <p
                         color="colors.secondary"
@@ -125,7 +125,7 @@ function BookAppointment() {
                           fontWeight: "600"
                         }}
                       >
-                        which can impact overall
+                        
                       </p>
                       <p
                         color="colors.secondary"
@@ -135,7 +135,7 @@ function BookAppointment() {
                           textAlign: "center", fontWeight: "600"
                         }}
                       >
-                        well-being and quality of life
+                        
                       </p>
                     </Stack>
                   </CardBody>
@@ -171,7 +171,7 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        Feelings of fear and
+                        Feelings of fear and apprehension that can interfere with daily activities
                       </p>
                       <p
                         color="colors.secondary"
@@ -182,7 +182,7 @@ function BookAppointment() {
                           fontWeight: "600"
                         }}
                       >
-                        apprehension that can
+                        
                       </p>
                       <p
                         color="colors.secondary"
@@ -193,7 +193,7 @@ function BookAppointment() {
                           fontWeight: "600"
                         }}
                       >
-                        interfere with daily activities
+                        
                       </p>
                     </Stack>
                   </CardBody>
@@ -229,7 +229,7 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        A decrease in work efficiency,
+                        A decrease in work efficiency, output caused by stress,burnout,mental health issues.
                       </p>
                       <p
                         color="colors.secondary"
@@ -239,7 +239,7 @@ function BookAppointment() {
                           textAlign: "center", fontWeight: "600"
                         }}
                       >
-                        output caused by stress,
+                        
                       </p>
                       <p
                         color="colors.secondary"
@@ -249,7 +249,7 @@ function BookAppointment() {
                           textAlign: "center", fontWeight: "600"
                         }}
                       >
-                        burnout,mental health issues.
+                        
                       </p>
                     </Stack>
                   </CardBody>
@@ -285,7 +285,7 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        Emotional, physical, and mental
+                        Emotional, physical, and mental exhaustion resulting in reduced productivity.
                       </p>
                       <p
                         color="colors.secondary"
@@ -295,7 +295,7 @@ function BookAppointment() {
                           textAlign: "center", fontWeight: "600"
                         }}
                       >
-                        exhaustion resulting in reduced
+                        
                       </p>
                       <p
                         color="colors.secondary"
@@ -305,7 +305,7 @@ function BookAppointment() {
                           textAlign: "center", fontWeight: "600"
                         }}
                       >
-                         productivity.
+                       
                       </p>
                     </Stack>
                   </CardBody>
