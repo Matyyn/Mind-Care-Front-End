@@ -95,7 +95,7 @@ function BookAppointment() {
                         fontSize="17"
                         style={{ textAlign: "center", fontWeight: "bolder", }}
                       >
-                        Low Mood and Wellbeing
+                        Gloomy Health
                       </Text>
                       <Center>
                         <div>
@@ -103,7 +103,7 @@ function BookAppointment() {
                           <Image
                             src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fdepression.png?alt=media&token=12c115ce-ac5d-4842-a384-9b1514406e10"
                             alt="Depression Image"
-                            height="100px"
+                            height="auto"
                             width="100px"
                             onLoad={handleImageLoad}
                             style={{ display: isLoading ? "none" : "block" }}
@@ -114,29 +114,9 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        A state of emotional distress which can impact overall well-being and quality of life
+                        Stress can harm life's vibe.
                       </p>
-                      <p
-                        color="colors.secondary"
-                        style={{
-                          fontSize: "14",
-                          marginTop: "0",
-                          textAlign: "center",
-                          fontWeight: "600"
-                        }}
-                      >
-                        
-                      </p>
-                      <p
-                        color="colors.secondary"
-                        style={{
-                          fontSize: "14",
-                          marginTop: "0",
-                          textAlign: "center", fontWeight: "600"
-                        }}
-                      >
-                        
-                      </p>
+                      
                     </Stack>
                   </CardBody>
                 </Card>
@@ -160,7 +140,7 @@ function BookAppointment() {
                           <Image
                             src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fnervous.png?alt=media&token=ea27bb6c-34e4-4944-8a65-0c32504b6329"
                             alt="Nervous Image"
-                            height="100px"
+                            height="auto"
                             width="100px"
                             onLoad={handleImageLoad}
                             style={{ display: isLoading ? "none" : "block" }}
@@ -171,30 +151,9 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        Feelings of fear and apprehension that can interfere with daily activities
+                         Fear impacts daily tasks.
                       </p>
-                      <p
-                        color="colors.secondary"
-                        style={{
-                          fontSize: "14",
-                          marginTop: "0",
-                          textAlign: "center",
-                          fontWeight: "600"
-                        }}
-                      >
-                        
-                      </p>
-                      <p
-                        color="colors.secondary"
-                        style={{
-                          fontSize: "14",
-                          marginTop: "0",
-                          textAlign: "center",
-                          fontWeight: "600"
-                        }}
-                      >
-                        
-                      </p>
+                      
                     </Stack>
                   </CardBody>
                 </Card>
@@ -210,7 +169,7 @@ function BookAppointment() {
                         fontSize="17"
                         style={{ textAlign: "center", fontWeight: "bolder" }}
                       >
-                        Low productivity & Output
+                        Diminished yield
                       </Text>
                       <Center>
                         <div>
@@ -218,7 +177,7 @@ function BookAppointment() {
                           <Image
                             src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Flow-speed%20(1).png?alt=media&token=90e2c259-2fe0-4550-9cf3-c5f3433e1319"
                             alt="Speed Image"
-                            height="100px"
+                            height="auto"
                             width="100px"
                             onLoad={handleImageLoad}
                             style={{ display: isLoading ? "none" : "block" }}
@@ -229,7 +188,7 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        A decrease in work efficiency, output caused by stress, mental health issues.
+                        Work woes from stress.
                       </p>                      
                     </Stack>
                   </CardBody>
@@ -246,7 +205,7 @@ function BookAppointment() {
                         fontSize="17"
                         style={{ textAlign: "center", fontWeight: "bolder" }}
                       >
-                        Stress & burnout
+                        Strain Fatigue
                       </Text>
                       <Center>
                         <div>
@@ -254,7 +213,7 @@ function BookAppointment() {
                           <Image
                             src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Ffatigue.png?alt=media&token=fc767160-6648-4a16-9dbe-eb554a6a3efc"
                             alt="Fatigue Image"
-                            height="100px"
+                            height="auto"
                             width="100px"
                             onLoad={handleImageLoad}
                             style={{ display: isLoading ? "none" : "block" }}
@@ -265,7 +224,7 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        Emotional, physical, and mental exhaustion resulting in reduced productivity.
+                        Burnout lowers productivity.
                       </p>
                       <p
                         color="colors.secondary"
