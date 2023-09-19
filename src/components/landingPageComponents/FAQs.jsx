@@ -92,7 +92,7 @@ function FAQs() {
           <h2>
             <AccordionButton>
               <Box as="span" flex="1" textAlign="left" fontWeight={'semibold'}>
-                Q4: How do I schedule an appointment with Mind Care?
+                Q4: How do I sechedule an appointment with Mind Care?
               </Box>
               <AccordionIcon />
             </AccordionButton>
