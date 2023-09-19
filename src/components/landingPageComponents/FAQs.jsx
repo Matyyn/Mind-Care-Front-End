@@ -17,7 +17,7 @@ function FAQs() {
     <div className="parentDiv">
       <div
         className="columns"
-        style={{  marginTop: "1%" ,width:'auto',marginTop:'5%',marginBottom:'5%'}}>
+        style={{width:'auto',marginTop:'5%',marginBottom:'5%'}}>
       <Text
         fontSize="44"
         style={{
