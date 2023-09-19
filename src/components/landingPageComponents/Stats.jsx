@@ -68,7 +68,7 @@ function Stats() {
               color:colors.third
             }}>
             Clinical data that showcases substantial improvements in the
-            wellbeing, stress,and anxiety levels of members who utilise our
+            wellbeing, stress, and anxiety levels of members who utilise our
             programs.
           </p>
         
@@ -86,7 +86,7 @@ function Stats() {
               gap={4}
             >
               <GridItem >
-                <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+                <Card maxW="100%" height="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'  
                 }}boxShadow='lg' size={'md'} paddingBottom={'2%'}>
@@ -127,7 +127,7 @@ function Stats() {
                 </Card>
               </GridItem>
               <GridItem >
-              <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+              <Card maxW="100%" height="100%"backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'
                 }}boxShadow='lg' size={'md'}paddingBottom={'2%'}>
@@ -170,7 +170,7 @@ function Stats() {
                 </Card>
               </GridItem>
               <GridItem >
-              <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+              <Card maxW="100%"   height="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'
                 }}boxShadow='lg' size={'md'} paddingBottom={'2%'}>
@@ -212,7 +212,7 @@ function Stats() {
                 </Card>
               </GridItem>
               <GridItem >
-              <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+              <Card maxW="100%" height="100%"backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white',height:'auto'
                 }}boxShadow='lg' size={'md'} marginBottom={'2%'} paddingBottom={'2%'}>
@@ -246,7 +246,7 @@ function Stats() {
                         color="blue.600"
                         style={{ fontSize: "14", textAlign: "center" ,fontWeight:'600'}}
                       >
-                        user satisfaction rating across
+                        user satisfaction rating across 3 million registered users on our app
                       </p>
                       <p
                         color="blue.600"
@@ -256,7 +256,7 @@ function Stats() {
                           textAlign: "center",fontWeight:'600'
                         }}
                       >
-                        3 million registered users on our app
+                        
                       </p>
                       <p
                         color={colors.secondary}

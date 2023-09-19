@@ -85,7 +85,7 @@ function BookAppointment() {
               gap={4}
             >
               <GridItem>
-                <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+                <Card maxW="100%"  height="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
@@ -122,7 +122,7 @@ function BookAppointment() {
                 </Card>
               </GridItem>
               <GridItem>
-                <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+                <Card maxW="100%"  height="100%"backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
@@ -132,7 +132,7 @@ function BookAppointment() {
                         fontSize="17"
                         style={{ textAlign: "center", fontWeight: "bolder" }}
                       >
-                        Anxiety & worry
+                        Anxiety & Worry
                       </Text>
                       <Center>
                         <div>
@@ -159,7 +159,7 @@ function BookAppointment() {
                 </Card>
               </GridItem>
               <GridItem>
-                <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+                <Card maxW="100%"  height="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
@@ -169,7 +169,7 @@ function BookAppointment() {
                         fontSize="17"
                         style={{ textAlign: "center", fontWeight: "bolder" }}
                       >
-                        Diminished yield
+                        Diminished Yield
                       </Text>
                       <Center>
                         <div>
@@ -188,14 +188,14 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        Work woes from stress.
+                        Work Woes from Stress.
                       </p>                      
                     </Stack>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem>
-                <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
+                <Card maxW="100%"  height="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
                   bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'md'} paddingBottom={'2%'}>
