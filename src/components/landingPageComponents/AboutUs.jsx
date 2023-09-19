@@ -227,7 +227,7 @@ function AboutUs() {
                   <h2>
                     <strong>Subscribe</strong>
                   </h2>
-                  <InputGroup style={{ width: "80%" }} flexDirection={'row'}>
+                  <InputGroup style={{ width: "80%" }} flexDirection={'row'} gap={2}>
                     <Input placeholder="Email Address" />
                     <IconButton
                     aria-label="Facebook"
@@ -237,6 +237,7 @@ function AboutUs() {
                     bg={colors.primary}
                     color={colors.fourth}
                     fontSize={24}
+                    
                     _hover={{
                       bg: colors.primary,
                       borderColor: colors.primary,
