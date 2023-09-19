@@ -66,9 +66,7 @@ const SideBar = ({therapist}) => {
               >
                 Messages
               </Link>
-              <Link style={{ marginBottom: "7%" }} to="" 
-              state={therapist}
-              >
+              <Link style={{ marginBottom: "7%" }} to="/VC" >
                 Forum
               </Link>
               <Link

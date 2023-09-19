@@ -2,24 +2,25 @@ import {
   ref,
   uploadBytes,
   getDownloadURL,
-  listAll,
-  list,
 } from "firebase/storage";
 import { storage } from "../utils/firebase";
 import { v4 } from "uuid";
-
+import colors from "./Colors";
 import React, { useRef, useEffect, useState } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import {
   Button,
-  Modal,
+  Modal,  
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter,
+  IconButton,
+  Icon
 } from "@chakra-ui/react";
+import {BsUpload} from 'react-icons/bs'
 
 function ImageMatchingComponent({ onClose }) {
   const fileInputRef = useRef(null);
@@ -293,7 +294,15 @@ function App() {
 
   return (
     <div>
-      <Button colorScheme="purple" onClick={handleOpenModal}>Upload Image</Button>
+      <Button bg={colors.primary} onClick={handleOpenModal}>
+      <IconButton                    
+                    icon={<Icon as={BsUpload} />}
+                    fontSize={19}
+                    size="sm"
+                    borderColor="none"
+                    bg={colors.primary}
+                  />
+      </Button>
 
       <Modal isOpen={isOpen} onClose={handleCloseModal} size="xl">
         <ModalOverlay />

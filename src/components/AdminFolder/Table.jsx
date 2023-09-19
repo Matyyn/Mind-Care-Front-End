@@ -17,8 +17,8 @@ import {
 import jsPDF from "jspdf";
 import { useDispatch } from "react-redux";
 import { setArray } from "../redux/slices/accountsReducer";
-import { deleteItemFromStore } from "../redux/actions/deleteAccountsActions";
 import { useSelector } from "react-redux";
+import { deleteItemFromStore } from "../redux/actions/deleteAccountsActions";
 
 
 const data = [

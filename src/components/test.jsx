@@ -362,21 +362,24 @@ export default function SignIn() {
 
   const toast = useToast();
   const navigate = useNavigate();
-  async function handleSubmit(values, { resetForm }) {
+  async function handleSubmit(values) {
 
     var result;
-    
+    delete values.confirmPassword
     console.log("entered values are", values);
+    console.log(values.dateofBirth)
+
     result = await axios.post('/signup', values)
     //await uploadFiles();
     if (result) {
       console.log(result)
       toast({
-        title: "Signup form Submitted.",
+        title: "You Sign Up Successfully",
         status: "success",
         duration: 3000,
         isClosable: true,
       });
+      
       navigate('/signin')
       //resetForm();
       // window.location.href = 'https://127.0.0.1:5173/signin';
@@ -589,7 +592,7 @@ export default function SignIn() {
             </FormControl>
             <Button
               mt={4}
-              colorScheme="purple"
+              bg={colors.primary}
               onClick={handleNextStep}
               width="100%"
             >
@@ -600,9 +603,7 @@ export default function SignIn() {
       case 2:
         return (
           <>
-            
-
-           
+    
             <FormControl
               isInvalid={errors.specialization && touched.specialization}
               marginBottom="1rem"
@@ -613,9 +614,9 @@ export default function SignIn() {
                 name="specialization"
                 placeholder="Select specialization field"
               >
-                <option value="a">a</option>
-                <option value="b">b</option>
-                <option value="c">c</option>
+                <option value="Therapist">Therapist</option>
+                <option value="Counselor">Counselor</option>
+                <option value="Psychologist">Psychologist</option>
               </Field>
               <FormErrorMessage>{errors.specialization}</FormErrorMessage>
             </FormControl>
@@ -629,7 +630,8 @@ export default function SignIn() {
               />
               <FormErrorMessage>{errors.experience}</FormErrorMessage>
             </FormControl>
-            <FormLabel style={{ marginRight: "50%" }}>Upload Image</FormLabel>
+                        
+            <FormLabel style={{ marginRight: "50%" }}>Image</FormLabel>
             <FormControl>
               <ImageMatching
                 setFieldValue={setFieldValue}
@@ -639,7 +641,7 @@ export default function SignIn() {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
                 mt={4}
-                colorScheme="purple"
+                bg={colors.primary}
                 onClick={handlePreviousStep}
                 width="45%"
               >
@@ -647,7 +649,7 @@ export default function SignIn() {
               </Button>
               <Button
                 mt={4}
-                colorScheme="purple"
+                bg={colors.primary}
                 onClick={handleNextStep}
                 width="45%"
               >
@@ -659,8 +661,7 @@ export default function SignIn() {
         );
       case 3:
         return (
-          <>
-            
+          <>            
             <FormControl
               isInvalid={errors.password && touched.password}
               marginBottom="1rem"
@@ -690,7 +691,7 @@ export default function SignIn() {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
                 mt={4}
-                colorScheme="purple"
+                bg={colors.primary}
                 onClick={handlePreviousStep}
                 width="45%"
               >

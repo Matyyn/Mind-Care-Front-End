@@ -65,7 +65,7 @@ function BookAppointment() {
               marginTop: "2%",
               fontSize: '17px',
               fontWeight: '500',
-              color: colors.third
+              color: colors.third  
             }}
           >
             Mental health challenges can hinder daily life, relationships, and productivity. Mind Care provides services to help individuals address these challenges and enhance their well-being
@@ -86,7 +86,7 @@ function BookAppointment() {
             >
               <GridItem>
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
+                  bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody >
@@ -143,7 +143,7 @@ function BookAppointment() {
               </GridItem>
               <GridItem>
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
+                  bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
@@ -201,7 +201,7 @@ function BookAppointment() {
               </GridItem>
               <GridItem>
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
+                  bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
@@ -229,35 +229,15 @@ function BookAppointment() {
                         color="colors.secondary"
                         style={{ fontSize: "14", textAlign: "center", fontWeight: "600" }}
                       >
-                        A decrease in work efficiency, output caused by stress,burnout,mental health issues.
-                      </p>
-                      <p
-                        color="colors.secondary"
-                        style={{
-                          fontSize: "14",
-                          marginTop: "0",
-                          textAlign: "center", fontWeight: "600"
-                        }}
-                      >
-                        
-                      </p>
-                      <p
-                        color="colors.secondary"
-                        style={{
-                          fontSize: "14",
-                          marginTop: "0",
-                          textAlign: "center", fontWeight: "600"
-                        }}
-                      >
-                        
-                      </p>
+                        A decrease in work efficiency, output caused by stress, burnout, mental health issues.
+                      </p>                      
                     </Stack>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem>
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
+                  bg: colors.secondary,
                   color: 'white'
                 }} boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
@@ -326,7 +306,7 @@ function BookAppointment() {
             }}
             size='md'
             >
-              Book Appointment
+              Find Therapist
             </Button>
           </Center>
         </div>

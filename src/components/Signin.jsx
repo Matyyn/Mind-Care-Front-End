@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Formik, Field, Form } from "formik";
 import React, { useState, useEffect } from "react";
 import colors from "./Colors";
+import { useDispatch } from "react-redux";
+import { setUser } from "./redux/slices/therapistReducer";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import {
@@ -33,6 +36,7 @@ const validationSchema = Yup.object().shape({
 
   
 export default function SignIn() {
+  const dispatch = useDispatch()
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -40,16 +44,15 @@ async function handleSubmit(values, resetForm)  {
   try {
     //console.log(values); // replace with your logic for submitting the form
     const result = await axios.post('/login', values);    
-    if(result.data.status == 'OK'){
-    const { accessToken, refreshToken} = result.data.data;
-    console.log("therapist",therapist)
+    console.log(result.data.data)    
+    if(result.status === 200){
+    let accessToken=result.data.accessToken
+    let refreshToken = result.data.refreshToken    
     // Store tokens in local storage
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);  
-    //localStorage.setItem('therapist', JSON.stringify(therapist));
-    // console.log('Access Token:', accessToken);
-    // console.log('Refresh Token:', refreshToken);
-    // console.log('Therapist Date',therapist)
+    dispatch(setUser(result.data.data))
+
     toast({
       title: "You have logined Successfully",
       status: "success",

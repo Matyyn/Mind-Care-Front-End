@@ -10,6 +10,9 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import {
+  RiMailSendLine
+} from "react-icons/ri";
+import {
   Box,
   Flex,Spinner,
   Center,
@@ -224,12 +227,22 @@ function AboutUs() {
                   <h2>
                     <strong>Subscribe</strong>
                   </h2>
-                  <InputGroup style={{ width: "63%" }}>
+                  <InputGroup style={{ width: "80%" }} flexDirection={'row'}>
                     <Input placeholder="Email Address" />
-                    <InputRightElement
-                      borderTopEndRadius={"5px"}
-                      borderBottomEndRadius={"5px"}
-                    />
+                    <IconButton
+                    aria-label="Facebook"
+                    icon={<Icon as={RiMailSendLine} />}                    
+                    size="md"                    
+                    borderColor="none"
+                    bg={colors.primary}
+                    color={colors.fourth}
+                    fontSize={24}
+                    _hover={{
+                      bg: colors.primary,
+                      borderColor: colors.primary,
+                      color:colors.fourth
+                    }}
+                  />                                        
                   </InputGroup>
                   <p>
                     Hello, we are Mind Care. Our goal is to translate the

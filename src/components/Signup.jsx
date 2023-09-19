@@ -149,9 +149,10 @@ export default function Signup({ matchedImageAddress }) {
   const navigate = useNavigate();
   async function handleSubmit(values, { resetForm }) {
     
-    var result;
+    let result;
     console.log("entered values are", values);
     result = await axios.post('/signup',values)
+    console.log(result)
     //await uploadFiles();
     if(result){
       console.log(result)
@@ -161,7 +162,7 @@ export default function Signup({ matchedImageAddress }) {
       duration: 3000,
       isClosable: true,
     });
-    navigate('/signin')
+    navigate('/dashboard')
    //resetForm();
    // window.location.href = 'https://127.0.0.1:5173/signin';
     //redirect("/signin");

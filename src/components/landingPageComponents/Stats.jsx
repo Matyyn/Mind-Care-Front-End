@@ -87,8 +87,8 @@ function Stats() {
             >
               <GridItem >
                 <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
-                  color: 'white'
+                  bg: colors.secondary,
+                  color: 'white',height:'auto'  
                 }}boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
@@ -128,8 +128,8 @@ function Stats() {
               </GridItem>
               <GridItem >
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
-                  color: 'white'
+                  bg: colors.secondary,
+                  color: 'white',height:'auto'
                 }}boxShadow='lg' size={'sm'}paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">
@@ -171,7 +171,7 @@ function Stats() {
               </GridItem>
               <GridItem >
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
+                  bg: colors.secondary,
                   color: 'white',height:'auto'
                 }}boxShadow='lg' size={'sm'} paddingBottom={'2%'}>
                   <CardBody>
@@ -213,8 +213,8 @@ function Stats() {
               </GridItem>
               <GridItem >
               <Card maxW="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.third,
-                  color: 'white',
+                  bg: colors.secondary,
+                  color: 'white',height:'auto'
                 }}boxShadow='lg' size={'sm'} marginBottom={'2%'} paddingBottom={'2%'}>
                   <CardBody>
                     <Stack mt="6" spacing="3">

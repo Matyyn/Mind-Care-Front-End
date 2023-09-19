@@ -56,6 +56,20 @@ const Navbar = () => {
     onToggle();
   };
 
+  // for access and referesh token
+  const [accessToken, setAccessToken] = useState('');
+  const [refreshToken,setRefreshToken] =useState('')
+  const [check,setCheck] = useState(false)
+  useEffect(() => {
+    const items = localStorage.getItem('accessToken');
+    const Token = localStorage.getItem('refreshToken')
+    if (items&&Token) {
+    setAccessToken(items);
+    setRefreshToken(Token);
+    setCheck(true)
+    }
+  }, []);  
+
   return (
     <>
       <Box  px={4}>
@@ -92,6 +106,34 @@ const Navbar = () => {
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
+            {check ?(
+            <>
+            <Link to="/dashboard">
+            <Button   mr={4}
+            size='md'                          
+            >
+              Sign In
+            </Button>
+            </Link>
+            <Link to="/signup">
+            <Button 
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"md"}
+              size='md'
+              fontWeight={'500'}
+              color={"white"}
+              bg={colors.secondary}
+              href={"#"}
+              _hover={{
+                bg: colors.primary,
+                color: 'white',
+                borderColor:colors.primary
+              }}>
+              Sign Up
+            </Button>
+            </Link>
+            </>
+            ):(<>
             <Link to="/signin">
             <Button color={colors.secondary} variant="ghost" mr={4}
             size='md'
@@ -121,6 +163,9 @@ const Navbar = () => {
               Sign Up
             </Button>
             </Link>
+            </>)
+            }
+            
           </Flex>
         </Flex>
 

@@ -49,9 +49,7 @@ function IndexPage() {
                       , fontWeight: '500', color: colors.third
                     }}>
                       For people looking to proactively care for their mental wellbeing, Mind
-                      Care takes the guesswork out with our mental health platform. Speak with
-                      licensed therapists or take on self-guided programs, entirely within a
-                      single platform
+                      Care takes the guesswork out with our mental health platform.
                     </p>
                   </Stack>
                   <div
@@ -147,8 +145,7 @@ function IndexPage() {
                     >
                       For people looking to proactively care for their mental
                       wellbeing, Mind Care takes the guesswork out with our mental
-                      health platform. Speak with licensed therapists or take on
-                      self-guided programs, entirely within a single platform
+                      health platform.
                     </p>
                     <div
                       className="buttons"
@@ -173,7 +170,7 @@ function IndexPage() {
                           </Stack>
                         </Button>
                       </Link>
-                      <Link to='/VC'>
+                      <Link to=''>
                         <Button
                           backgroundColor={colors.secondary}
                           width={"110%"}

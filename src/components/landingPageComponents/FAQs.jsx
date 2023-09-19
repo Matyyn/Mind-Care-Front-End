@@ -49,8 +49,8 @@ function FAQs() {
         <AccordionItem >
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
-                Q1: What is MindCare?
+              <Box as="span" flex="1" textAlign="left" fontWeight={'semibold'}>
+                Q1: What is Mind Care?
               </Box>
               <AccordionIcon />
             </AccordionButton>
@@ -63,7 +63,7 @@ function FAQs() {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box as="span" flex="1" textAlign="left" fontWeight={'semibold'}>
                 Q2: Who can benefit from Mind Care's services?
               </Box>
               <AccordionIcon />
@@ -77,7 +77,7 @@ function FAQs() {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box as="span" flex="1" textAlign="left" fontWeight={'semibold'}>
                 Q3: What types of therapy does Mind Care offer?
               </Box>
               <AccordionIcon />
@@ -91,7 +91,7 @@ function FAQs() {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box as="span" flex="1" textAlign="left" fontWeight={'semibold'}>
                 Q4: How do I sechedule an appointment with Mind Care?
               </Box>
               <AccordionIcon />
@@ -105,7 +105,7 @@ function FAQs() {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box as="span" flex="1" textAlign="left" fontWeight={'semibold'}>
                 Q5: How much does therapy cost at Mind Care?
               </Box>
               <AccordionIcon />
