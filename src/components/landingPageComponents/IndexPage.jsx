@@ -74,7 +74,7 @@ function IndexPage() {
                         </Stack>
                       </Button>
                     </Link>
-                    <Link to='/VC'>
+                    <Link to='/Admin'>
                       <Button
                         backgroundColor={colors.secondary}
                         color={"white"}

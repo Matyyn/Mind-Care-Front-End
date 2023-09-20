@@ -25,18 +25,13 @@ import {
   ChevronRightIcon
 } from "@chakra-ui/icons"
 import Test from "../Sidebar"
-export default function WithSubnavigation(
-  // {therapist}
-  ) {
-   const { isOpen, onToggle } = useDisclosure()
-//  // var therapistJson = JSON.stringify(therapist)
-//  //console.log(therapist)
-//  const therapistData = localStorage.getItem('therapist');
+import { useSelector } from "react-redux";
 
-//   // Parse the retrieved string back into an object
-//   const therapistLocal = JSON.parse(therapistData);
-    
-  //var therapistJson = therapist
+
+export default function WithSubnavigation() {
+  const therapistInfo = useSelector((state) => state.therapistReducer.user);
+  console.log(therapistInfo)
+   const { isOpen, onToggle } = useDisclosure()
   return (
     <Box width={{ base: 'auto', md: 'auto' }}>
       <Flex
@@ -99,9 +94,15 @@ export default function WithSubnavigation(
             fontSize={"25"}
           />
 
-    <Link to={"/therapistprofile"}>
+    <Link to={"/therapistProfile"}>
       <Avatar size={"md"} >
-        <AvatarBadge boxSize="1.25em" bg="green.500" />
+        <AvatarBadge boxSize="1.25em" bg="green.500"/>
+        <Image
+      src={therapistInfo.picture}
+      alt="Therapist Image"
+      borderRadius="full"
+      boxSize="100%"
+    />
       </Avatar>
     </Link>
         </Stack>

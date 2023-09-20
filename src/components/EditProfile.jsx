@@ -31,7 +31,7 @@ import { v4 } from "uuid";
 //import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 //import SideBar from "./Sidebar";
-
+import { useSelector } from 'react-redux';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string(),
@@ -49,27 +49,19 @@ const validationSchema = Yup.object().shape({
   downloadURL: Yup.string()
 });
 const FormikForm = () => {
-  // const location = useLocation();
-  // //console.log('Local State',location)
-  // const therapistJson = location.state  
-  // const therapist = location.state ? location.state.therapist : null;
-  //console.log('Therapist Data :', therapistJson.picture);
-  const therapistData = localStorage.getItem('therapist');
-
-  // Parse the retrieved string back into an object
-  const therapistLocal = JSON.parse(therapistData);
-    
-  //console.log('settings screen',therapistJson)
+  const therapistInfo = useSelector((state) => state.therapistReducer.user);
   const initialValues = {
-    firstName:`${therapistLocal.firstName}`,
-    lastName: `${therapistLocal.lastName}`,
-    email: `${therapistLocal.email}`,
+    firstName:`${therapistInfo.firstName}`,
+    lastName: `${therapistInfo.lastName}`,
+    email: `${therapistInfo.email}`,
     password: "",
     Dateofbirth:Date.now(),
-    gender:`${therapistLocal.gender}`,
-    picture: "therapistJson.picture",
-    specialization: `${therapistLocal.specialization}`,
-    experience: `${therapistLocal.experience}`,
+    gender:`${therapistInfo.gender}`,
+    picture: ''
+    //`${therapistInfo.picture}`
+    ,
+    specialization: `${therapistInfo.specialization}`,
+    experience: `${therapistInfo.experience}`,
     SessionCharges: "",
     Start_DateTime: "",
     End_DateTime: "",
@@ -116,8 +108,9 @@ const FormikForm = () => {
   const [showPreviousButton, setShowPreviousButton] = useState(false);
   const handleSubmit =async(values,{resetForm}) => {
             console.log(values);
-            const result = axios.patch('/updateProfile',values)            
-            localStorage.setItem('therapist', JSON.stringify(result));
+            //const result = axios.patch('/updateProfile',values)            
+            //localStorage.setItem('therapist', JSON.stringify(result));
+
             toast({
               title: "Edit Profile Form Submitted.",
               status: "success",

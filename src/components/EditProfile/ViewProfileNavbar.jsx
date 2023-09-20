@@ -8,7 +8,7 @@ import {
   Text,
   IconButton,
   Stack,
-  Collapse,Avatar,AvatarBadge,
+  Collapse, Avatar, AvatarBadge,
   Icon,
   Image,
   Popover,
@@ -25,14 +25,10 @@ import {
   ChevronRightIcon
 } from "@chakra-ui/icons"
 import Test from "../Sidebar"
+import { useSelector } from "react-redux";
 export default function WithSubnavigation() {
-  //const { isOpen, onToggle } = useDisclosure()
-  // Retrieve item from local storage
-  const therapistData = localStorage.getItem('therapist');
+  const therapistInfo = useSelector((state) => state.therapistReducer.user);
 
-  // Parse the retrieved string back into an object
-  const therapist = JSON.parse(therapistData);
-    
   return (
     <Box width={{ base: '100vw', md: '100vw' }}>
       <Flex
@@ -70,7 +66,7 @@ export default function WithSubnavigation() {
             fontSize={"25"}
             color={useColorModeValue("gray.800", "white")}
           >
-           View Profile
+            View Profile
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
@@ -93,11 +89,17 @@ export default function WithSubnavigation() {
             fontSize={"25"}
           />
 
-      <Link to={"/therapistprofile"}>
-      <Avatar size={"md"} src={therapist.picture}>
-        <AvatarBadge boxSize="1.25em" bg="green.500" />
-      </Avatar>
-    </Link>
+          <Link to={"/therapistprofile"}>
+            <Avatar size={"md"}>
+              <AvatarBadge boxSize="1.25em" bg="green.500" />
+              <Image
+                src={therapistInfo.picture}
+                alt="Therapist Image"
+                borderRadius="full"
+                boxSize="100%"
+              />
+            </Avatar>
+          </Link>
         </Stack>
       </Flex>
 

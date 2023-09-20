@@ -22,7 +22,7 @@ import ViewComments from './components/AdminFolder/ReportedCommentsDashboard'
 import Appeals from './components/AdminFolder/AppealsDashboard'
 import VideoCall from './components/Video Calls/Appointments'
 import Redux from './components/ReduxExample'
-//import Messaging from './components/Messaging'
+import AdminSignin from './components/AdminFolder/AdminSignin'
 import Admin from './components/AdminFolder/AdminDashboard'
 //import Sessions from './components/VideoCall/sessionScreen'
 import axios from 'axios'
@@ -52,6 +52,7 @@ function App() {
           <Route path="/AdminComments" element={<ViewComments/>}/>
           <Route path="/Appeals" element={<Appeals/>}/>  
           <Route path="/VC" element={<VideoCall/>}/>
+          <Route path="/AdminSignIn" element={<AdminSignin/>}/>          
         </Routes>
       </Router>
       {/* <LandingPage/>    */}

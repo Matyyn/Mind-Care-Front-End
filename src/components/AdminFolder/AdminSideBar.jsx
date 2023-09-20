@@ -17,11 +17,10 @@ const SideBar = ({therapist}) => {
   const btnRef = React.useRef()
   const handleLogout = () => {
     // Clear tokens from local storage
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    
+    localStorage.removeItem('adminAccessToken');
+    localStorage.removeItem('adminRefreshToken');    
     // Navigate to the signin page
-    navigate('/signin');
+    navigate('/AdminSignIn');
   };
   return (
     <>
@@ -64,14 +63,14 @@ const SideBar = ({therapist}) => {
               </Link>
               <Link
                 style={{ marginBottom: "7%" }}
-                to="/signin"
+                to=""
                 // onClick={handleLogout}
               >
                 Messages
               </Link>  
               <Link
                 style={{ marginBottom: "7%" }}
-                to="/signin"
+                to="/AdminSignIn"
                 onClick={handleLogout}
               >
                 Logout

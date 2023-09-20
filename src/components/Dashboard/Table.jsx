@@ -441,7 +441,7 @@ function TableComponent() {
                 Status
               </Th>
               <Th fontSize={"15"}>Actions</Th>
-              <Th fontSize={"15"} padding={0}>View Therapist Remarks</Th>
+              <Th fontSize={"15"} padding={0}>Therapist Remarks</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -497,15 +497,15 @@ function TableComponent() {
                   >
                     PDF
                   </Button> */}
-                <Td padding={0} >
+                <Td paddingLeft={7} >
                   <Button
                     backgroundColor={"blue.400"}                    
                     color={"white"}                    
                     size={'sm'}      
-                                           
+                                       
                     onClick={onOpenTherapistFeedback}
                   >
-                    View Therapist Remarks
+                    View Remarks
                   </Button>
 
                 </Td>

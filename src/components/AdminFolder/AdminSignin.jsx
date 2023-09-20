@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Field, Form } from "formik";
 import React, { useState, useEffect } from "react";
-import colors from "./Colors";
+import colors from "../Colors";
 import { useDispatch } from "react-redux";
-import { setUser } from "./redux/slices/therapistReducer";
+import { setUser } from "../redux/slices/therapistReducer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -33,8 +33,6 @@ const validationSchema = Yup.object().shape({
   .min(8, "Password must be at least 8 characters")
   .required("Password is required"),
 });
-
-  
 export default function SignIn() {
   const dispatch = useDispatch()
   const toast = useToast();
@@ -43,25 +41,15 @@ export default function SignIn() {
 async function handleSubmit(values, resetForm)  {
   try {
     //console.log(values); // replace with your logic for submitting the form
-    const result = await axios.post('/login', values);    
+    const result = await axios.post('http://localhost:8080/api/v1/admin/login', values);    
     console.log(result.data.data)    
     if(result.status === 200){
       let accessToken=result.data.accessToken
       let refreshToken = result.data.refreshToken    
       // Store tokens in local storage
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);  
+      localStorage.setItem('adminAccessToken', accessToken);
+      localStorage.setItem('adminRefreshToken', refreshToken);  
       dispatch(setUser(result.data.data))
-
-      toast({
-        title: "You have logined Successfully",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-      navigate('/dashboard');
-    }  
-    else if (values.email.toLowerCase() === 'admin@gmail.com' && values.password === 'admin123') {
       toast({
         title: "Admin Logined Successfully",
         status: "success",
@@ -69,7 +57,7 @@ async function handleSubmit(values, resetForm)  {
         isClosable: true,
       });
       navigate('/Admin');
-    }     
+    }      
     else{
       toast({
         title: "Please enter correct credentials to Log in",
@@ -77,11 +65,8 @@ async function handleSubmit(values, resetForm)  {
         duration: 2000,
         isClosable: true,
       });
-    }
-    // resetForm();
-  } catch (error) {
-    // Handle login error
-    //console.error('Login failed:', error);
+    }    
+  } catch (error) {    
     toast({
       title: "Sign In Failure",
       status: "danger",
@@ -124,14 +109,9 @@ async function handleSubmit(values, resetForm)  {
           fontWeight="700"
           style={{ textAlign: "center", marginTop: "5%", marginBottom: "1%" }}
         >
-          Login in to your Account
+          Login in as Admin
         </Text>
-        <Text style={{ textAlign: "center", marginBottom: "10%" }}>
-          <span style={{ marginRight: "8px" }}>Don't have an account?</span>
-          <Link fontWeight="bold" to="/signup">
-            Sign Up
-          </Link>
-        </Text>
+    
         <Box bg="white" p={6} rounded="md" w={450} boxShadow={"lg"}>
 
       <Formik
