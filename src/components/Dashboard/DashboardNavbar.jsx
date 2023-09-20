@@ -30,7 +30,7 @@ import { useSelector } from "react-redux";
 
 export default function WithSubnavigation() {
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
-  console.log(therapistInfo)
+  
    const { isOpen, onToggle } = useDisclosure()
   return (
     <Box width={{ base: 'auto', md: 'auto' }}>

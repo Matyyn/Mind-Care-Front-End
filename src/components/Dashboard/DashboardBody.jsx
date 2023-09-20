@@ -37,11 +37,13 @@ function DashboardBody() {
   return (
     <>
     <Box p={4} marginLeft={'3%'} width={'auto'}>
-        <Grid templateColumns="repeat(6, 1fr)" gap={1} width={'auto'} padding={0}>
+        <Grid templateColumns="repeat(6, 1fr)" gap={8} width={'auto'}>
+          <Flex justifyContent="center" alignItems="center">
           <GridItem
-            width="14vw"
-            height={"auto"}
-            padding={3}
+            width="100%"            
+            height={"18vh"}
+            paddingLeft={9}
+            paddingTop={5}
             boxShadow={'lg'}
             borderRadius={"10"}
           >
@@ -59,13 +61,14 @@ function DashboardBody() {
               </Tag>
             </HStack>
           </GridItem>
-
+          </Flex>
+          <Flex justifyContent="center" alignItems="center">
           <GridItem
-            width="14vw"
-            h="10"
-            height={"auto"}
+            width="100%"            
+            height={"18vh"}            
             boxShadow={'lg'}
-            padding={3}
+            paddingLeft={9}
+            paddingTop={5}
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>
@@ -82,12 +85,14 @@ function DashboardBody() {
               </Tag>
             </HStack>
           </GridItem>
-
+          </Flex>
+          <Flex justifyContent="center" alignItems="center">
           <GridItem
-            width="14vw"            
-            height={"auto"}
+            width="100%"            
+            height={"18vh"}
             boxShadow={'lg'}
-            padding={3}
+            paddingLeft={9}
+            paddingTop={5}
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>
@@ -104,12 +109,14 @@ function DashboardBody() {
               </Tag>
             </HStack>
           </GridItem>
-
+          </Flex>
+          <Flex justifyContent="center" alignItems="center">
           <GridItem
-            width="14vw"
+            width="100%"            
+            height={"18vh"}
             boxShadow={'lg'}
-            height={"auto"}
-            padding={3}
+            paddingLeft={9}
+            paddingTop={5}
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>
@@ -126,11 +133,14 @@ function DashboardBody() {
               </Tag>
             </HStack>
           </GridItem>
+          </Flex>
+          <Flex justifyContent="center" alignItems="center">
           <GridItem
-            width="14vw"
-            height={"auto"}
+            width="100%"            
+            height={"18vh"}
             boxShadow={'lg'}
-            padding={3}
+            paddingLeft={9}
+            paddingTop={5}
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>
@@ -147,6 +157,7 @@ function DashboardBody() {
               </Tag>
             </HStack>
           </GridItem>
+          </Flex>
         </Grid>
       
         <Grid templateColumns="repeat(3, 1fr)" gap={1} style={{marginTop:'3%',marginBottom:'3%'}}>

@@ -57,9 +57,7 @@ const FormikForm = () => {
     password: "",
     Dateofbirth:Date.now(),
     gender:`${therapistInfo.gender}`,
-    picture: ''
-    //`${therapistInfo.picture}`
-    ,
+    picture: `${therapistInfo.picture}`,
     specialization: `${therapistInfo.specialization}`,
     experience: `${therapistInfo.experience}`,
     SessionCharges: "",
