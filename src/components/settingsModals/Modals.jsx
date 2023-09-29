@@ -76,7 +76,7 @@ function Modals() {
         </ModalContent>
       </Modal>
 
-      <Button type="button" onClick={handleViewDocumentsOpen} style={{marginTop:'1%',marginLeft:'2%',width:'20%'}}>
+      {/* <Button type="button" onClick={handleViewDocumentsOpen} style={{marginTop:'1%',marginLeft:'2%',width:'20%'}}>
         View Documents
       </Button>
       <Modal isOpen={isViewDocumentsOpen} onClose={handleViewDocumentsClose}>
@@ -90,7 +90,7 @@ function Modals() {
             <Button onClick={handleViewDocumentsClose}>Close</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   );
 }

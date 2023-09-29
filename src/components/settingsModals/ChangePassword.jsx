@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Formik, Form } from "formik";
 import colors from "../Colors";
 import * as Yup from "yup";
@@ -9,10 +9,11 @@ import {
   Input,
   Button,
   Stack,
-  FormErrorMessage
+  FormErrorMessage,useToast
 } from "@chakra-ui/react";
 
 const SignupForm = () => {
+  const toast = useToast();  
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email address")
@@ -29,8 +30,14 @@ const SignupForm = () => {
     <Formik
       initialValues={{ email: "", password: "", confirmPassword: "" }}
       onSubmit={async(values) => {
-        result = await axios.post('/changePaswword',values)
+        result = await axios.post('/change-password',values)
         console.log(result.status);
+        toast({
+          title: "Password Changed Successfully",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });        
       }}
       validationSchema={validationSchema}
     >

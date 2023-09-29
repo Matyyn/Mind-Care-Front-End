@@ -41,10 +41,9 @@ export default function SignIn() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 async function handleSubmit(values, resetForm)  {
-  try {
-    //console.log(values); // replace with your logic for submitting the form
-    const result = await axios.post('/login', values);    
-    console.log(result.data.data)    
+  try {  
+      const result = await axios.post('/login', values);    
+  //  console.log(result.data.data)    
     if(result.status === 200){
       let accessToken=result.data.accessToken
       let refreshToken = result.data.refreshToken    

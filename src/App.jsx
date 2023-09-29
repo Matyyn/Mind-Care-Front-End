@@ -1,6 +1,6 @@
 import { ChakraProvider, Button, Divider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import EditProfile from "./components/EditProfile"
+import EditProfile from "./components/EditProfile/EditProfile"
 import LandingPage from "./components/LandingPage";
 //import SessionsList from "./components/VideoCall/sessionsList";
 import SignUpform from "./components/Signup";

@@ -1,12 +1,12 @@
 import { useLocation } from 'react-router-dom';
-import Navbar from './EditProfile/Navbar'
+import Navbar from './Navbar'
 import React, { useState, useEffect } from "react";
 import { Formik, Field, Form } from "formik";
-import colors from './Colors'
+import colors from '../Colors'
 import * as Yup from "yup";
 import axios from 'axios';
 import { AiOutlineClose } from "react-icons/ai";
-import Modals from './settingsModals/Modals'
+import Modals from '../settingsModals/Modals'
 import {
   FormControl,
   FormLabel, GridItem,
@@ -26,7 +26,7 @@ import {
   getDownloadURL,
   listAll,
 } from "firebase/storage";
-import { storage } from "../utils/firebase";
+import { storage } from "../../utils/firebase";
 import { v4 } from "uuid";
 //import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -44,7 +44,7 @@ const validationSchema = Yup.object().shape({
   specialization: Yup.string(),
   experience: Yup.string(),
   SessionCharges: Yup.string().required('Session Charges are required'),
-  Start_DateTime: Yup.date().required('Start Date/Time is required'),
+  dateOfAvailability: Yup.date().required('Date of Availability is required'),
   End_DateTime: Yup.date().required('End Date/Time is required'),
   downloadURL: Yup.string()
 });
@@ -60,15 +60,14 @@ const FormikForm = () => {
     picture: `${therapistInfo.picture}`,
     specialization: `${therapistInfo.specialization}`,
     experience: `${therapistInfo.experience}`,
-    SessionCharges: "",
-    Start_DateTime: "",
+    SessionCharges: ''
+    //`${therapistInfo.sessionCharges}`
+    ,
+    dateOfAvailability: "",
     End_DateTime: "",
     downloadURL: ""
   };
 
-
-
-  const [showAlert, setShowAlert] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrl] = useState([]);
   //picture uploading code
@@ -276,8 +275,9 @@ const FormikForm = () => {
                                 <option value="none">
                                   Select Specialization Field
                                 </option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                                <option value="Therapist">Therapist</option>
+                                <option value="Counselor">Counselor</option>
+                                <option value="Psychologist">Psychologist</option>
                               </Select>
                             )}
                           </Field>
@@ -307,19 +307,18 @@ const FormikForm = () => {
                   <Flex height={'5vh'} direction="column">
                     <Text marginLeft={'2%'} fontWeight={'700'} fontSize={18} color={colors.secondary}>Working Schedule</Text>
                     <Flex alignItems="left" width={'100%'} >
-                      <FormControl
-                        
-                        isInvalid={errors.Start_DateTime && touched.Start_DateTime} width="29%" mr={2} marginLeft={'2%'}>
+                      <FormControl                      
+                        isInvalid={errors.dateOfAvailability && touched.dateOfAvailability} width="29%" mr={2} marginLeft={'2%'}>
                         <FormLabel>Start Time</FormLabel>
                         <Input
                           placeholder="Select Date and Time"
                           size="md"
                           type="datetime-local"
-                          name="Start_DateTime"
+                          name="dateOfAvailability"
                           onChange={handleChange}
-                          value={values.Start_DateTime}
+                          value={values.dateOfAvailability}
                         />
-                        <FormErrorMessage>{errors.Start_DateTime}</FormErrorMessage>
+                        <FormErrorMessage>{errors.dateOfAvailability}</FormErrorMessage>
                       </FormControl>
                       <FormControl
                         isInvalid={errors.End_DateTime && touched.End_DateTime} width="30%" mr={2}

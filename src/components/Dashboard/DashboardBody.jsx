@@ -41,9 +41,9 @@ function DashboardBody() {
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
-            height={"18vh"}
-            paddingLeft={9}
-            paddingTop={5}
+            height={"15vh"}
+            paddingLeft={5}
+            
             boxShadow={'lg'}
             borderRadius={"10"}
           >
@@ -65,10 +65,10 @@ function DashboardBody() {
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
-            height={"18vh"}            
+            height={"15vh"}            
             boxShadow={'lg'}
-            paddingLeft={9}
-            paddingTop={5}
+            paddingLeft={5}
+            
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>
@@ -89,10 +89,10 @@ function DashboardBody() {
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
-            height={"18vh"}
+            height={"15vh"}
             boxShadow={'lg'}
-            paddingLeft={9}
-            paddingTop={5}
+            paddingLeft={5}
+            
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>
@@ -113,10 +113,10 @@ function DashboardBody() {
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
-            height={"18vh"}
+            height={"15vh"}
             boxShadow={'lg'}
-            paddingLeft={9}
-            paddingTop={5}
+            paddingLeft={5}
+            
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>
@@ -137,10 +137,10 @@ function DashboardBody() {
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
-            height={"18vh"}
+            height={"15vh"}
             boxShadow={'lg'}
-            paddingLeft={9}
-            paddingTop={5}
+            paddingLeft={5}
+            
             borderRadius={"10"}
           >
             <Text textAlign={"left"} fontWeight={"bolder"}>

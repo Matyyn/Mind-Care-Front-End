@@ -8,7 +8,7 @@ import {
   Text,
   IconButton,
   Stack,
-  Collapse,Avatar,AvatarBadge,
+  Collapse, Avatar, AvatarBadge,
   Icon,
   Image,
   Popover,
@@ -86,17 +86,17 @@ export default function WithSubnavigation() {
             mr={3}
             fontSize={"25"}
           />
-            <Link to={"/therapistprofile"}>
-      <Avatar size={"md"} >
-        <AvatarBadge boxSize="1.25em" bg="green.500" />
-        <Image
-      src={therapistInfo.picture}
-      alt="Therapist Image"
-      borderRadius="full"
-      boxSize="100%"
-    />
-      </Avatar>
-    </Link>
+          <Link to={"/therapistprofile"}>
+            <Avatar size={"md"} >
+              <AvatarBadge boxSize="1.25em" bg="green.500" />
+              <Image
+                src={therapistInfo.picture}
+                alt="Therapist Image"
+                borderRadius="full"
+                boxSize="100%"
+              />
+            </Avatar>
+          </Link>
         </Stack>
       </Flex>
 
