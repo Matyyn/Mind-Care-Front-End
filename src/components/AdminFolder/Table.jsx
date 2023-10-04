@@ -13,8 +13,6 @@ import {
   InputLeftElement,
   Select,
 } from "@chakra-ui/react";
-
-import jsPDF from "jspdf";
 import { useDispatch } from "react-redux";
 import { setArray } from "../redux/slices/accountsReducer";
 import { useSelector } from "react-redux";

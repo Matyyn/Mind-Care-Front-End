@@ -32,8 +32,13 @@ import {
   useDisclosure,
   Img,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 import SideBar from "../Sidebar";
 function DashboardBody() {
+  const info  = useSelector((state) => state.selectedAccounts.acceptedAppointments)
+  
+    console.log(info)
+
   return (
     <>
     <Box p={4} marginLeft={'3%'} width={'auto'}>

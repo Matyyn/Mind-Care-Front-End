@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import colors from "./Colors";
+import colors from "../Colors";
 
 const data = [
   {
@@ -35,18 +35,16 @@ const data = [
   }
 ];
 
-const convertEmotionToEnum = (emotion) => {
-  switch (emotion) {
-    case "Happy":
-      return 5;
-    case "Normal":
+const convertStressToEnum = (stressTimeline) => {
+  switch (stressTimeline) {
+    case "Low":
       return 4;
-    case "Neutral":
+    case "Medium":
       return 3;
-    case "Sad":
+    case "Normal":
       return 2;
-    case "Grief":
-      return 1;
+    case "High":
+      return 1;    
     default:
       return 0;
   }
@@ -57,8 +55,8 @@ const RechartsExample = () => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date(item.checkinDate);
     const dayOfWeek = daysOfWeek[date.getDay()];  
-    const emotionEnum = convertEmotionToEnum(item.emotion);
-    return { dayOfWeek, emotionEnum };
+    const stressEnum = convertStressToEnum(item.stressTimeline);
+    return { dayOfWeek, stressEnum };
   });
   
   return (
@@ -75,7 +73,7 @@ const RechartsExample = () => {
         }}>
         <Line
           type="natural"
-          dataKey="emotionEnum"
+          dataKey="stressEnum"
           stroke={colors.secondary}          
         />
         <CartesianGrid stroke={colors.fourth} />

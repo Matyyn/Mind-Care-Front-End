@@ -1,12 +1,9 @@
 import { Box, Heading, Text, Center, Stack, Image } from "@chakra-ui/react";
 import Navbar from './EditProfile/ViewProfileNavbar'
-import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
-//import {Link} from 'react-router-v6'
-
 const RegistrationPreview = () => {
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
-    
+  console.log(therapistInfo)    
   return (
     <>
       <Navbar />
@@ -34,7 +31,7 @@ const RegistrationPreview = () => {
               </Text>
 
               <Text>
-              <strong style={{marginRight:'1%'}}>Date of Birth:</strong> {therapistInfo.dateofBirth}
+              <strong style={{marginRight:'1%'}}>Date of Birth:</strong> {therapistInfo.dateofBirth.split("T")[0]}
               </Text>
 
               <Text>
@@ -46,17 +43,17 @@ const RegistrationPreview = () => {
               </Text>
 
               <Text>
-              <strong style={{marginRight:'1%'}}>Experience:</strong> {therapistInfo.experience}
+              <strong style={{marginRight:'1%'}}>Experience:</strong> {therapistInfo.experience} Years
               </Text>
 
               <Text>
-              <strong style={{marginRight:'1%'}}>Session Charges:</strong> {therapistInfo.SessionCharges}
+              <strong style={{marginRight:'1%'}}>Session Charges:</strong> ${therapistInfo.sessionCharges/100}
               </Text>
 
               <Text>
               <strong style={{marginRight:'1%'}}>Availability:</strong> {therapistInfo.
-dateOfAvailability
-}
+                dateOfAvailability
+                }
               </Text>
 
             </Stack>
