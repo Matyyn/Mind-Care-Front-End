@@ -701,7 +701,7 @@ export default function SignIn() {
                 color={'white'}
                 type='submit'
               >
-                Login
+                Sign Up
               </Button>
             </div>
           </>
