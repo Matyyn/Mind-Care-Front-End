@@ -296,7 +296,7 @@ export default function SignIn() {
     lastName: lastName,
     email: email,
     password: "",
-    dateofBirth: new Date(),
+    dateOfBirth: new Date(),
     gender: "",
     picture: JSON.stringify(localStorage.getItem('uploaded image url')),
     specialization: "",
@@ -367,7 +367,7 @@ export default function SignIn() {
     var result;
     delete values.confirmPassword
     console.log("entered values are", values);
-    console.log(values.dateofBirth)
+    console.log(values.dateOfBirth)
 
     result = await axios.post('/signup', values)
     //await uploadFiles();
@@ -379,7 +379,7 @@ export default function SignIn() {
         duration: 3000,
         isClosable: true,
       });
-      
+
       navigate('/signin')
       //resetForm();
       // window.location.href = 'https://127.0.0.1:5173/signin';
@@ -410,7 +410,7 @@ export default function SignIn() {
               Upload Relevant Documents to autofill your form
             </FormLabel>
             <FormControl
-              style={{ display: "flex", alignItems: "center" ,marginBottom:"5%",marginTop:'5%'}}
+              style={{ display: "flex", alignItems: "center", marginBottom: "5%", marginTop: '5%' }}
               isInvalid={errors.downloadURL && touched.downloadURL}
             >
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -564,19 +564,15 @@ export default function SignIn() {
             <FormControl>
               <FormLabel>Date of Birth</FormLabel>
               <DatePicker
-                selected={values.dateofBirth}
+                selected={values.dateOfBirth}
                 dateFormat="MMMM d, yyyy"
                 className="form-control"
-                name="dateofBirth"
+                name="dateOfBirth"
                 maxDate={new Date()}
-                onChange={(date) =>
-                  setFieldValue(
-                    "dateofBirth",
-                    date
-                  )
-                }
+                onChange={(date) => setFieldValue("dateOfBirth", date)}
               />
             </FormControl>
+
             <FormControl
               isInvalid={errors.gender && touched.gender}
               marginBottom="1rem"
@@ -603,7 +599,7 @@ export default function SignIn() {
       case 2:
         return (
           <>
-    
+
             <FormControl
               isInvalid={errors.specialization && touched.specialization}
               marginBottom="1rem"
@@ -630,7 +626,7 @@ export default function SignIn() {
               />
               <FormErrorMessage>{errors.experience}</FormErrorMessage>
             </FormControl>
-                        
+
             <FormLabel style={{ marginRight: "50%" }}>Image</FormLabel>
             <FormControl>
               <ImageMatching
@@ -661,7 +657,7 @@ export default function SignIn() {
         );
       case 3:
         return (
-          <>            
+          <>
             <FormControl
               isInvalid={errors.password && touched.password}
               marginBottom="1rem"
