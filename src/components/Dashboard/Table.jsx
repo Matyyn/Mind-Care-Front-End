@@ -252,6 +252,7 @@ function TableComponent() {
     async function getProfiles() {
       const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)      
       setAppointments(response.data.data)      
+      setSorted(response.data.data);
       console.log(response.data.data)
     }
     getProfiles()
