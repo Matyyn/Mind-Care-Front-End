@@ -1,4 +1,4 @@
-import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import {Text, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import colors from "../Colors";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -31,6 +31,11 @@ const EmotionsTable = () => {
   }, [id]);
 
   return (
+    <>
+    <Text style={{fontWeight:'700',fontSize:22}}>
+      Daily Logs
+    </Text >
+    <Text style={{fontWeight:'500',fontSize:18}}>Users Daily Logs will be displayed here</Text>
     <Table variant="striped" boxShadow={'lg'}>
       <Thead>
         <Tr>
@@ -53,6 +58,7 @@ const EmotionsTable = () => {
         ))}
       </Tbody>
     </Table>
+    </>
   );
 };
 
