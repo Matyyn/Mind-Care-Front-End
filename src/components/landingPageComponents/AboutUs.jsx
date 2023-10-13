@@ -14,7 +14,8 @@ import {
 } from "react-icons/ri";
 import {
   Box,
-  Flex,Spinner,
+  Flex,
+  Spinner,
   Center,
   Text,
   Divider,
@@ -48,16 +49,23 @@ function AboutUs() {
   const [isLoading, setIsLoading] = useState(true);
   const showImage = useBreakpointValue({ base: false, md: false, lg: true });
   const showMarginTop = useBreakpointValue({ sm: false, md: true, lg: true });
-  //for spinner
+
+  // for spinner
   const handleImageLoad = () => {
     setIsLoading(false);
   };
+
+  // Define the bounce animation CSS
+  const bounceAnimation = {
+    animation: "bounce 2s infinite",
+  };
+
   return (
     <div>
-      <div className="parentDiv"  style={{marginTop:'5%'}}>
+      <div className="parentDiv" style={{ marginTop: '5%' }}>
         <div
           className="columns"
-          style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%",height:'auto' ,width:'auto'}}
+          style={{ marginLeft: "10%", marginRight: "10%", marginTop: "2%", height: 'auto', width: 'auto' }}
         >
           <Box>
             <Grid
@@ -82,16 +90,15 @@ function AboutUs() {
                       fontWeight: "bolder",
                       marginTop: "0",
                       marginBottom: "0",
-                     
+                      color: colors.secondary
                     }}
-                    color={colors.secondary}
                   >
                     Redefining mental healthcare for people
                   </Text>
-                  <p                    
-                    style={{textAlign: "center",fontSize:'17px',fontWeight:'600',color:colors.third}}
+                  <p
+                    style={{ textAlign: "center", fontSize: '17px', fontWeight: '600', color: colors.third }}
                   >
-                    Our mission is to make mental health supportradically more
+                    Our mission is to make mental health support radically more
                     accessible, preventative, and stigma-free
                   </p>
                 </Stack>
@@ -109,7 +116,7 @@ function AboutUs() {
                     leftIcon={<Icon as={FaGooglePlay} boxSize={7} />}
                     backgroundColor="white"
                     borderColor={"black"}
-                    size='md'                  
+                    size='md'
                     padding={"4%"}
                   >
                     <Stack>
@@ -123,7 +130,6 @@ function AboutUs() {
                     leftIcon={<Icon as={FaApple} boxSize={7} />}
                     backgroundColor="white"
                     borderColor={"black"}
-                    //width={"28%"}
                     size='md'
                     padding={'4%'}
                     style={{ marginLeft: "10px" }}>
@@ -140,18 +146,20 @@ function AboutUs() {
               </GridItem>
               <GridItem order={{ sm: 1, md: 1 }}>
                 {showImage && (
-                 <div>
-                 {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'}/>}
-                 <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FPsychologist-amico.png?alt=media&token=ff2d20a8-6088-4997-ab50-a80e9e80cfd2"
-                    alt="Depression Image"
-                    onLoad={handleImageLoad}
-                    style={{ display: isLoading ? "none" : "block" }}
-                    height="100%"
-                    width="100%"
-                    // display={{ sm: 'none', lg: 'block' }}
-                  />
-                </div>
+                  <div>
+                    {isLoading && <Spinner size="lg" marginLeft={'40%'} marginTop={'40%'} />}
+                    <Image
+                      src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2FPsychologist-amico.png?alt=media&token=ff2d20a8-6088-4997-ab50-a80e9e80cfd2"
+                      alt="Depression Image"
+                      onLoad={handleImageLoad}
+                      style={{
+                        display: isLoading ? "none" : "block",
+                        ...(isLoading ? {} : bounceAnimation) // Apply the animation if not loading
+                      }}
+                      height="100%"
+                      width="100%"
+                    />
+                  </div>
                 )}
               </GridItem>
             </Grid>
@@ -229,23 +237,23 @@ function AboutUs() {
                   <InputGroup style={{ width: "80%" }} flexDirection={'row'} gap={2}>
                     <Input placeholder="Email Address" />
                     <IconButton
-                    aria-label="Facebook"
-                    icon={<Icon as={RiMailSendLine} />}                    
-                    size="md"                    
-                    borderColor="none"
-                    bg={colors.primary}
-                    color={colors.fourth}
-                    fontSize={24}
-                    _hover={{
-                      bg: colors.primary,
-                      borderColor: colors.primary,
-                      color:colors.fourth
-                    }}
-                  />                                        
+                      aria-label="Facebook"
+                      icon={<Icon as={RiMailSendLine} />}
+                      size="md"
+                      borderColor="none"
+                      bg={colors.primary}
+                      color={colors.fourth}
+                      fontSize={24}
+                      _hover={{
+                        bg: colors.primary,
+                        borderColor: colors.primary,
+                        color: colors.fourth
+                      }}
+                    />
                   </InputGroup>
                   <p>
-                      Hello, we are Mind Care. Our goal is to translate the
-                      positive effects from revolutionizing digital therapy
+                    Hello, we are Mind Care. Our goal is to translate the
+                    positive effects from revolutionizing digital therapy
                   </p>
                 </Stack>
               </GridItem>
@@ -256,4 +264,5 @@ function AboutUs() {
     </div>
   );
 }
+
 export default AboutUs;

@@ -161,7 +161,7 @@ function Stats() {
                         color="blue.600"
                         style={{ fontSize: "13", textAlign: "center" ,fontWeight:'600'}}
                       >
-                        of employees reported improved ability to regulate their
+                        of employees reported improved ability to regulate
                         
                       </p>
                       

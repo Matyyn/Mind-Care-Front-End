@@ -1,19 +1,36 @@
 import React, { useState, useEffect } from "react";
 import colors from "../Colors";
-import { GridItem, Grid, Spinner, useBreakpointValue, Box, Text, Button, Stack, Image, Divider } from "@chakra-ui/react"
+import { GridItem, Grid, Spinner, useBreakpointValue, Box, Text, Button, Stack, Image, Divider } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useMediaQuery } from "@chakra-ui/react"
+import { useMediaQuery } from "@chakra-ui/react";
+
 function IndexPage() {
   const [isLoading, setIsLoading] = useState(true);
-  //for spinner
+
+  // for spinner
   const handleImageLoad = () => {
     setIsLoading(false);
   };
+
   const columnCount = useBreakpointValue({ base: 1, md: 2, lg: 2, xl: 2 });
 
-  const [isLargerThanLg] = useMediaQuery("(min-width: 1350px)")
+  const [isLargerThanLg] = useMediaQuery("(min-width: 1350px)");
+
   return (
     <>
+      <style>
+        {`
+          @keyframes bounce {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-10px); // Adjust the distance of the bounce as needed
+            }
+          }
+        `}
+      </style>
+
       <div className="parentDiv" style={{ marginBottom: '5%' }}>
         <div
           className="columns"
@@ -48,8 +65,7 @@ function IndexPage() {
                       textAlign: "left", fontSize: '17px'
                       , fontWeight: '500', color: colors.third
                     }}>
-                      For people looking to proactively care for their mental wellbeing, Mind
-                      Care takes the guesswork out with our mental health platform.
+                      For people looking to proactively care for their mental wellbeing, Mind Care takes the guesswork out with our mental health platform.
                     </p>
                   </Stack>
                   <div
@@ -65,7 +81,6 @@ function IndexPage() {
                       <Button
                         borderColor={"white"}
                         size='md'
-                      //width={{ base: "100%", lg: "100%" }}
                       >
                         <Stack>
                           <Text style={{ textAlign: "left" }}>
@@ -78,7 +93,6 @@ function IndexPage() {
                       <Button
                         backgroundColor={colors.secondary}
                         color={"white"}
-                        //width={{ base: "100%", lg: "130%" }}
                         size='md'
                         borderColor={colors.secondary}
                         _hover={{
@@ -101,12 +115,15 @@ function IndexPage() {
                         alt="Hero Image"
                         opacity="1"
                         onLoad={handleImageLoad}
-                        style={{ display: isLoading ? "none" : "block" }}
-                        borderRadius="md"
-                        marginTop={'5%'}
-                        marginLeft={{ base: "0", lg: "5%" }}
-                        height="auto"
-                        width="auto"
+                        style={{
+                          display: isLoading ? "none" : "block",
+                          borderRadius: "md",
+                          marginTop: "5%",
+                          marginLeft: { base: "0", lg: "5%" },
+                          height: "auto",
+                          width: "auto",
+                          animation: isLoading ? "none" : "bounce 1.7s infinite",
+                        }}
                       />
                     </div>
                   </Box>
@@ -124,7 +141,7 @@ function IndexPage() {
                           textAlign: "center",
                           marginLeft: "1%",
                           marginRight: "1%",
-                          fontSize: "52px" // Change this value as per your requirement
+                          fontSize: "52px"
                         }}
                       >
                         <span style={{ color: colors.secondary, }}>The most </span>
@@ -133,19 +150,17 @@ function IndexPage() {
                           mental health platform
                         </span>
                       </Text>
-
                     </strong>
                     <p
                       style={{
                         textAlign: "center",
                         marginLeft: "10%",
-                        marginRight: "10%", fontSize: '17px'
-                        , fontWeight: '100'
+                        marginRight: "10%",
+                        fontSize: '17px',
+                        fontWeight: '100'
                       }}
                     >
-                      For people looking to proactively care for their mental
-                      wellbeing, Mind Care takes the guesswork out with our mental
-                      health platform.
+                      For people looking to proactively care for their mental wellbeing, Mind Care takes the guesswork out with our mental health platform.
                     </p>
                     <div
                       className="buttons"
@@ -201,4 +216,5 @@ function IndexPage() {
     </>
   )
 }
-export default IndexPage
+
+export default IndexPage;
