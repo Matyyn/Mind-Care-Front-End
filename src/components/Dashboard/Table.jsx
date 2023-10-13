@@ -246,12 +246,12 @@ import { useSelector } from "react-redux";
 import jsPDF from 'jspdf';
 
 function TableComponent() {
-  const [appointments,setAppointments] = useState([])
+  const [appointments, setAppointments] = useState([])
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
   useEffect(() => {
     async function getProfiles() {
-      const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)      
-      setAppointments(response.data.data)      
+      const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)
+      setAppointments(response.data.data)
       setSorted(response.data.data);
       console.log(response.data.data)
     }
@@ -302,8 +302,8 @@ function TableComponent() {
   const [sorted, setSorted] = useState(appointments);
   const [filter, setFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
-  const [searched,setSearched] = useState('');
-  
+  const [searched, setSearched] = useState('');
+
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearched(value);
@@ -366,7 +366,7 @@ function TableComponent() {
     onClose: onCloseTherapistFeedback,
   } = useDisclosure();
 
-  return (    
+  return (
     <div width={'auto'}>
       <Stack style={{ flexDirection: "row" }} marginRight={'2%'}>
         <Text fontSize="2xl" style={{ fontWeight: "bold", marginLeft: "2%" }}>
@@ -383,26 +383,21 @@ function TableComponent() {
         >
           Filter By:
         </Text>
-        <Stack direction="row" spacing={4}>
-        <Text style={{marginTop:'2%',fontWeight:'600'}}>Order:</Text>
-        <Select
-          width="45%"          
-          onChange={(event) => setFilter(event.target.value)}
-        >
-          <option value="A-Z">A-Z</option>
-          <option value="Z-A">Z-A</option>
-        </Select>
-        <Text style={{marginTop:'2%',fontWeight:'600'}}>Status:</Text>
-        <Select
-          width="45%"          
-          onChange={(event) => setStatusFilter(event.target.value)}
-        > 
-          <option value="Default">Default</option>         
-          <option value="pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Completed">Completed</option>
-        </Select>
+        <Stack direction="row" spacing={4} alignItems="center">
+          <Text style={{ fontWeight: '600' }}>Order:</Text>
+          <Select width="45%" onChange={(event) => setFilter(event.target.value)}>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+          </Select>
+          <Text style={{ fontWeight: '600' }}>Status:</Text>
+          <Select width="45%" onChange={(event) => setStatusFilter(event.target.value)}>
+            <option value="Default">Default</option>
+            <option value="pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Completed">Completed</option>
+          </Select>
         </Stack>
+
         <InputGroup size="md" width={"20%"} style={{ marginLeft: "auto", justifyContent: "flex-end" }}>
           <InputLeftElement pointerEvents="none">
             <SearchIcon color="gray.300" />
@@ -497,10 +492,10 @@ function TableComponent() {
                   </Button> */}
                 <Td paddingLeft={7} >
                   <Button
-                    backgroundColor={"blue.400"}                    
-                    color={"white"}                    
-                    size={'sm'}      
-                                       
+                    backgroundColor={"blue.400"}
+                    color={"white"}
+                    size={'sm'}
+
                     onClick={onOpenTherapistFeedback}
                   >
                     View Remarks
@@ -508,7 +503,7 @@ function TableComponent() {
 
                 </Td>
               </Tr>
-))}
+            ))}
           </Tbody>
         </Table>
       </div>
