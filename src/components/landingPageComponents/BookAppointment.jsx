@@ -254,7 +254,7 @@ function BookAppointment() {
           </Box>
           <Center>
             <Button backgroundColor={colors.primary} variant="outline" style={{
-              marginTop: "20px",
+              
               marginBottom: "7%",
               marginTop:'4%'
             }}

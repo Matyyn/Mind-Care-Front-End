@@ -366,137 +366,161 @@ export default function Simple() {
         <><Box p={4}>
           <Stack flexDirection={'row'} justifyContent={'space-between'}>
             <Text fontSize={20} fontWeight={"500"} marginLeft={7}>
-              Client Name: {selectedUserInfo.clientId.firstName} {selectedUserInfo.clientId.lastName}
+              Client Name: {selectedUserInfo.clientId.firstName} {selectedUserInfo.clientId.lastName}              
             </Text>
             <Button onClick={() => setUser(false)} >
               View All Clients
             </Button>
           </Stack>
 
-          <Grid templateColumns="repeat(4, 1fr)" gap={10} >
-            {[
-              {
-                title: "Therapist Feedbacks",
-                buttonText: "View Feedbacks",
-                onClick: onOpenTherapistFeedback,
-              },
-              {
-                title: "Anxiety Test",
-                label: anxietyLabel,
-                buttonText: "View Result",
-                onClick: onOpenAnxietyTest,
-                backgroundColor: colors.primary,
-              },
-              {
-                title: "Depression Test",
-                label: depressionLabel,
-                buttonText: "View Result",
-                onClick: onOpenDepressionTest,
-                backgroundColor: "#E53E3E",
-              },
-              {
-                title: "Frequent Emotion",
-                label: "Happy",
-                colSpan: 1,
-              },
-            ].map((item, index) => (
-              <GridItem
-                key={index}
-                w="100%"
-                h="10"
-                boxShadow="lg"
-                height="auto"
-                padding={3}
-                borderRadius="10"
-                colSpan={item.colSpan || 1}
-              >
-                <Text fontSize={18} fontWeight={item.title === "Frequent Emotion" ? "700" : "bold"} textAlign="center">
-                  {item.title}
-                </Text>
-                {item.title === "Frequent Emotion" ? (
-                  <Center>
-                    <HStack spacing={4} marginTop="5%">
-                      <Tag size="lg" variant="solid" colorScheme="teal" width="auto" textAlign="center">
-                        {item.label}
-                      </Tag>
-                    </HStack>
-                  </Center>
-                ) : (
-                  <>
-                    <Center>
-                      <Button marginTop="5%" onClick={item.onClick} _hover={{
-                        bg: item.backgroundColor || colors.primary,
-                        color: 'white',
-                      }} fontSize="15" padding="2" size="small">
-                        {item.buttonText}
-                      </Button>
-                    </Center>
-                    {item.label && (
-                      <Center>
-                        <HStack spacing={4} marginTop="5%">
-                          <Tag size="lg" variant="solid" backgroundColor={item.backgroundColor || colors.primary}>
-                            {item.label}
-                          </Tag>
-                        </HStack>
-                      </Center>
-                    )}
-                  </>
-                )}
-              </GridItem>
-            ))}
-          </Grid>
+          <Grid templateColumns="repeat(5, 1fr)" gap={10} marginLeft={'10%'}>
+            <GridItem
+              w="100%"
+              h="10"
+              boxShadow={'lg'}
+              height={"auto"}
+              padding={3}
+              borderRadius={"10"}
+            >
+              <Text fontSize={18} fontWeight={"700"} textAlign={"center"}>
+                {" "}
+                Therapist Feedbacks
+              </Text>
+              <Center>
+                <Button marginTop={'5%'} onClick={onOpenTherapistFeedback}>
+                  View Feedbacks
+                </Button>
+              </Center>
 
+            </GridItem>
+            <GridItem
+              w="auto"
+              h="10"
+              boxShadow={'lg'}
+              height={"auto"}
+              padding={3}
+              borderRadius={"10"}            
+            >
+              <Text textAlign={"center"} fontWeight={"bolder"} fontSize={18}>
+                Anxiety Test
+              </Text>
+
+              <Center>
+                <HStack spacing={4} marginTop={'5%'}>
+                  <Tag size={"lg"} variant="solid" backgroundColor={colors.primary}>
+                    {anxietyLabel}
+                  </Tag>
+                </HStack>
+              </Center>
+              <Center>
+                <Button marginTop={'5%'} onClick={onOpenAnxietyTest} _hover={{
+                  bg: colors.primary,
+                  color: 'white',
+                }}
+                  fontSize={'15'}
+                  padding={'2'}
+                  size={'small'}
+                >
+                  View Result
+                </Button>
+              </Center>
+            </GridItem>
+
+            <GridItem
+              w="100%"
+              h="10"
+              boxShadow={'lg'}
+              height={"auto"}
+              padding={3}
+              borderRadius={"10"}
+            >
+              <Text fontSize={18} fontWeight={"700"} textAlign={"center"}>
+                Depression Test
+              </Text>
+              <Center>
+                <HStack spacing={4} marginTop={'5%'}>
+                  <Tag size={"lg"} variant="solid" backgroundColor="#E53E3E">
+                    {depressionLabel}
+                  </Tag>
+                </HStack>
+              </Center>
+              <Center>
+                <Button marginTop={'5%'} onClick={onOpenDepressionTest} _hover={{
+                  bg: colors.primary,
+                  color: 'white',
+                }}
+                  fontSize={'15'}
+                  padding={'2'}
+                  size={'small'}
+                >
+                  View Result
+                </Button>
+              </Center>
+
+            </GridItem>
+
+            <GridItem
+              w="70%"
+              h="10"
+              height={"auto"}
+              padding={3}
+              borderRadius={"10"}
+              colSpan={2}
+              boxShadow={'lg'}>
+              <Text fontSize={18} fontWeight={"700"} textAlign={"center"}>
+                Frequent Emotion
+              </Text>
+              <Center>
+                <HStack spacing={4} marginTop={"5%"}>
+                  <Tag size={"lg"} variant="solid" colorScheme="teal" width={'auto'} textAlign={'center'}>                    
+                    Happy
+                  </Tag>
+                </HStack>
+              </Center>
+            </GridItem>
+          </Grid>
         </Box>
           <Box>
-          <Grid templateColumns={{ base: '1fr', md: 'repeat(4, 1fr)' }} gap={1}>
-  <GridItem
-    colSpan={2}
-    w="100%"
-    h="10"
-    height="auto"
-    margin="4"
-    borderRadius="10"
-  >
-    <MoodTable />
-  </GridItem>
-  <GridItem marginTop={{ base: '2%', md: '12%' }}>
-    <Center>
-      <Tooltip
-        label="Here 0 is the lowest intensity and 5 is the highest intensity"
-        aria-label="A tooltip"
-      >
-        <Text fontWeight="700" fontSize={20}>
-          Mood Timeline
-        </Text>
-      </Tooltip>
-    </Center>
-    <Center>
-      <Text fontWeight="400" fontSize={12}>
-        Overall Moods Levels in this period
-      </Text>
-    </Center>
-    <Graphs />
-  </GridItem>
-  <GridItem marginTop={{ base: '2%', md: '12%' }}>
-    <Center>
-      <Tooltip
-        label="Here 0 is the lowest intensity and 5 is the highest intensity"
-        aria-label="A tooltip"
-      >
-        <Text fontWeight="700" fontSize={20}>
-          Stress Timeline
-        </Text>
-      </Tooltip>
-    </Center>
-    <Center>
-      <Text fontWeight="400" fontSize={12}>
-        Overall Stress Levels in this period
-      </Text>
-    </Center>
-    <StressGraph />
-  </GridItem>
-</Grid>
+            <Grid templateColumns="repeat(4, 1fr)" gap={1}>
+              <GridItem
+                colSpan={2}
+                w="100%"
+                h="10"
+                height={"auto"}
 
+                margin={"4"}
+                borderRadius={"10"}
+              >
+                <Text fontWeight={"700"} fontSize={25} marginLeft={"4%"}>
+                  Daily Logs
+                </Text>
+                <Text marginLeft={"4%"} fontWeight={'500'}>Mood Check In are displayed here</Text>
+                <MoodTable />
+              </GridItem>
+              <GridItem marginTop={'12%'}>
+                <Center>
+                  <Tooltip label="Here 0 is the lowest intensity and 5 is the highest intensity" aria-label='A tooltip'>
+                    <Text fontWeight={"700"} fontSize={20} >Mood Timeline</Text>
+                  </Tooltip>
+                </Center>
+                <Center>
+                  <Text fontWeight={"400"} fontSize={12} >Overall Moods Levels in this period</Text>
+                </Center>
+                <Graphs />
+
+              </GridItem>
+              <GridItem marginTop={'12%'}>
+                <Center>
+                  <Tooltip label="Here 0 is the lowest intensity and 5 is the highest intensity" aria-label='A tooltip'>
+                    <Text fontWeight={"700"} fontSize={20} >Stress Timeline</Text>
+                  </Tooltip>
+                </Center>
+                <Center>
+                  <Text fontWeight={"400"} fontSize={12} >Overall Stress Levels in this period</Text>
+                </Center>
+                <StressGraph />
+              </GridItem>
+            </Grid>
           </Box></>
       ) : (
         <> <Box>
@@ -653,16 +677,16 @@ export default function Simple() {
                       color: 'black'
                     }}
                     backgroundColor={'green'}
-                    onClick={() => {
-                      async function updateAppointment() {
-                        const response = await axios.patch(`/appointments-therapist/${user._id}`, { "status": "Approved" })
-                        console.log('res', response)
+                    onClick={()=>{                      
+                      async function updateAppointment(){
+                          const response= await axios.patch(`/appointments-therapist/${user._id}`,{"status":"Approved"})
+                          console.log('res',response)
                       }
                       updateAppointment()
                     }
-
+                  
                     }
-
+                    
                   >
                     Accept
                   </Button>
@@ -671,121 +695,121 @@ export default function Simple() {
             ))}
           </Grid>
         </Box>
-          <Box>
-            <Heading fontSize={24} fontWeight="bold" m={5}>
-              Approved Appointments
-            </Heading>
-            <Grid templateColumns="repeat(4, 1fr)" gap={4} margin={5} w={'97vw'}>
-              {acceptedAppointments.map((user) => (
-                <Box
-                  key={user._id}
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  boxShadow="lg"
-                  transition="all 0.3s"
-                  borderColor={useColorModeValue("gray.200", "gray.600")}
+        <Box>
+          <Heading fontSize={24} fontWeight="bold" m={5}>
+            Approved Appointments
+          </Heading>
+          <Grid templateColumns="repeat(4, 1fr)" gap={4} margin={5} w={'97vw'}>
+            {acceptedAppointments.map((user) => (
+              <Box
+                key={user._id}
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                boxShadow="lg"
+                transition="all 0.3s"
+                borderColor={useColorModeValue("gray.200", "gray.600")}
+              >
+
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  p={4}
+                  bg={useColorModeValue("gray.100", "gray.700")}
                 >
+                  <Avatar
+                    size="lg"
+                    name={`${user.clientId.firstName} ${user.clientId.lastName}`}
+                    src={user.clientId.picture}
+                  />
 
-                  <Flex
-                    justify="space-between"
-                    align="center"
-                    p={4}
-                    bg={useColorModeValue("gray.100", "gray.700")}
-                  >
-                    <Avatar
-                      size="lg"
-                      name={`${user.clientId.firstName} ${user.clientId.lastName}`}
-                      src={user.clientId.picture}
-                    />
+                  <IconButton
+                    icon={<Icon as={FaEye} />}
+                    fontSize={19}
+                    size="sm"
+                    borderColor="none"
+                    onClick={() => {
+                      setUser(true)
+                      dispatch(addAcceptedAppointment(user))
+                      const id = user.clientId._id;
+                      async function fetchAnxietyTest() {
+                        const response = await axios.get(`/anxiety-test/${id}`);
+                        const anxietyTestResponses = response.data.data.responses;
+                        setAnxietyTestScore(response.data.data.score)
+                        const convertedResponses = [];
 
-                    <IconButton
-                      icon={<Icon as={FaEye} />}
-                      fontSize={19}
-                      size="sm"
-                      borderColor="none"
-                      onClick={() => {
-                        setUser(true)
-                        dispatch(addAcceptedAppointment(user))
-                        const id = user.clientId._id;
-                        async function fetchAnxietyTest() {
-                          const response = await axios.get(`/anxiety-test/${id}`);
-                          const anxietyTestResponses = response.data.data.responses;
-                          setAnxietyTestScore(response.data.data.score)
-                          const convertedResponses = [];
+                        anxietyTestResponses.forEach((responseObj, index) => {
+                          const selectedOptionIndex = responseObj.response;
+                          const question = questions[index];
+                          if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
+                            const selectedOption = question.options[selectedOptionIndex];
+                            const convertedResponse = {
+                              question: question.question,
+                              selectedOption,
+                            };
+                            convertedResponses.push(convertedResponse);
+                          }
+                        });
+                        setAnxietyTest(convertedResponses)
+                      }
+                      async function fetchDepressionTest() {
 
-                          anxietyTestResponses.forEach((responseObj, index) => {
-                            const selectedOptionIndex = responseObj.response;
-                            const question = questions[index];
-                            if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
-                              const selectedOption = question.options[selectedOptionIndex];
-                              const convertedResponse = {
-                                question: question.question,
-                                selectedOption,
-                              };
-                              convertedResponses.push(convertedResponse);
-                            }
-                          });
-                          setAnxietyTest(convertedResponses)
-                        }
-                        async function fetchDepressionTest() {
+                        const response = await axios.get(`/depression-test/${id}`);
+                        const depressionTestResponses = response.data.data.responses;
+                        setDepressionTestScore(response.data.data.score)
+                        const convertedResponses = [];
 
-                          const response = await axios.get(`/depression-test/${id}`);
-                          const depressionTestResponses = response.data.data.responses;
-                          setDepressionTestScore(response.data.data.score)
-                          const convertedResponses = [];
+                        depressionTestResponses.forEach((responseObj, index) => {
+                          const selectedOptionIndex = responseObj.response;
+                          const question = depressionArray[index];
+                          if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
+                            const selectedOption = question.options[selectedOptionIndex];
+                            const convertedResponse = {
+                              question: question.question,
+                              selectedOption,
+                            };
+                            convertedResponses.push(convertedResponse);
+                          }
+                        });
+                        setDepressionTest(convertedResponses)
+                      }
+                      async function fetchEmotion() {
+                        const response = await axios.get(`/psychological-profile/${id}`)
+                        //console.log('res',response.data.data)
+                        setPyscProfile(response.data.data)
+                        // console.log('res',pyscProfile)
+                      }
+                      fetchAnxietyTest();
+                      fetchDepressionTest();
+                      fetchEmotion();
+                    }}
+                  />
 
-                          depressionTestResponses.forEach((responseObj, index) => {
-                            const selectedOptionIndex = responseObj.response;
-                            const question = depressionArray[index];
-                            if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
-                              const selectedOption = question.options[selectedOptionIndex];
-                              const convertedResponse = {
-                                question: question.question,
-                                selectedOption,
-                              };
-                              convertedResponses.push(convertedResponse);
-                            }
-                          });
-                          setDepressionTest(convertedResponses)
-                        }
-                        async function fetchEmotion() {
-                          const response = await axios.get(`/psychological-profile/${id}`)
-                          //console.log('res',response.data.data)
-                          setPyscProfile(response.data.data)
-                          // console.log('res',pyscProfile)
-                        }
-                        fetchAnxietyTest();
-                        fetchDepressionTest();
-                        fetchEmotion();
-                      }}
-                    />
+                </Flex>
 
-                  </Flex>
+                <Box p={4}>
+                  <Heading fontSize="xl">
+                    {user.clientId.firstName} {user.clientId.lastName}
+                  </Heading>
+                  <Text color={'black'} mt={2}>
+                    <span style={{ fontWeight: '700' }}>Desciption: </span>
+                    {user.problemDescription}
+                  </Text>
 
-                  <Box p={4}>
-                    <Heading fontSize="xl">
-                      {user.clientId.firstName} {user.clientId.lastName}
-                    </Heading>
-                    <Text color={'black'} mt={2}>
-                      <span style={{ fontWeight: '700' }}>Desciption: </span>
-                      {user.problemDescription}
-                    </Text>
-
-                    <Text fontSize="md" color={'black'} >
-                      <span style={{ fontWeight: '700' }}>Date: </span>{user.appointmentDate.split("T")[0]}
-                    </Text>
-                    <Text fontSize="md" color={'black'}>
-                      <span style={{ fontWeight: '700' }}>Time: </span>{user.appointmentTime.split("T")[1]}
-                    </Text>
-                    <Text fontSize="md" color={'black'}>
-                      <span style={{ fontWeight: '700' }}>Gender: Male </span>{user.clientId.gender}
-                    </Text>
-                  </Box>
+                  <Text fontSize="md" color={'black'} >
+                    <span style={{ fontWeight: '700' }}>Date: </span>{user.appointmentDate.split("T")[0]}
+                  </Text>
+                  <Text fontSize="md" color={'black'}>
+                    <span style={{ fontWeight: '700' }}>Time: </span>{user.appointmentTime.split("T")[1]}
+                  </Text>
+                  <Text fontSize="md" color={'black'}>
+                    <span style={{ fontWeight: '700' }}>Gender: Male </span>{user.clientId.gender}
+                  </Text>
                 </Box>
-              ))}
-            </Grid>
-          </Box>
+                </Box> 
+            ))}
+          </Grid>
+        </Box>
         </>
       )
       }
