@@ -816,7 +816,7 @@ export default function Simple() {
       {<Modal isOpen={isOpenAnxietyTest} onClose={onCloseAnxietyTest}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Anxiety Test Score : {anxietyTestScore}</ModalHeader>
+          <ModalHeader>Anxiety Test Score : {anxietyTestScore} / 40</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {
@@ -838,7 +838,7 @@ export default function Simple() {
       {<Modal isOpen={isOpenDepressionTest} onClose={onCloseDepressionTest}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Depression Test Score : {depressionTestScore}</ModalHeader>
+          <ModalHeader>Depression Test Score : {depressionTestScore} / 40</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {
