@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
+import storage from 'redux-persist/lib/storage'; 
 import myReducer from './slices/accountsReducer';
 import commentsReducer from './slices/commentsReducer';
 import postsReducer from './slices/postsReducer';
@@ -23,7 +22,7 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage,  
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

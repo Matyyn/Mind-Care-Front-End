@@ -13,24 +13,22 @@ import FAQs from "./components/landingPageComponents/FAQs";
 import ForgotPassword from "./components/ForgotPassword";
 import ViewTherapistProfile from "./components/ViewTherapistPofile";
 import Dashboard from "./components/Dashboard";
-import Multi from "./components/Multiple";
 import Test from "./components/test";
 //import Textextractor from "./components/textReader"
-import Picture from "./components/Picture";
-import Sidebar from './components/Sidebar'
 import ViewComments from './components/AdminFolder/ReportedCommentsDashboard'
 import Appeals from './components/AdminFolder/AppealsDashboard'
 import VideoCall from './components/Video Calls/Appointments'
-import Redux from './components/ReduxExample'
 import AdminSignin from './components/AdminFolder/AdminSignin'
 import Admin from './components/AdminFolder/AdminDashboard'
 //import Sessions from './components/VideoCall/sessionScreen'
 import axios from 'axios'
-import { PersistGate } from 'redux-persist/integration/react';
 import Profile from "./components/ClientFolder/PhyscologicalProfile"
 axios.defaults.baseURL = "http://localhost:8080/api/v1/therapist"
-import { store, persistor } from '../src/components/redux/store'
+import { store , persistor } from '../src/components/redux/store'
+import { PersistGate } from 'redux-persist/es/integration/react';
 import { Provider } from 'react-redux'
+import ProtectedRoutes from "./utils/protectedRoutes";
+
 function App() {
   return (
     <ChakraProvider >
@@ -41,15 +39,17 @@ function App() {
           <Route path="/" element={<LandingPage/>} />
           <Route path="/signin" element={<Signin/>} />
           <Route path="/signup" element={<Test/>} />
+          <Route element={<ProtectedRoutes/>}>
+            <Route path="/settings" element={<EditProfile/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/therapistprofile" element={<ViewTherapistProfile/>}/>
+            <Route path="/Admin" element={<Admin/>}/>
+          </Route>
           <Route path="/aboutus" element={<AboutUs/>} />
           <Route path="/pricing" element={<Pricing/>} />
           <Route path="/faqs" element={<FAQs/>} />
           <Route path="/forgotpassword" element={<ForgotPassword/>} />
-          <Route path="/settings" element={<EditProfile/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="/therapistprofile" element={<ViewTherapistProfile/>}/>
-          <Route path="/Admin" element={<Admin/>}/>
           <Route path="/AdminPosts" element={<ViewPosts/>}/>
           <Route path="/AdminComments" element={<ViewComments/>}/>
           <Route path="/Appeals" element={<Appeals/>}/>  
@@ -69,4 +69,5 @@ function App() {
     </ChakraProvider>
   );
 }
+//persistor.persist()
 export default App;
