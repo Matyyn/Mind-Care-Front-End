@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -8,32 +8,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import axios from "axios";
 import colors from "./Colors";
-
-const data = [
-  {
-    "_id": "65184ff142260b52dd127219",
-    "clientId": "64ece6ba4d227068ea863ee3",
-    "__v": 0,
-    "checkinDate": "2023-09-31T16:51:17.061Z",
-    "elaborationText": "Hello gghh",
-    "emotion": "Sad",
-    "reasonOfEmotion": "Friends",
-    "specificEmotion": "Disappointed",
-    "stressTimeline": "Medium"
-  },
-  {
-    "_id": "65184ff142260b52dd127219",
-    "clientId": "64ece6ba4d227068ea863ee3",
-    "__v": 0,
-    "checkinDate": "2023-09-30T16:51:17.061Z",
-    "elaborationText": "Hello gghh",    
-    "emotion": "Happy",
-    "reasonOfEmotion": "Friends",
-    "specificEmotion": "Disappointed",
-    "stressTimeline": "Medium"
-  }
-];
+import { useSelector } from "react-redux";
 
 const convertEmotionToEnum = (emotion) => {
   switch (emotion) {
@@ -52,17 +29,46 @@ const convertEmotionToEnum = (emotion) => {
   }
 };
 
+const calculateMood = (data) => {  
+  const totalEmotion = data.reduce((acc, item) => {
+    return acc + convertEmotionToEnum(item.emotion);
+  }, 0);
+
+  const averageEmotion = totalEmotion / data.length;
+  return averageEmotion;
+};
+
 const RechartsExample = () => {
-  const transformedData = data.map((item) => {
+  const selectedUserInfo = useSelector((state) => state.selectedAccounts.user);
+  const id = selectedUserInfo.clientId._id;
+  const [userResponse, setUserResponse] = useState([]);
+
+  useEffect(() => {
+    async function fetchEmotions() {
+      try {
+        const response = await axios.get(`/psychological-profile/${id}`);
+        setUserResponse(response.data.data.profile);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchEmotions();
+  }, [id]);
+
+  const transformedData = userResponse.map((item) => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date(item.checkinDate);
-    const dayOfWeek = daysOfWeek[date.getDay()];  
-    const emotionEnum = convertEmotionToEnum(item.emotion);
-    return { dayOfWeek, emotionEnum };
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const Mood = convertEmotionToEnum(item.emotion);
+    return { dayOfWeek, Mood };
   });
-  
+
+  const mood = calculateMood(userResponse);
+
   return (
     <>
+      
       <LineChart
         width={400}
         height={400}
@@ -75,8 +81,8 @@ const RechartsExample = () => {
         }}>
         <Line
           type="natural"
-          dataKey="emotionEnum"
-          stroke={colors.secondary}          
+          dataKey="Mood"
+          stroke={colors.secondary}
         />
         <CartesianGrid stroke={colors.fourth} />
         <XAxis dataKey="dayOfWeek" />
