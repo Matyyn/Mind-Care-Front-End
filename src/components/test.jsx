@@ -588,9 +588,10 @@ export default function SignIn() {
             </FormControl>
             <Button
               mt={4}
-              bg={colors.primary}
+              bg={colors.secondary}
               onClick={handleNextStep}
               width="100%"
+              color={'white'}
             >
               Next
             </Button>
@@ -637,17 +638,19 @@ export default function SignIn() {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
                 mt={4}
-                bg={colors.primary}
+                bg={colors.secondary}
                 onClick={handlePreviousStep}
                 width="45%"
+                color={'white'}
               >
                 Back
               </Button>
               <Button
                 mt={4}
-                bg={colors.primary}
+                bg={colors.secondary}
                 onClick={handleNextStep}
                 width="45%"
+                color={'white'}
               >
                 Next
               </Button>
@@ -687,9 +690,10 @@ export default function SignIn() {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
                 mt={4}
-                bg={colors.primary}
+                bg={colors.secondary}
                 onClick={handlePreviousStep}
                 width="45%"
+                color={'white'}
               >
                 Back
               </Button>
