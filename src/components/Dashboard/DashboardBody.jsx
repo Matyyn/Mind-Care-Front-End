@@ -1,166 +1,114 @@
-import React from "react";
-import colors from "../Colors";
+import React,{useEffect,useState} from "react";
 import Table from "./Table";
 import LineGraph from "./MonthlyGraph";
 import BarGraph from "../BarGraph";
 import PieGraph from "../PieGraph";
+import axios from "axios";
 import {
   Box,Grid,GridItem,Tag,
   Flex,
-  Center,
   Text,
-  Divider,
-  CardFooter,
-  ButtonGroup,
-  IconButton,HStack,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  StackDivider,
-  Stack,
-  Collapse,
-  Icon,
-  Link,
-  Image,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
-  Img,
+  HStack,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import SideBar from "../Sidebar";
 function DashboardBody() {
-  const info  = useSelector((state) => state.selectedAccounts.acceptedAppointments)
-  
-    console.log(info)
+  const [totalClients,setTotalClients] = useState(0);
+  const [completedAppointments,setCompletedAppointments] =useState(0)
+  const [pendingAppointments,setPendingAppointments] = useState(0);
+  const [totalEarnings,setTotalEarnings] = useState(0);
+  const therapistInfo = useSelector((state) => state.therapistReducer.user);
+  useEffect(() => {
+    async function getProfiles() {
+      const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)         
+      
+      const appointments = response.data.data;
+      setTotalClients(response.data.data.length)
+
+      const appointmentCharges = appointments.map(appointment => appointment.appointmentCharges);
+      const firstCharge = appointmentCharges[0];      
+      setTotalEarnings(firstCharge*response.data.data.length)
+
+      const completedAppointments = appointments.filter(appointment => appointment.status === "Approved");      
+      setCompletedAppointments(completedAppointments.length);
+
+      const pending = appointments.filter(appointment=> appointment.status ==="pending")
+      setPendingAppointments(pending.length)
+    }
+    getProfiles()
+  }, [])
+  const info  = useSelector((state) => state.selectedAccounts.acceptedAppointments)    
 
   return (
     <>
     <Box p={4} marginLeft={'3%'} width={'auto'}>
-        <Grid templateColumns="repeat(6, 1fr)" gap={8} width={'auto'}>
+        <Grid templateColumns="repeat(6, 1fr)" gap={8} width={'auto'} margin={15}>
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
-            height={"15vh"}
-            paddingLeft={5}
+            height={"15vh"}            
             
             boxShadow={'lg'}
             borderRadius={"10"}
           >
-            <Text textAlign={"left"} fontWeight={"bolder"}>
+            <Text textAlign={"center"} fontWeight={"700"} fontSize={18} mt={5}>
               {" "}
-              Anxiety Test Score
+              Total Clients
             </Text>
-            <Text textAlign={"left"} fontWeight={"600"}>
-              {" "}
-              Total Score:31
-            </Text>
-            <HStack spacing={4}>
-              <Tag size={"lg"} variant="solid" backgroundColor="#EDA600">
-                Mild Anxiety
-              </Tag>
-            </HStack>
+            <Text textAlign={"center"} fontWeight={"600"} fontSize={22} mt={2}>
+              {totalClients}
+              
+            </Text>            
           </GridItem>
           </Flex>
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
             height={"15vh"}            
-            boxShadow={'lg'}
-            paddingLeft={5}
-            
+            boxShadow={'lg'}            
             borderRadius={"10"}
           >
-            <Text textAlign={"left"} fontWeight={"bolder"}>
+           <Text textAlign={"center"} fontWeight={"700"} fontSize={18} mt={5}>
               {" "}
-              Anxiety Test Score
+              Approved Sessions
             </Text>
-            <Text textAlign={"left"} fontWeight={"600"}>
+            <Text textAlign={"center"} fontWeight={"600"} fontSize={22} mt={2}>
               {" "}
-              Total Score:31
-            </Text>
-            <HStack spacing={4}>
-              <Tag size={"lg"} variant="solid" backgroundColor="#EDA600">
-                Mild Anxiety
-              </Tag>
-            </HStack>
+              {completedAppointments}
+            </Text>            
           </GridItem>
           </Flex>
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
             height={"15vh"}
-            boxShadow={'lg'}
-            paddingLeft={5}
-            
+            boxShadow={'lg'}                        
             borderRadius={"10"}
           >
-            <Text textAlign={"left"} fontWeight={"bolder"}>
+          <Text textAlign={"center"} fontWeight={"700"} fontSize={18} mt={5}>
               {" "}
-              Anxiety Test Score
+              Pending Sessions
             </Text>
-            <Text textAlign={"left"} fontWeight={"600"}>
+            <Text textAlign={"center"} fontWeight={"600"} fontSize={22} mt={2}>
               {" "}
-              Total Score:31
+              {pendingAppointments}
             </Text>
-            <HStack spacing={4}>
-              <Tag size={"lg"} variant="solid" backgroundColor="#EDA600">
-                Mild Anxiety
-              </Tag>
-            </HStack>
+            
           </GridItem>
           </Flex>
           <Flex justifyContent="center" alignItems="center">
           <GridItem
             width="100%"            
             height={"15vh"}
-            boxShadow={'lg'}
-            paddingLeft={5}
-            
+            boxShadow={'lg'}            
             borderRadius={"10"}
           >
-            <Text textAlign={"left"} fontWeight={"bolder"}>
-              {" "}
-              Anxiety Test Score
+            <Text textAlign={"center"} fontWeight={"700"} fontSize={18} mt={5}>
+              Total Earning
             </Text>
-            <Text textAlign={"left"} fontWeight={"600"}>
-              {" "}
-              Total Score:31
+            <Text textAlign={"center"} fontWeight={"600"} fontSize={22} mt={2}>
+             ${totalEarnings.toFixed(2)}
             </Text>
-            <HStack spacing={4}>
-              <Tag size={"lg"} variant="solid" backgroundColor="#EDA600">
-                Mild Anxiety
-              </Tag>
-            </HStack>
-          </GridItem>
-          </Flex>
-          <Flex justifyContent="center" alignItems="center">
-          <GridItem
-            width="100%"            
-            height={"15vh"}
-            boxShadow={'lg'}
-            paddingLeft={5}
             
-            borderRadius={"10"}
-          >
-            <Text textAlign={"left"} fontWeight={"bolder"}>
-              {" "}
-              Anxiety Test Score
-            </Text>
-            <Text textAlign={"left"} fontWeight={"600"}>
-              {" "}
-              Total Score:31
-            </Text>
-            <HStack spacing={4}>
-              <Tag size={"lg"} variant="solid" backgroundColor="#EDA600">
-                Mild Anxiety
-              </Tag>
-            </HStack>
           </GridItem>
           </Flex>
         </Grid>

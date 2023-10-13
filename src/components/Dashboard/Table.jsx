@@ -221,6 +221,7 @@ import colors from "../Colors";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
 import { FaFileDownload, FaEdit, FaRegTrashAlt } from "react-icons/fa";
+import axios from "axios";
 import {
   Text,
   Button,
@@ -240,35 +241,21 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 import jsPDF from 'jspdf';
-import { color } from "framer-motion";
-
-const data = [
-  {
-    clientname: "Andrew",
-    gender: "Male",
-    probdesc: "Depression",
-    appointmentTime: "10:00 AM 23-03-23",
-    status: "completed",
-  },
-  {
-    clientname: "Hanna",
-    gender: "Female",
-    probdesc: "Depression",
-    appointmentTime: "10:00 AM 23-03-23",
-    status: "completed",
-  },
-  {
-    clientname: "John",
-    gender: "Female",
-    probdesc: "Anxiety",
-    appointmentTime: "10:00 AM 23-03-23",
-    status: "completed",
-  },
-];
 
 function TableComponent() {
+  const [appointments,setAppointments] = useState([])
+  const therapistInfo = useSelector((state) => state.therapistReducer.user);
+  useEffect(() => {
+    async function getProfiles() {
+      const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)      
+      setAppointments(response.data.data)      
+      console.log(response.data.data)
+    }
+    getProfiles()
+  }, [])
   const imageUrl = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z_YOZX-RaLTolqYCiDrwB93GLJpQ_XoP0-g-KH06jGtYJXfg';
 
   const generatePDF = (row) => {
@@ -311,40 +298,49 @@ function TableComponent() {
     doc.save(`${row.clientname}.pdf`);
   };
 
-  const [sorted, setSorted] = useState(data);
+  const [sorted, setSorted] = useState(appointments);
   const [filter, setFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [searched,setSearched] = useState('');
+  
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearched(value);
 
-    // Filter the data based on the search query
-    const filteredData = data.filter((item) =>
-      item.clientname.toLowerCase().includes(value.toLowerCase())
+    const filteredData = appointments.filter((item) =>
+      `${item.clientId.firstName} ${item.clientId.lastName}`
+        .toLowerCase()
+        .includes(value.toLowerCase())
     );
     setSorted(filteredData);
   };
-  
-  useEffect(()=>{  
-    if(statusFilter==='Default'){
-      setSorted(data)      
-    }  else{
-    const key ="status"
-    const value = statusFilter
-    const filteredArray = data.filter((obj) => obj[key] === value);
-    setSorted(filteredArray)
-    }
-  },[statusFilter])
-  
+
   useEffect(() => {
-    if (filter === 'Z-A') {
-      const sortedData = data.slice().sort((a, b) => b.clientname.localeCompare(a.clientname));
+    if (statusFilter === "Default") {
+      setSorted(appointments);
+    } else {
+      const key = "status";
+      const value = statusFilter;
+      const filteredArray = appointments.filter((obj) => obj[key] === value);
+      setSorted(filteredArray);
+    }
+  }, [statusFilter]);
+
+  useEffect(() => {
+    if (filter === "Z-A") {
+      const sortedData = appointments
+        .slice()
+        .sort((a, b) =>
+          `${b.clientId.firstName} ${b.clientId.lastName}`.localeCompare(
+            `${a.clientId.firstName} ${a.clientId.lastName}`
+          )
+        );
       setSorted(sortedData);
     } else {
-      setSorted(data);
+      setSorted(appointments);
     }
   }, [filter]);
+
   //therapist remarks
   const videoCallFeedback = [
     {
@@ -400,9 +396,10 @@ function TableComponent() {
           width="45%"          
           onChange={(event) => setStatusFilter(event.target.value)}
         > 
-          <option value="completed">Default</option>         
-          <option value="completed">Completed</option>
-          <option value="cancelled">Cancelled</option>
+          <option value="Default">Default</option>         
+          <option value="pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Completed">Completed</option>
         </Select>
         </Stack>
         <InputGroup size="md" width={"20%"} style={{ marginLeft: "auto", justifyContent: "flex-end" }}>
@@ -448,16 +445,16 @@ function TableComponent() {
             {sorted.map((row, index) => (
               <Tr key={index}>
                 <Td padding={0} paddingLeft={"2%"}>
-                  {row.clientname}
+                  {row.clientId.firstName} {row.clientId.lastName}
                 </Td>
                 <Td padding={0} paddingLeft={"2%"}>
-                  {row.gender}
+                  {row.clientId.gender}
                 </Td>
                 <Td padding={0} paddingLeft={"2%"}>
-                  {row.probdesc}
+                  {row.problemDescription}
                 </Td>
                 <Td padding={0} paddingLeft={"2%"}>
-                  {row.appointmentTime}
+                  {row.appointmentDate.split('T')[0]}{row.appointmentTime.split('T')[1]}
                 </Td>
                 <Td padding={0} paddingLeft={"1%"}>
                   {row.status}
