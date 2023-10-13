@@ -56,11 +56,11 @@ const SideBar = ({therapist}) => {
               >
                 Profiles
               </Link>
-              <Link style={{ marginBottom: "7%" }} to="" 
+              {/* <Link style={{ marginBottom: "7%" }} to="" 
                 state={ therapist } 
               >
                 Requests
-              </Link>
+              </Link> */}
               <Link style={{ marginBottom: "7%" }} to="" 
               state={therapist}
               >

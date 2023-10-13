@@ -262,8 +262,6 @@ export default function Simple() {
   const [pyscProfile, setPyscProfile] = useState()
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
 
-  const pendingAppointments = allUsers.filter((user) => user.status === "pending");
-  const acceptedAppointments = allUsers.filter((user) => user.status === "Approved");
   useEffect(() => {
     async function getProfiles() {
       const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)
@@ -272,10 +270,12 @@ export default function Simple() {
     }
     getProfiles()
   }, [])
+  const pendingAppointments = allUsers.filter((user) => user.status === "pending");
+  const acceptedAppointments = allUsers.filter((user) => user.status === "Approved");
 
-  const dispatch = useDispatch()
   const selectedUserInfo = useSelector((state) => state.selectedAccounts.user);
-  console.log(selectedUserInfo)
+  const dispatch = useDispatch()
+  //console.log('sc',selectedUserInfo)
 
   useEffect(() => {
     async function fetchAnxietyTest() {
@@ -366,8 +366,7 @@ export default function Simple() {
         <><Box p={4}>
           <Stack flexDirection={'row'} justifyContent={'space-between'}>
             <Text fontSize={20} fontWeight={"500"} marginLeft={7}>
-              Client Name:
-              {/* {pyscProfile.clientId.firstName} {pyscProfile.clientId.lastName} */}
+              Client Name: {selectedUserInfo.clientId.firstName} {selectedUserInfo.clientId.lastName}              
             </Text>
             <Button onClick={() => setUser(false)} >
               View All Clients
@@ -400,11 +399,7 @@ export default function Simple() {
               boxShadow={'lg'}
               height={"auto"}
               padding={3}
-              borderRadius={"10"}
-            // _hover={{
-            //   bg: colors.third,
-            //   color: 'white',height:'auto'
-            // }}
+              borderRadius={"10"}            
             >
               <Text textAlign={"center"} fontWeight={"bolder"} fontSize={18}>
                 Anxiety Test
@@ -477,8 +472,7 @@ export default function Simple() {
               </Text>
               <Center>
                 <HStack spacing={4} marginTop={"5%"}>
-                  <Tag size={"lg"} variant="solid" colorScheme="teal" width={'auto'} textAlign={'center'}>
-                    {/* {pyscProfile.emotion} */}
+                  <Tag size={"lg"} variant="solid" colorScheme="teal" width={'auto'} textAlign={'center'}>                    
                     Happy
                   </Tag>
                 </HStack>
