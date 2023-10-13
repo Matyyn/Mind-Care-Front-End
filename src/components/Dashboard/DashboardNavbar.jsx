@@ -65,7 +65,7 @@ export default function WithSubnavigation() {
            />
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"inter"}
+            //fontFamily={"inter"}
             marginLeft={"12"}
             style={{ fontWeight: "bolder" }}
             fontSize={"25"}
