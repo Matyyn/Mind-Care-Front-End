@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card,
+  Card, Box,
   CardHeader,
   IconButton,
   CardBody,
-  CardFooter,
+  CardFooter, Flex, HStack,
   Text,
   ButtonGroup,
   Button,
@@ -18,10 +18,10 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import Comment from "../CommunityForum/Comment";
 import Reply from "../CommunityForum/Reply";
 import { useSelector } from "react-redux";
-import {BiUpvote,BiDownvote} from "react-icons/bi";
+import { BiUpvote, BiDownvote } from "react-icons/bi";
 
 function SinglePost({ post, upvote, downvote }) {
-  const therapistInfo = useSelector((state) => state.therapistReducer.user);  
+  const therapistInfo = useSelector((state) => state.therapistReducer.user);
   console.log("post single post: ", post);
   useEffect(() => {
     console.log("hello");
@@ -84,7 +84,7 @@ function SinglePost({ post, upvote, downvote }) {
     if (result.length > 0) return true;
     return false;
   };
-  const getCommentDownvoteStatus = (comment) => {};
+  const getCommentDownvoteStatus = (comment) => { };
 
   const addCommentUpvote = (postId, therapistId, commentId) => {
     const commentSelected = {
@@ -99,7 +99,7 @@ function SinglePost({ post, upvote, downvote }) {
       });
   };
 
-  const removeCommentUpvote = () => {};
+  const removeCommentUpvote = () => { };
 
   const addUpvote = async (postId, therapistId) => {
     console.log("HWyyyyy");
@@ -184,20 +184,16 @@ function SinglePost({ post, upvote, downvote }) {
       }}
     >
       <Card style={{ margin: 10 }}>
-        <CardHeader
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
+        <Flex justifyContent="space-between" margin={5}>
           <Link to={"/therapistprofile"}>
-            <Avatar size={"md"} src={post.therapistId.picture}>
-              <AvatarBadge boxSize="1.25em" bg="green.500" />
-            </Avatar>
-            <p style={{ marginTop: "1rem" }}>
-              {post.therapistId.firstName} {post.therapistId.lastName}
-            </p>
+            <Flex alignItems="center">
+              <Avatar size={"md"} src={post.therapistId.picture}>
+                <AvatarBadge boxSize="1.25em" bg="green.500" />
+              </Avatar>
+              <Text ml="2" fontSize="lg">
+                {post.therapistId.firstName} {post.therapistId.lastName}
+              </Text>
+            </Flex>
           </Link>
           <ButtonGroup gap="4">
             {post.tags.map((tag) => (
@@ -207,10 +203,10 @@ function SinglePost({ post, upvote, downvote }) {
                   tag === "Anxiety"
                     ? "purple"
                     : tag === "Depression"
-                    ? "pink"
-                    : tag === "Advice"
-                    ? "orange"
-                    : "gray"
+                      ? "pink"
+                      : tag === "Advice"
+                        ? "orange"
+                        : "gray"
                 }
                 size="sm"
               >
@@ -218,62 +214,71 @@ function SinglePost({ post, upvote, downvote }) {
               </Button>
             ))}
           </ButtonGroup>
-        </CardHeader>
-        <CardBody>
-          <Text style={{ fontWeight: "bold" }}>{post.title}</Text>
+        </Flex>
+        <Box ml={5}>
+          <Text fontWeight="700" fontSize={22}>{post.title}</Text>
           {post.body.length < 300 ? (
-            <Text>{post.body}</Text>
+            <Text fontSize={20}>{post.body}</Text>
           ) : (
             <Text>
-              {isReadMore ? post.body.slice(0, 300) : post.body}
-              <span
+              {isReadMore ? post.body : `${post.body.slice(0, 300)}...`}
+              <Button
+                variant="link"
+                color="gray.600"
+                size="sm"
                 onClick={toggleReadMore}
-                className="read-or-hide"
-                style={{ cursor: "pointer", color: "rgb(192, 192, 192)" }}
               >
-                {isReadMore ? "...read more" : " show less"}
-              </span>
+                {isReadMore ? "Show Less" : "Read More"}
+              </Button>
             </Text>
           )}
-        </CardBody>
-        <CardFooter style={{ flexDirection: "column" }}>
-          <Text style={{ fontSize: "0.8rem" }}>
+        </Box>
+        <Flex direction="column" ml={5}>
+          <Text fontSize="md">
             {dateConversion(post.createdAt)}
           </Text>
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <HStack spacing={4} mt={2}>
             {getUpvoteStatus(post) ? (
-              <BiUpvote onClick={() => removeUpvote(post._id)} />
+              <IconButton
+                icon={<BiUpvote />}
+                colorScheme="teal"
+                fontSize={20}
+                onClick={() => removeUpvote(post._id)}
+              />
             ) : (
-              <BiUpvote
+              <IconButton
+                icon={<BiUpvote />}
+                colorScheme="teal"
+                fontSize={20}
                 onClick={() => addUpvote(post._id, post.therapistId._id)}
               />
             )}
             {getDownvoteStatus(post) ? (
-               <IconButton
-               aria-label="notifications"
-               icon={<BiDownvote />}
-               variant="ghost"
-               colorScheme="gray"
-               mr={3}
-               fontSize={"25"}
-               onClick={() => removeDownvote(post._id)}
-             />
-              
+              <IconButton
+                icon={<BiDownvote />}
+                colorScheme="teal"
+                fontSize={20}
+                onClick={() => removeDownvote(post._id)}
+              />
             ) : (
-              <BiDownvote
+              <IconButton
+                icon={<BiDownvote />}
+                colorScheme="teal"
+                fontSize={20}
                 onClick={() => addDownvote(post._id, post.therapistId._id)}
               />
             )}
             {post.therapistId._id === therapistLocal._id && (
-              <DeleteIcon onClick={() => deletePost(post._id)} />
+              <IconButton
+                icon={<DeleteIcon />}
+                colorScheme="red"
+                fontSize={20}
+                onClick={() => deletePost(post._id)}
+              />
             )}
-            <Comment
-              postId={post._id}
-              therapistId={therapistLocal._id}
-              // body={post.comments.body}
-            />
-          </div>
-        </CardFooter>
+            <Comment postId={post._id} therapistLocal={therapistLocal} />
+          </HStack>
+        </Flex>
         <div>
           {/* <Comment
             postId={post._id}
@@ -322,10 +327,10 @@ function SinglePost({ post, upvote, downvote }) {
                               tag === "Anxiety"
                                 ? "purple"
                                 : tag === "Depression"
-                                ? "pink"
-                                : tag === "Advice"
-                                ? "orange"
-                                : "gray"
+                                  ? "pink"
+                                  : tag === "Advice"
+                                    ? "orange"
+                                    : "gray"
                             }
                             size="sm"
                           >
@@ -355,15 +360,15 @@ function SinglePost({ post, upvote, downvote }) {
                           />
                         )}
                         {getCommentDownvoteStatus(post) ? (
-                           <IconButton
-                           aria-label="notifications"
-                           icon={<BiDownvote />}
-                           variant="ghost"
-                           colorScheme="gray"
-                           mr={3}
-                           fontSize={"25"}
-                           onClick={() => removeDownvote(post._id)}
-                         />
+                          <IconButton
+                            aria-label="notifications"
+                            icon={<BiDownvote />}
+                            variant="ghost"
+                            colorScheme="gray"
+                            mr={3}
+                            fontSize={"25"}
+                            onClick={() => removeDownvote(post._id)}
+                          />
                         ) : (
                           <BiDownvote
                             onClick={() =>
@@ -413,10 +418,10 @@ function SinglePost({ post, upvote, downvote }) {
                                       tag === "Anxiety"
                                         ? "purple"
                                         : tag === "Depression"
-                                        ? "pink"
-                                        : tag === "Advice"
-                                        ? "orange"
-                                        : "gray"
+                                          ? "pink"
+                                          : tag === "Advice"
+                                            ? "orange"
+                                            : "gray"
                                     }
                                     size="sm"
                                   >
@@ -431,8 +436,7 @@ function SinglePost({ post, upvote, downvote }) {
                             <CardFooter>
                               <DeleteIcon
                                 onClick={() => deleteComment(reply._id)}
-                              />
-
+                              />  
                               <Reply
                                 commentId={comment._id}
                                 postId={post._id}

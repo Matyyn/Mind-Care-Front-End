@@ -23,8 +23,8 @@ function Forum() {
   return (
     <Container maxW="container.xl">
       <Navbar />
-     {/* <ForumTagsBar /> */}
-      <Box  mt={4} p={4} borderRadius="lg" bg="white" boxShadow="lg" ml={0}>
+     <ForumTagsBar />
+      <Box  mt={4} p={4} borderRadius="lg" bg="white" boxShadow="lg" ml={5}>
         <Flex justifyContent="space-between" alignItems="center" mb={4}>
           <Link to="/tabs">
             <Button colorScheme="teal">Post a Question +</Button>

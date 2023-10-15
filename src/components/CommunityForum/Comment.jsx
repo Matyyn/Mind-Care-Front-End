@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Reply from "../CommunityForum/Reply";
-import { Card, Button, Textarea } from "@chakra-ui/react";
+import {
+  IconButton,
+  Textarea,
+  Flex,
+  Button,
+  Box,
+} from "@chakra-ui/react";
 import { BiComment } from "react-icons/bi";
 import { useSelector } from "react-redux";
+
 export default function Comment({ postId, therapistId, commentId }) {
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
   const [isReplying, setIsReplying] = useState(false);
   const [commentBody, setCommentBody] = useState("");
   const [commentState, setCommentState] = useState(false);
-  
+
   useEffect(() => {}, [commentState]);
 
   const postComment = async () => {
@@ -24,37 +30,49 @@ export default function Comment({ postId, therapistId, commentId }) {
     console.log("comment response: ", response);
     setCommentBody("");
     setCommentState(!commentState);
+    setIsReplying(false);
   };
+
   return (
     <div>
-      {/* <span>{body}</span> */}
-      {isReplying ? (
-        <div style={{ paddingTop: "2rem", paddingBottom: "0.5rem" }}>
-          <Button
-            style={{ marginRight: "1rem" }}
-            size="sm"
-            onClick={postComment}
-          >
-            Post
-          </Button>
-          <Button size="sm" onClick={() => setIsReplying(false)}>
-            Cancel
-          </Button>
-        </div>
-      ) : (
-        <BiComment
-          style={{ marginLeft: "0.5rem" }}
-          onClick={() => setIsReplying(true)}
-        ></BiComment>
-      )}
+      <IconButton
+        icon={<BiComment />}
+        aria-label="Reply"
+        variant="unstyled"
+        size="lg"
+        fontSize={30}
+        onClick={() => setIsReplying(!isReplying)}
+      />
+
       {isReplying && (
         <Textarea
           placeholder="What are your thoughts?"
           value={commentBody}
           onChange={(e) => setCommentBody(e.target.value)}
-        ></Textarea>
+          mt="2"
+          mb="1"
+        />
       )}
-      {/* <Reply commentId={commentId} postId={postId} therapistId={therapistId} /> */}
+
+      {isReplying && (
+        <Flex alignItems="center" mt="2" mb="1">
+          <Button
+            size="sm"
+            colorScheme="teal"
+            mr="2"
+            onClick={postComment}
+          >
+            Post
+          </Button>
+          <Button
+            size="sm"
+            colorScheme="red"
+            onClick={() => setIsReplying(false)}
+          >
+            Cancel
+          </Button>
+        </Flex>
+      )}
     </div>
   );
 }
