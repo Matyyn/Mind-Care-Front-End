@@ -27,7 +27,7 @@ function Forum() {
       <Box  mt={4} p={4} borderRadius="lg" bg="white" boxShadow="lg" ml={5}>
         <Flex justifyContent="space-between" alignItems="center" mb={4}>
           <Link to="/tabs">
-            <Button colorScheme="teal">Post a Question +</Button>
+            <Button colorScheme="teal" fontSize={20}>Post a Question +</Button>
           </Link>
           <InputGroup size="sm" w={60}>
             <InputLeftElement pointerEvents="none">

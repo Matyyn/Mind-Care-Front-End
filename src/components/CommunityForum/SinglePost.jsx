@@ -190,7 +190,7 @@ function SinglePost({ post, upvote, downvote }) {
               <Avatar size={"md"} src={post.therapistId.picture}>
                 <AvatarBadge boxSize="1.25em" bg="green.500" />
               </Avatar>
-              <Text ml="2" fontSize="lg">
+              <Text ml="2" fontSize={21}>
                 {post.therapistId.firstName} {post.therapistId.lastName}
               </Text>
             </Flex>
@@ -209,6 +209,7 @@ function SinglePost({ post, upvote, downvote }) {
                         : "gray"
                 }
                 size="sm"
+                fontSize={20}
               >
                 {tag}
               </Button>
@@ -310,7 +311,7 @@ function SinglePost({ post, upvote, downvote }) {
                         justifyContent: "space-between",
                       }}
                     >
-                      <Link to={"/therapistprofile"}>
+                      <Link>
                         <Avatar size={"md"} src={comment.therapistId.picture}>
                           <AvatarBadge boxSize="1.25em" bg="green.500" />
                         </Avatar>
