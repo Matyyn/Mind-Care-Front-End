@@ -9,6 +9,8 @@ import therapistReducer from './slices/therapistReducer';
 import appealsReducer from './slices/appealsReducer';
 import clientsAccountReducer from './slices/clientsAccountsReducer';
 import selectedAccounts from './slices/selectedAccounts';
+import postTagsSlice from './slices/TagsSlice'
+import therapistDataSlice from './slices/TherapistDataSlice'
 
 const rootReducer = combineReducers({
   myReducer: myReducer,
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   therapistReducer: therapistReducer,
   clientsAccountReducer: clientsAccountReducer,
   selectedAccounts: selectedAccounts,
+  postTags: postTagsSlice,
+  therapistData: therapistDataSlice,
 });
 
 const persistConfig = {

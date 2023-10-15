@@ -15,6 +15,10 @@ import ViewTherapistProfile from "./components/ViewTherapistPofile";
 import Dashboard from "./components/Dashboard";
 import Test from "./components/test";
 //import Textextractor from "./components/textReader"
+import Forum from "./components/Forum";
+import PostQuestion from "./components/PostQuestion";
+import PostTab from "./components/CommunityForum/TabComponent/PostTab";
+import Tabs from "./components/CommunityForum/TabComponent/Tabs";
 import ViewComments from './components/AdminFolder/ReportedCommentsDashboard'
 import Appeals from './components/AdminFolder/AppealsDashboard'
 import VideoCall from './components/Video Calls/Appointments'
@@ -45,6 +49,10 @@ function App() {
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/therapistprofile" element={<ViewTherapistProfile/>}/>
             <Route path="/Admin" element={<Admin/>}/>
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/postquestion" element={<PostQuestion />} />
+            <Route path="/postTab" element={<PostTab />} />
+            <Route path="/tabs" element={<Tabs/>} />
           </Route>
           <Route path="/aboutus" element={<AboutUs/>} />
           <Route path="/pricing" element={<Pricing/>} />
