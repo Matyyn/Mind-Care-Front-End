@@ -21,7 +21,7 @@ function Forum() {
   const [searchPost, setSearchPost] = useState("");
 
   return (
-    <Container maxW="container.xl">
+    <>
       <Navbar />
      <ForumTagsBar />
       <Box  mt={4} p={4} borderRadius="lg" bg="white" boxShadow="lg" ml={5}>
@@ -44,7 +44,7 @@ function Forum() {
         </Flex>
         <Post />
       </Box>
-    </Container>
+    </>
   );
 }
 

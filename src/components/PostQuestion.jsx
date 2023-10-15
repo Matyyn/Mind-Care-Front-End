@@ -122,10 +122,10 @@ function PostQuestion() {
         <ButtonGroupComponent />
         <Divider className="divider" />
         <div className="button-container">
-          <Button onClick={uploadFile} colorScheme="green" size="sm">
+          <Button onClick={uploadFile} colorScheme="green" size="md">
             Add Image
           </Button>
-          <Button onClick={uploadData} colorScheme="green" size="sm">
+          <Button onClick={uploadData} colorScheme="green" size="md">
             Post
           </Button>
         </div>

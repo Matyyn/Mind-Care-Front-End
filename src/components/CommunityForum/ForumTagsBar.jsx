@@ -16,7 +16,7 @@ function FilterTags() {
   };
 
   return (
-    <Box borderWidth="1px" p={4} borderRadius="lg" boxShadow="md" mb={5} ml={5} mt={5}>
+    <Box borderWidth="1px" p={4} borderRadius="lg" boxShadow="md" mb={5} ml={5} mt={5} >
       <Text fontSize={22} fontWeight="bold" mb={4}>
         Filter by
       </Text>
