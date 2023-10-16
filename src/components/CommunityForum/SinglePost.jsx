@@ -19,6 +19,7 @@ import Comment from "../CommunityForum/Comment";
 import Reply from "../CommunityForum/Reply";
 import { useSelector } from "react-redux";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
+import {AiOutlineLike,AiFillLike,AiOutlineDislike,AiTwotoneDislike} from "react-icons/ai"
 
 function SinglePost({ post, upvote, downvote }) {
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
@@ -241,14 +242,14 @@ function SinglePost({ post, upvote, downvote }) {
           <HStack spacing={4} mt={2}>
             {getUpvoteStatus(post) ? (
               <IconButton
-                icon={<BiUpvote />}
+                icon={<AiFillLike />}
                 colorScheme="teal"
                 fontSize={20}
                 onClick={() => removeUpvote(post._id)}
               />
             ) : (
               <IconButton
-                icon={<BiUpvote />}
+                icon={<AiOutlineLike />}
                 colorScheme="teal"
                 fontSize={20}
                 onClick={() => addUpvote(post._id, post.therapistId._id)}
@@ -256,14 +257,14 @@ function SinglePost({ post, upvote, downvote }) {
             )}
             {getDownvoteStatus(post) ? (
               <IconButton
-                icon={<BiDownvote />}
+                icon={<AiTwotoneDislike />}
                 colorScheme="teal"
                 fontSize={20}
                 onClick={() => removeDownvote(post._id)}
               />
             ) : (
               <IconButton
-                icon={<BiDownvote />}
+                icon={<AiOutlineDislike />}
                 colorScheme="teal"
                 fontSize={20}
                 onClick={() => addDownvote(post._id, post.therapistId._id)}
@@ -344,41 +345,60 @@ function SinglePost({ post, upvote, downvote }) {
                       <Text>{comment.body}</Text>
                     </CardBody>
                     <CardFooter>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
+                      <div style={{ display: "flex", flexDirection: "row" }} >
                         {getCommentUpvoteStatus(comment) ? (
-                          <BiUpvote
+
+                          <IconButton
+                            icon={<AiFillLike />}
+                            colorScheme="teal"
+                            fontSize={20}
+                            mr={4}
                             onClick={() => removeCommentUpvote(post._id)}
                           />
                         ) : (
-                          <BiUpvote
+
+                          <IconButton
+                            icon={<AiOutlineLike />}
+                            colorScheme="teal"
+                            mr={4}
+                            fontSize={20}
                             onClick={() =>
                               addCommentUpvote(
                                 post._id,
                                 post.therapistId._id,
                                 comment._id
-                              )
-                            }
+                              )}
                           />
                         )}
                         {getCommentDownvoteStatus(post) ? (
                           <IconButton
-                            aria-label="notifications"
-                            icon={<BiDownvote />}
-                            variant="ghost"
-                            colorScheme="gray"
-                            mr={3}
-                            fontSize={"25"}
+                            icon={<AiTwotoneDislike />}
+                            colorScheme="teal"
+                            fontSize={20}
+                            mr={4}
                             onClick={() => removeDownvote(post._id)}
                           />
+
                         ) : (
-                          <BiDownvote
+                          <IconButton
+                            icon={<AiOutlineDislike />}
+                            colorScheme="teal"
+                            fontSize={20}
+                            mr={4}
                             onClick={() =>
                               addDownvote(post._id, post.therapistId._id)
                             }
                           />
                         )}
                       </div>
-                      <DeleteIcon onClick={() => deleteComment(comment._id)} />
+                      <IconButton
+                        icon={<DeleteIcon />}
+                        colorScheme="red"
+                        fontSize={20}
+                        mr={4}
+                        onClick={() => deleteComment(comment._id)}
+                      />
+                      {/* <DeleteIcon onClick={() => deleteComment(comment._id)} /> */}
                       <Reply
                         commentId={comment._id}
                         postId={post._id}
@@ -388,7 +408,7 @@ function SinglePost({ post, upvote, downvote }) {
                     <div style={{ width: "95%" }}>
                       {comment.replies.map((reply) => {
                         return (
-                          <Card style={{ marginBottom: "0.5rem" }}>
+                          <Card style={{ marginBottom: "0.5rem" }} ml={10}>
                             <CardHeader
                               style={{
                                 display: "flex",
@@ -432,12 +452,20 @@ function SinglePost({ post, upvote, downvote }) {
                               </ButtonGroup>
                             </CardHeader>
                             <CardBody>
-                              <Text>reply: {reply.body}</Text>
+                              <Text fontSize={16}>Reply: {reply.body}</Text>
                             </CardBody>
                             <CardFooter>
-                              <DeleteIcon
+                              
+                              {/* <DeleteIcon
                                 onClick={() => deleteComment(reply._id)}
-                              />  
+                              />   */}
+                              <IconButton
+                        icon={<DeleteIcon />}
+                        colorScheme="red"
+                        fontSize={20}
+                        mr={4}
+                        onClick={() =>  deleteComment(reply._id)} 
+                      />
                               <Reply
                                 commentId={comment._id}
                                 postId={post._id}
