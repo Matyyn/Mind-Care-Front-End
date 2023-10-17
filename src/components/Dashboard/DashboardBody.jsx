@@ -95,7 +95,7 @@ function DashboardBody() {
           <GridItem marginLeft={'10%'}>
             <BarGraph />
           </GridItem>
-          <GridItem>
+          <GridItem style={{marginLeft:'15%'}}>
             <PieGraph />
           </GridItem>
         </Grid>
