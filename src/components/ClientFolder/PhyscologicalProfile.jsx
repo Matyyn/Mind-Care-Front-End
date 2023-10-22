@@ -1,7 +1,7 @@
 import MoodTable from "./MoodTable";
 import React, { useEffect, useState } from "react";
 import Navbar from './Navbar'
-import { setnotifications } from "../redux/slices/notificationsReducer";
+//import { setnotifications } from "../redux/slices/notificationsReducer";
 import { useDispatch } from "react-redux";
 import { addAcceptedAppointment } from "../redux/slices/selectedAccounts";
 import { FaEye } from "react-icons/fa";
@@ -653,12 +653,12 @@ export default function Simple() {
                         duration: 2000,
                         isClosable: true,
                       });
-                      const Notification = {
-                        firstName:user.clientId.firstName,
-                        lastName:user.clientId.lastName,
-                        time:Date.now()
-                      }    
-                      dispatch(setnotifications(Notification))
+                      // const Notification = {
+                      //   firstName:user.clientId.firstName,
+                      //   lastName:user.clientId.lastName,
+                      //   time:Date.now()
+                      // }    
+                      // dispatch(setnotifications(Notification))
                     }
                     }>
                     Accept
