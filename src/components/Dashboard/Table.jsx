@@ -344,21 +344,7 @@ function TableComponent() {
 
   //therapist remarks
   const videoCallFeedback = [
-    {
-      therapistName: "Dr. Sarah Adams",
-      anxietyFeedback: "During the video call, the client expressed anxiety about work-related stress. Dr. Adams provided helpful coping strategies to manage anxiety effectively.",
-      depressionFeedback: "In the session, signs of depression were noticed in the client's behavior and mood. Dr. Adams recommended further evaluation and offered ongoing support."
-    },
-    {
-      therapistName: "Dr. Faaiza",
-      anxietyFeedback: "During the video call, the client opened up about anxiety. Dr. Johnson created a safe space and taught relaxation techniques to reduce anxiety symptoms.",
-      depressionFeedback: "Signs of depression were observed in the client's communication and feelings. Dr. Johnson discussed the importance of seeking additional support and self-care."
-    },
-    {
-      therapistName: "Dr. Kumail Raza",
-      anxietyFeedback: "During the video call session, the client shared struggles with anxiety. Dr. Lee validated the client's feelings and introduced cognitive-behavioral techniques to address them.",
-      depressionFeedback: "Symptoms of depression were detected in the client's speech and emotions during the session. Dr. Lee encouraged the client to explore potential triggers and seek ongoing assistance."
-    }
+   
   ];
   const {
     isOpen: isOpenTherapistFeedback,
@@ -510,7 +496,7 @@ function TableComponent() {
       {<Modal isOpen={isOpenTherapistFeedback} onClose={onCloseTherapistFeedback}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Therapist Feedbacks</ModalHeader>
+          <ModalHeader>Therapist Remarks</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {

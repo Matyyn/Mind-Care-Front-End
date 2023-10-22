@@ -59,14 +59,14 @@ useEffect(() => {
 
       // Create a set to keep track of unique user IDs
       const uniqueUserIds = new Set();
-
+      
       // Assuming your response data structure matches the "data" structure, update the state.
       const transformedData = response.data.data.reduce((ageCounts, appointment) => {
+        
         // Calculate the user's age from the date of birth
         const dob = new Date(appointment.clientId.dateOfBirth);
         const currentDate = new Date();
         const age = currentDate.getFullYear() - dob.getFullYear();
-
         // Check if the user's ID is already in the set of unique user IDs
         if (!uniqueUserIds.has(appointment.clientId._id)) {
           // Define age ranges

@@ -173,11 +173,11 @@ export default function Simple() {
             >
               <Text fontSize={18} fontWeight={"700"} textAlign={"center"}>
                 {" "}
-                Therapist Feedbacks
+                Therapist Remarks
               </Text>
               <Center>
                 <Button marginTop={'5%'} onClick={onOpenTherapistFeedback}>
-                  View Feedbacks
+                  View Remarks
                 </Button>
               </Center>
               
@@ -494,7 +494,7 @@ export default function Simple() {
       {<Modal isOpen={isOpenTherapistFeedback} onClose={onCloseTherapistFeedback}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Therapist Feedbacks</ModalHeader>
+          <ModalHeader>Therapist Remarks</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {
