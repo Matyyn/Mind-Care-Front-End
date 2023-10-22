@@ -1,6 +1,7 @@
 import MoodTable from "./MoodTable";
 import React, { useEffect, useState } from "react";
 import Navbar from './Navbar'
+import { setnotifications } from "../redux/slices/notificationsReducer";
 import { useDispatch } from "react-redux";
 import { addAcceptedAppointment } from "../redux/slices/selectedAccounts";
 import { FaEye } from "react-icons/fa";
@@ -15,15 +16,10 @@ import {
   Tag,
   GridItem,
   Avatar,
-  HStack,
-  Link,
+  HStack,  
   IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
+  useToast,
   Text,
   useDisclosure,
   useColorModeValue,
@@ -41,9 +37,9 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import axios from "axios";
-
-
-export default function Simple() {
+export default function Simple() {  
+  
+  const toast = useToast();
   const questions = [
     {
       question: 'Numbness or tingling',
@@ -246,16 +242,18 @@ export default function Simple() {
   const [anxietyTestScore, setAnxietyTestScore] = useState(0)
   const [allUsers, setAllUsers] = useState([])
   const [pyscProfile, setPyscProfile] = useState()
-  const therapistInfo = useSelector((state) => state.therapistReducer.user);
+  const [refresh, setRefresh] = useState(false);
 
+  const therapistInfo = useSelector((state) => state.therapistReducer.user);
+  
   useEffect(() => {
     async function getProfiles() {
       const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)
-      console.log('response', response.data.data)
       setAllUsers(response.data.data)
+      //console.log('response', response.data.data)
     }
     getProfiles()
-  }, [])
+  }, [refresh])
   const pendingAppointments = allUsers.filter((user) => user.status === "pending");
   const acceptedAppointments = allUsers.filter((user) => user.status === "Approved");
 
@@ -640,15 +638,29 @@ export default function Simple() {
                     backgroundColor={'green'}
                     onClick={() => {
                       async function updateAppointment() {
-                        const response = await axios.patch(`/appointments-therapist/${user._id}`, { "status": "Approved" })
-                        console.log('res', response)
+                        await axios.patch(`/appointments-therapist/${user._id}`, { "status": "Approved" }).then(() => {                          
+                          setRefresh(!refresh);
+                        })
+                        .catch((error) => {
+                          console.error('Error posting data:', error);
+                        });
                       }
                       updateAppointment()
+                      console.log('res',user)
+                      toast({
+                        title: "Appointment Accepted Successfully",
+                        status: "success",
+                        duration: 2000,
+                        isClosable: true,
+                      });
+                      const Notification = {
+                        firstName:user.clientId.firstName,
+                        lastName:user.clientId.lastName,
+                        time:Date.now()
+                      }    
+                      dispatch(setnotifications(Notification))
                     }
-
-                    }
-
-                  >
+                    }>
                     Accept
                   </Button>
                 </Flex>
