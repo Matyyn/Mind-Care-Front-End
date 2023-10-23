@@ -11,12 +11,12 @@ import { useSelector } from "react-redux";
 import colors from "../Colors";
 import {
   Box,
-  Flex, Icon,
+  Flex, Icon, Image,
   Grid,
   Tag,
   GridItem,
   Avatar,
-  HStack,  
+  HStack,
   IconButton,
   Button,
   useToast,
@@ -37,8 +37,8 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import axios from "axios";
-export default function Simple() {  
-  
+export default function Simple() {
+
   const toast = useToast();
   const questions = [
     {
@@ -215,7 +215,7 @@ export default function Simple() {
 
 
   const videoCallFeedback = [
-   
+
   ];
 
   const {
@@ -243,9 +243,11 @@ export default function Simple() {
   const [allUsers, setAllUsers] = useState([])
   const [pyscProfile, setPyscProfile] = useState()
   const [refresh, setRefresh] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
 
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
-  
+
   useEffect(() => {
     async function getProfiles() {
       const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)
@@ -482,198 +484,13 @@ export default function Simple() {
 
           </Box></>
       ) : (
-        <> <Box>
-          <Heading fontSize={24} fontWeight="bold" m={5}>
-            Pending Appointments
-          </Heading>
-          <Grid templateColumns="repeat(4, 1fr)" gap={4} margin={5} w={'97vw'}>
-            {pendingAppointments.map((user) => (
-              <Box
-                key={user._id}
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden"
-                boxShadow="lg"
-                transition="all 0.3s"
-                borderColor={useColorModeValue("gray.200", "gray.600")}
-              >
-
-                <Flex
-                  justify="space-between"
-                  align="center"
-                  p={4}
-                  bg={useColorModeValue("gray.100", "gray.700")}
-                >
-                  <Avatar
-                    size="lg"
-                    name={`${user.clientId.firstName} ${user.clientId.lastName}`}
-                    src={user.clientId.profilePicture}
-                  />
-
-                  <IconButton
-                    icon={<Icon as={FaEye} />}
-                    fontSize={19}
-                    size="sm"
-                    borderColor="none"
-                    onClick={() => {
-                      setUser(true)
-                      dispatch(addAcceptedAppointment(user))
-                      const id = user.clientId._id;
-                      async function fetchAnxietyTest() {
-                        const response = await axios.get(`/anxiety-test/${id}`);
-                        const anxietyTestResponses = response.data.data.responses;
-                        setAnxietyTestScore(response.data.data.score)
-                        const convertedResponses = [];
-
-                        anxietyTestResponses.forEach((responseObj, index) => {
-                          const selectedOptionIndex = responseObj.response;
-                          const question = questions[index];
-                          if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
-                            const selectedOption = question.options[selectedOptionIndex];
-                            const convertedResponse = {
-                              question: question.question,
-                              selectedOption,
-                            };
-                            convertedResponses.push(convertedResponse);
-                          }
-                        });
-                        setAnxietyTest(convertedResponses)
-                      }
-                      async function fetchDepressionTest() {
-
-                        const response = await axios.get(`/depression-test/${id}`);
-                        const depressionTestResponses = response.data.data.responses;
-                        setDepressionTestScore(response.data.data.score)
-                        const convertedResponses = [];
-
-                        depressionTestResponses.forEach((responseObj, index) => {
-                          const selectedOptionIndex = responseObj.response;
-                          const question = depressionArray[index];
-                          if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
-                            const selectedOption = question.options[selectedOptionIndex];
-                            const convertedResponse = {
-                              question: question.question,
-                              selectedOption,
-                            };
-                            convertedResponses.push(convertedResponse);
-                          }
-                        });
-                        setDepressionTest(convertedResponses)
-                      }
-                      async function fetchEmotion() {
-                        const response = await axios.get(`/psychological-profile/${id}`)
-                        //console.log('res',response.data.data)
-                        setPyscProfile(response.data.data)
-                        // console.log('res',pyscProfile)
-                      }
-                      fetchAnxietyTest();
-                      fetchDepressionTest();
-                      fetchEmotion();
-                    }}
-                  />
-
-                </Flex>
-
-                <Box p={4}>
-                  <Heading fontSize="xl">
-                    {user.clientId.firstName} {user.clientId.lastName}
-                  </Heading>
-                  <Text color={'black'} mt={2}>
-                    <span style={{ fontWeight: '700' }}>Desciption: </span>
-                    {user.problemDescription}
-                  </Text>
-
-                  <Text fontSize="md" color={'black'} >
-                    <span style={{ fontWeight: '700' }}>Date: </span>{user.appointmentDate.split("T")[0]}
-                  </Text>
-                  <Text fontSize="md" color={'black'}>
-                    <span style={{ fontWeight: '700' }}>Time: </span>{user.appointmentTime.split("T")[1]}
-                  </Text>
-                  <Text fontSize="md" color={'black'}>
-                    <span style={{ fontWeight: '700' }}>Gender: </span>{user.clientId.gender}
-                  </Text>
-                </Box>
-
-                <Flex
-                  align="center"
-                  justify="space-between"
-                  p={4}
-                  gap={5}
-                  borderTopWidth="1px"
-                  borderColor={useColorModeValue("gray.200", "gray.600")}
-                >
-                  <Button
-                    flex={1}
-                    fontSize={'sm'}
-                    size={'md'}
-                    rounded={'full'}
-                    borderRadius={10}
-                    _hover={{
-                      bg: 'red.500',
-                      color: 'white'
-                    }}
-                    _focus={{
-                      bg: 'red',
-                    }}>
-                    Reject
-                  </Button>
-                  <Button
-                    flex={1}
-                    size={'md'}
-                    fontSize={'md'}
-                    borderRadius={10}
-                    bg={'blue.400'}
-                    color={'white'}
-                    boxShadow={
-                      '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                    }
-                    _hover={{
-                      bg: 'white',
-                      color: 'black'
-                    }}
-                    _focus={{
-                      bg: 'white',
-                      color: 'black'
-                    }}
-                    backgroundColor={'green'}
-                    onClick={() => {
-                      async function updateAppointment() {
-                        await axios.patch(`/appointments-therapist/${user._id}`, { "status": "Approved" }).then(() => {                          
-                          setRefresh(!refresh);
-                        })
-                        .catch((error) => {
-                          console.error('Error posting data:', error);
-                        });
-                      }
-                      updateAppointment()
-                      console.log('res',user)
-                      toast({
-                        title: "Appointment Accepted Successfully",
-                        status: "success",
-                        duration: 2000,
-                        isClosable: true,
-                      });
-                      // const Notification = {
-                      //   firstName:user.clientId.firstName,
-                      //   lastName:user.clientId.lastName,
-                      //   time:Date.now()
-                      // }    
-                      // dispatch(setnotifications(Notification))
-                    }
-                    }>
-                    Accept
-                  </Button>
-                </Flex>
-              </Box>
-            ))}
-          </Grid>
-        </Box>
+        <>
           <Box>
-            <Heading fontSize={24} fontWeight="bold" m={5}>
-              Approved Appointments
+            <Heading fontSize={22} fontWeight="700" m={5}>
+              Pending Appointments
             </Heading>
             <Grid templateColumns="repeat(4, 1fr)" gap={4} margin={5} w={'97vw'}>
-              {acceptedAppointments.map((user) => (
+              {pendingAppointments.map((user) => (
                 <Box
                   key={user._id}
                   borderWidth="1px"
@@ -693,11 +510,17 @@ export default function Simple() {
                     <Avatar
                       size="lg"
                       name={`${user.clientId.firstName} ${user.clientId.lastName}`}
-                      src={user.clientId.picture}
+                      src={user.clientId.profilePicture}
                     />
 
                     <IconButton
-                      icon={<Icon as={FaEye} />}
+                      icon={<Image
+                        src={'https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Ffolder.png?alt=media&token=53dc60ae-b4a0-4dfd-90e3-362caa0ad55a'}
+                        alt="Image"
+                        boxSize="35px"
+                      />
+
+                      }
                       fontSize={19}
                       size="sm"
                       borderColor="none"
@@ -766,7 +589,222 @@ export default function Simple() {
                     </Heading>
                     <Text color={'black'} mt={2}>
                       <span style={{ fontWeight: '700' }}>Desciption: </span>
-                      {user.problemDescription}
+                      {showMore
+                        ? user.problemDescription
+                        : user.problemDescription.slice(0, 45) + (user.problemDescription.length > 45 ? '...' : '')}
+                      {user.problemDescription.length > 45 && (
+                        <button onClick={() => setShowMore(!showMore)}>
+                          {showMore ? 'Show Less' : 'Show More'}
+                        </button>
+                      )}
+                    </Text>
+
+                    <Text fontSize="md" color={'black'} >
+                      <span style={{ fontWeight: '700' }}>Date: </span>{user.appointmentDate.split("T")[0]}
+                    </Text>
+                    <Text fontSize="md" color={'black'}>
+                      <span style={{ fontWeight: '700' }}>Time: </span>{user.appointmentTime.split("T")[1]}
+                    </Text>
+                    <Text fontSize="md" color={'black'}>
+                      <span style={{ fontWeight: '700' }}>Gender: </span>{user.clientId.gender}
+                    </Text>
+                  </Box>
+
+                  <Flex
+                    align="center"
+                    justify="space-between"
+                    p={4}
+                    gap={5}
+                    borderTopWidth="1px"
+                    borderColor={useColorModeValue("gray.200", "gray.600")}
+                  >
+                    <Button
+                      flex={1}
+                      fontSize={'lg'}
+                      size={'md'}
+                      rounded={'full'}
+                      borderRadius={10}
+                      _hover={{
+                        bg: 'red.500',
+                        color: 'white'
+                      }}
+                      _focus={{
+                        bg: 'red',
+                      }}>
+                      Reject
+                    </Button>
+                    <Button
+                      flex={1}
+                      size={'md'}
+                      fontSize={'lg'}
+                      borderRadius={10}
+
+                      color={'white'}
+                      boxShadow={
+                        '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                      }
+                      _hover={{
+                        bg: 'white',
+                        color: 'black'
+                      }}
+                      _focus={{
+                        bg: 'white',
+                        color: 'black'
+                      }}
+                      backgroundColor={colors.secondary}
+                      onClick={() => {
+                        const notificationObject = {
+                          clientId: user.clientId._id,
+                          notificationBody: 'The Appointment has been approved by the Therapist',
+                          notificationTitle: 'Appointment Accepted',
+                          notificationTime: Date.now(),
+                        }
+                        async function updateAppointment() {
+                          await axios.patch(`/appointments-therapist/${user._id}`, { "status": "Approved" }).then(() => {
+                            setRefresh(!refresh);
+                          })
+                            .catch((error) => {
+                              console.error('Error posting data:', error);
+                            });
+                          const res = await axios.post(`/${therapistInfo._id}`, notificationObject)
+                          console.log('res', res);
+                        }
+                        updateAppointment()
+                        console.log('res', user)
+                        toast({
+                          title: "Appointment Accepted Successfully",
+                          status: "success",
+                          duration: 2000,
+                          isClosable: true,
+                        });
+                        // const Notification = {
+                        //   firstName:user.clientId.firstName,
+                        //   lastName:user.clientId.lastName,
+                        //   time:Date.now()
+                        // }    
+                        // dispatch(setnotifications(Notification))
+                      }
+                      }>
+                      Accept
+                    </Button>
+                  </Flex>
+                </Box>
+              ))}
+            </Grid>
+          </Box>
+          <Box>
+            <Heading fontSize={22} fontWeight="700" m={5}>
+              Approved Appointments
+            </Heading>
+            <Grid templateColumns="repeat(4, 1fr)" gap={4} margin={5} w={'97vw'}>
+              {acceptedAppointments.map((user) => (
+                <Box
+                  key={user._id}
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                  boxShadow="lg"
+                  transition="all 0.3s"
+                  borderColor={useColorModeValue("gray.200", "gray.600")}
+                >
+
+                  <Flex
+                    justify="space-between"
+                    align="center"
+                    p={4}
+                    bg={useColorModeValue("gray.100", "gray.700")}
+                  >
+                    <Avatar
+                      size="lg"
+                      name={`${user.clientId.firstName} ${user.clientId.lastName}`}
+                      src={user.clientId.picture}
+                    />
+
+                    <IconButton
+                      icon={
+                        //<Icon as={FaEye} />
+                        <Image
+                          src={'https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Ffolder.png?alt=media&token=53dc60ae-b4a0-4dfd-90e3-362caa0ad55a'}
+                          alt="Image"
+                          boxSize="35px"
+                        />
+                      }
+                      fontSize={19}
+                      size="sm"
+                      borderColor="none"
+                      onClick={() => {
+                        setUser(true)
+                        dispatch(addAcceptedAppointment(user))
+                        const id = user.clientId._id;
+                        async function fetchAnxietyTest() {
+                          const response = await axios.get(`/anxiety-test/${id}`);
+                          const anxietyTestResponses = response.data.data.responses;
+                          setAnxietyTestScore(response.data.data.score)
+                          const convertedResponses = [];
+
+                          anxietyTestResponses.forEach((responseObj, index) => {
+                            const selectedOptionIndex = responseObj.response;
+                            const question = questions[index];
+                            if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
+                              const selectedOption = question.options[selectedOptionIndex];
+                              const convertedResponse = {
+                                question: question.question,
+                                selectedOption,
+                              };
+                              convertedResponses.push(convertedResponse);
+                            }
+                          });
+                          setAnxietyTest(convertedResponses)
+                        }
+                        async function fetchDepressionTest() {
+
+                          const response = await axios.get(`/depression-test/${id}`);
+                          const depressionTestResponses = response.data.data.responses;
+                          setDepressionTestScore(response.data.data.score)
+                          const convertedResponses = [];
+
+                          depressionTestResponses.forEach((responseObj, index) => {
+                            const selectedOptionIndex = responseObj.response;
+                            const question = depressionArray[index];
+                            if (selectedOptionIndex >= 0 && selectedOptionIndex < question.options.length) {
+                              const selectedOption = question.options[selectedOptionIndex];
+                              const convertedResponse = {
+                                question: question.question,
+                                selectedOption,
+                              };
+                              convertedResponses.push(convertedResponse);
+                            }
+                          });
+                          setDepressionTest(convertedResponses)
+                        }
+                        async function fetchEmotion() {
+                          const response = await axios.get(`/psychological-profile/${id}`)
+                          //console.log('res',response.data.data)
+                          setPyscProfile(response.data.data)
+                          // console.log('res',pyscProfile)
+                        }
+                        fetchAnxietyTest();
+                        fetchDepressionTest();
+                        fetchEmotion();
+                      }}
+                    />
+
+                  </Flex>
+
+                  <Box p={4}>
+                    <Heading fontSize="xl">
+                      {user.clientId.firstName} {user.clientId.lastName}
+                    </Heading>
+                    <Text color={'black'} mt={2}>
+                      <span style={{ fontWeight: '700' }}>Desciption: </span>
+                      {showMore
+                        ? user.problemDescription
+                        : user.problemDescription.slice(0, 45) + (user.problemDescription.length > 45 ? '...' : '')}
+                      {user.problemDescription.length > 45 && (
+                        <button onClick={() => setShowMore(!showMore)}>
+                          {showMore ? 'Show Less' : 'Show More'}
+                        </button>
+                      )}
                     </Text>
 
                     <Text fontSize="md" color={'black'} >

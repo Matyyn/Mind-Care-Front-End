@@ -43,7 +43,7 @@ const SignupForm = () => {
     >
       {(formik) => (
         <Form>
-          <Stack spacing={4}>
+          <Stack spacing={4} mb={5}>
             <FormControl isInvalid={formik.errors.email && formik.touched.email}>
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input
@@ -95,6 +95,7 @@ const SignupForm = () => {
               color={'white'}
               //isLoading={formik.isSubmitting}
               type="submit"
+              
             >
               Change Password
             </Button>

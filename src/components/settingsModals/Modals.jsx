@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Button,
   Modal,
+  Image,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -34,13 +35,19 @@ function Modals() {
       <Modal isOpen={isChangePasswordOpen} onClose={handleChangePasswordClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Change Password</ModalHeader>
+        <ModalHeader display="flex" justifyContent="space-between" alignItems="center">
+          Change Password
+        <Image
+              src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fclose.png?alt=media&token=bb65a3bc-27e6-45f1-9e26-27ce3a53dd84" 
+              alt="Close"
+              boxSize="25px"
+              style={{ cursor: 'pointer' }}
+              onClick={handleChangePasswordClose}
+          />
+        </ModalHeader>
           <ModalBody>
             <ChangePassword/>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={handleChangePasswordClose}>Close</Button>
-          </ModalFooter>
+          </ModalBody>          
         </ModalContent>
       </Modal>
 
@@ -49,6 +56,15 @@ function Modals() {
       </Button>
       <Modal isOpen={isVerifyAccountOpen} onClose={handleVerifyAccountClose}>
         <ModalOverlay />
+        <ModalHeader display="flex" justifyContent="space-between" alignItems="center">
+        <Image
+              src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fclose.png?alt=media&token=bb65a3bc-27e6-45f1-9e26-27ce3a53dd84" 
+              alt="Close"
+              boxSize="25px"
+              style={{ cursor: 'pointer' }}
+              onClick={handleContactSupportClose}
+          />
+        </ModalHeader>
         <ModalContent>
           <ModalHeader>Verify Account</ModalHeader>
           <ModalBody>
@@ -66,13 +82,19 @@ function Modals() {
       <Modal isOpen={isContactSupportOpen} onClose={handleContactSupportClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Contact Support</ModalHeader>
+        <ModalHeader display="flex" justifyContent="space-between" alignItems="center">
+          Contact Support
+          <Image
+              src="https://firebasestorage.googleapis.com/v0/b/mind-care-b5645.appspot.com/o/images%2Fclose.png?alt=media&token=bb65a3bc-27e6-45f1-9e26-27ce3a53dd84" 
+              alt="Close"
+              boxSize="25px"
+              style={{ cursor: 'pointer' }}
+              onClick={handleContactSupportClose}
+          />
+        </ModalHeader>
           <ModalBody>
             <ContactSupport/>
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={handleContactSupportClose}>Close</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
 
