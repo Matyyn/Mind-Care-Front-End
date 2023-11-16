@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import {
   FormControl,
   FormLabel,
-  Input,
+  Input,Flex,
   Textarea,
   Button,
   Container,
@@ -42,7 +42,6 @@ function EmailForm() {
         }
       );
   };
-
   return (
     <Container maxW="lg">
       <Box boxShadow="md" p={6} borderRadius="lg">
@@ -51,24 +50,31 @@ function EmailForm() {
             <FormLabel>Name:</FormLabel>
             <Input type="text" name="user_name" placeholder="Name" />
           </FormControl>
-
+  
           <FormControl isRequired mt={4}>
             <FormLabel>Email:</FormLabel>
             <Input type="email" name="user_email" placeholder="Email address" />
           </FormControl>
-
+  
           <FormControl isRequired mt={4}>
             <FormLabel>Message:</FormLabel>
             <Textarea name="message" placeholder="Message" />
           </FormControl>
-
-          <Button mt={4} backgroundColor={colors.secondary} color={'white'} type="submit">
-            Send Email
-          </Button>
+  
+          
+          <Button
+              mt={4}
+              width={'100%'}
+              backgroundColor={colors.secondary}
+              color={'white'}
+              //isLoading={formik.isSubmitting}
+              type="submit"
+            >
+              Send Email
+            </Button>          
         </form>
       </Box>
     </Container>
   );
 }
-
 export default EmailForm;

@@ -27,7 +27,8 @@ import Admin from './components/AdminFolder/AdminDashboard'
 //import Sessions from './components/VideoCall/sessionScreen'
 import axios from 'axios'
 import Profile from "./components/ClientFolder/PhyscologicalProfile"
-axios.defaults.baseURL = "http://localhost:8080/api/v1/therapist"
+// axios.defaults.baseURL = "http://localhost:8080/api/v1/therapist"
+axios.defaults.baseURL = "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/therapist";
 import { store , persistor } from '../src/components/redux/store'
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { Provider } from 'react-redux'

@@ -55,7 +55,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`);
-      console.log('Response', response.data.data);
+      console.log('Response', response.data);
 
       // Create a set to keep track of unique user IDs
       const uniqueUserIds = new Set();

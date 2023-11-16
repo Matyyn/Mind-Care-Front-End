@@ -1,6 +1,7 @@
 import { FaRegBell, FaCog } from "react-icons/fa"
-import React from "react"
+import React,{useState} from "react"
 import colors from "../Colors";
+import Notifications from "../Notifications/userNotifications"
 import { Link } from "react-router-dom"
 import {
   Box,
@@ -27,6 +28,10 @@ import Test from "../Sidebar"
 import { useSelector } from "react-redux";
 export default function WithSubnavigation() {
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const handleNotificationsClick = () => {
+    setNotificationsOpen(!notificationsOpen);
+  };
   return (
     <Box width={{ base: 'auto', md: 'auto' }}>
       <Flex
@@ -56,7 +61,7 @@ export default function WithSubnavigation() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Test />
-          <Text
+          {/* <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             //fontFamily={"inter"}
             marginLeft={"12"}
@@ -65,7 +70,7 @@ export default function WithSubnavigation() {
             color={useColorModeValue("gray.800", "white")}
           >
             Pyscological Profiles
-          </Text>
+          </Text> */}
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
@@ -85,6 +90,7 @@ export default function WithSubnavigation() {
             colorScheme="gray"
             mr={3}
             fontSize={"25"}
+            onClick={handleNotificationsClick}
           />
           <Link to={"/therapistprofile"}>
             <Avatar size={"md"} >
@@ -99,6 +105,7 @@ export default function WithSubnavigation() {
           </Link>
         </Stack>
       </Flex>
+          {notificationsOpen && <Notifications />}
 
       {/* <Collapse in={isOpen} animateOpacity>
         <MobileNav />

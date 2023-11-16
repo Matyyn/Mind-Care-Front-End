@@ -69,10 +69,7 @@ function Modals() {
           <ModalHeader>Verify Account</ModalHeader>
           <ModalBody>
             <p>Modal content for verify account goes here...</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={handleVerifyAccountClose}>Close</Button>
-          </ModalFooter>
+          </ModalBody>          
         </ModalContent>
       </Modal>
 

@@ -42,15 +42,16 @@ export default function SignIn() {
   const navigate = useNavigate();
 async function handleSubmit(values, resetForm)  {
   try {  
+    console.log(values)
       const result = await axios.post('/login', values);    
-  //  console.log(result.data.data)    
+     console.log(result.data.data.data)    
     if(result.status === 200){
       let accessToken=result.data.accessToken
       let refreshToken = result.data.refreshToken    
       // Store tokens in local storage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);  
-      dispatch(setUser(result.data.data))
+      dispatch(setUser(result.data.data.data))
 
       toast({
         title: "You have logined Successfully",
