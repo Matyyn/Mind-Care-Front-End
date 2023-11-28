@@ -21,7 +21,7 @@ import PostTab from "./components/CommunityForum/TabComponent/PostTab";
 import Tabs from "./components/CommunityForum/TabComponent/Tabs";
 import ViewComments from './components/AdminFolder/ReportedCommentsDashboard'
 import Appeals from './components/AdminFolder/AppealsDashboard'
-import VideoCall from './components/Video Calls/Appointments'
+import VideoCall from './components/AdminFolder/VC'
 import AdminSignin from './components/AdminFolder/AdminSignin'
 import Admin from './components/AdminFolder/AdminDashboard'
 //import Sessions from './components/VideoCall/sessionScreen'
@@ -53,7 +53,7 @@ function App() {
             <Route path="/forum" element={<Forum />} />
             <Route path="/postquestion" element={<PostQuestion />} />
             <Route path="/postTab" element={<PostTab />} />
-            <Route path="/tabs" element={<Tabs/>} />
+            <Route path="/tabs" element={<Tabs/>} />            
           </Route>
           <Route path="/aboutus" element={<AboutUs/>} />
           <Route path="/pricing" element={<Pricing/>} />

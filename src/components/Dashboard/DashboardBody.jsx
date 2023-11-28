@@ -5,102 +5,139 @@ import BarGraph from "../BarGraph";
 import PieGraph from "../PieGraph";
 import axios from "axios";
 import {
-  Box, Grid, GridItem, Tag,
+  Box,
+  Grid,
+  GridItem,
+  Tag,
+  Card,
+  CardHeader,
+  CardBody,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatGroup,
   Flex,
   Text,
   HStack,
+  Spinner,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
+
 function DashboardBody() {
   const [totalClients, setTotalClients] = useState(0);
-  const [completedAppointments, setCompletedAppointments] = useState(0)
+  const [completedAppointments, setCompletedAppointments] = useState(0);
   const [pendingAppointments, setPendingAppointments] = useState(0);
   const [totalEarnings, setTotalEarnings] = useState(0);
+  const [loading, setLoading] = useState(true); 
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
+
   useEffect(() => {
     async function getProfiles() {
-      const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)
+      try {
+        const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`);
+        const appointments = response.data.data;
 
-      const appointments = response.data.data;
-      setTotalClients(response.data.data.length)
+        setTotalClients(response.data.data.length);
 
-      const appointmentCharges = appointments.map(appointment => appointment.appointmentCharges);
-      const firstCharge = appointmentCharges[0];
-      setTotalEarnings(firstCharge * response.data.data.length)
+        const appointmentCharges = appointments.map(
+          (appointment) => appointment.appointmentCharges
+        );
+        const firstCharge = appointmentCharges[0];
+        setTotalEarnings(firstCharge * response.data.data.length);
 
-      const completedAppointments = appointments.filter(appointment => appointment.status === "Approved");
-      setCompletedAppointments(completedAppointments.length);
+        const completedAppointments = appointments.filter(
+          (appointment) => appointment.status === "Approved"
+        );
+        setCompletedAppointments(completedAppointments.length);
 
-      const pending = appointments.filter(appointment => appointment.status === "pending")
-      setPendingAppointments(pending.length)
+        const pending = appointments.filter(
+          (appointment) => appointment.status === "pending"
+        );
+        setPendingAppointments(pending.length);
+
+        setLoading(false); 
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false); 
+      }
     }
-    getProfiles()
-  }, [])
-  const info = useSelector((state) => state.selectedAccounts.acceptedAppointments)
+    getProfiles();
+  }, [therapistInfo._id]);
+
+  const info = useSelector(
+    (state) => state.selectedAccounts.acceptedAppointments
+  );
 
   return (
     <>
-      <Box p={4} marginLeft={'3%'} width={'auto'}>
+      <Box p={4} marginLeft={"3%"} width={"auto"}>
         <Grid
-          templateColumns="repeat(4, 1fr)" // Changed the number of columns to 4 for a cleaner layout
-          gap={8}
-          width="auto"
-          margin={15}
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(2, 1fr)",
+            "repeat(4, 1fr)",
+          ]}
+          gap={2}
+          width={"100%"}
+          margin="0 auto"
+          padding={0}
         >
-          {/*
-    Create a reusable component for the grid items to reduce code duplication
-    and improve maintainability.
-  */}
           {[
             {
-              title: "Total Clients",
+              title: "Total Users",
               value: totalClients,
             },
             {
-              title: "Approved Sessions",
+              title: "Completed Appointments",
               value: completedAppointments,
             },
             {
-              title: "Pending Sessions",
+              title: "Pending Appointments",
               value: pendingAppointments,
             },
             {
-              title: "Total Earning",
-              value: `$${totalEarnings.toFixed(2)}`,
+              title: "Total Earnings",
+              value: totalEarnings,
             },
           ].map((item, index) => (
-            <Flex key={index} justifyContent="center" alignItems="center">
-              <GridItem
-                width="100%"
-                height="15vh"
-                boxShadow="lg"
-                borderRadius="10"
-              >
-                <Text textAlign="center" fontWeight="700" fontSize={18} mt={5}>
+            <Card key={index} width="240px" maxWidth="400px" margin="auto">
+              <CardHeader textAlign="center">
+                <Text fontSize="md" fontWeight="medium">
                   {item.title}
                 </Text>
-                <Text textAlign="center" fontWeight="600" fontSize={22} mt={2}>
-                  {item.value}
-                </Text>
-              </GridItem>
-            </Flex>
+              </CardHeader>
+              <CardBody textAlign="center">
+                {loading ? (
+                  <Spinner size="lg" />
+                ) : (
+                  <StatGroup>
+                    <Stat>
+                      <StatNumber>{item.value}</StatNumber>
+                    </Stat>
+                  </StatGroup>
+                )}
+              </CardBody>
+            </Card>
           ))}
         </Grid>
 
-
-        <Grid templateColumns="repeat(3, 1fr)" gap={1} style={{ marginTop: '3%', marginBottom: '3%' }}>
+        <Grid
+          templateColumns="repeat(3, 1fr)"
+          gap={1}
+          style={{ marginTop: "3%", marginBottom: "3%" }}
+        >
           <GridItem colSpan={1}>
             <LineGraph />
           </GridItem>
-          <GridItem marginLeft={'10%'}>
+          <GridItem marginLeft={"10%"}>
             <BarGraph />
           </GridItem>
-          <GridItem style={{marginLeft:'15%'}}>
+          <GridItem style={{ marginLeft: "15%" }}>
             <PieGraph />
           </GridItem>
         </Grid>
 
-        <Grid templateColumns="repeat(1, 1fr)" >
+        <Grid templateColumns="repeat(1, 1fr)">
           <GridItem>
             <Table />
           </GridItem>
@@ -109,4 +146,5 @@ function DashboardBody() {
     </>
   );
 }
+
 export default DashboardBody;

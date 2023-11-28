@@ -1,92 +1,190 @@
-import React from "react";
 //import colors from "../Colors";
-import Table from "./Table";
+import Table from "./ReportedAccountsTable";
 import LineGraph from "./MonthlyGraph";
 import BarGraph from "./BarGraph";
 import PieGraph from "./PieGraph";
+import ReportedPieGraph from "./ReportedPieGraph";
+import React, { useState, useEffect } from "react";
 import {
-    Box, Grid, GridItem, Tag,
-    Flex,
-    Center,
-    Text,
-    Divider,
-    CardFooter,
-    ButtonGroup,
-    IconButton, HStack,
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Heading,
-    StackDivider,
-    Stack,
-    Collapse,
-    Icon,
-    Link,
-    Image,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    useColorModeValue,
-    useBreakpointValue,
-    useDisclosure,
-    Img,
+  Box,
+  Grid,
+  GridItem,
+  Text,
+  SimpleGrid,
+  Heading,
+  Button,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatGroup,
+  Card,
+  CardHeader,
+  CardBody,
 } from "@chakra-ui/react";
-import SideBar from "../Sidebar";
-const anxietyTestData = [
-    { id: 1, title: "Anxiety Test Score", totalScore: 31 },
-    { id: 2, title: "Anxiety Test Score", totalScore: 31 },
-    { id: 3, title: "Anxiety Test Score", totalScore: 31 },
-    { id: 4, title: "Anxiety Test Score", totalScore: 31 },
-    { id: 5, title: "Anxiety Test Score", totalScore: 31 },
-  ];
+import axios from "axios";
+
 function DashboardBody() {
-    return (
-        <>
-            <Box p={[2, 4, 4]} marginLeft={['0%', '3%', '3%']} width={['100%', 'auto', 'auto']}>
-                <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(5, 1fr)']}
-                    gap={[7, 7, 4, 2, 2]}>
-                    {anxietyTestData.map((data)=>(
-                        <GridItem
-                        width={['100%', '15vw', '15vw']}
-                        height={"auto"}
-                        padding={3}
-                        boxShadow={'lg'}
-                        borderRadius={"10"}
-                    >
-                        <Text textAlign={"left"} fontWeight={"bolder"}>
-                            {" "}
-                            {data.title}
-                        </Text>
-                        <Text textAlign={"left"} fontWeight={"600"}>
-                            {" "}
-                            Total Score: {data.totalScore}
-                        </Text>
-                    </GridItem>
-                    ))}
-                </Grid>
-                <Grid
-                    templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(4, 1fr)']}
-                    gap={[4, 4, 4, 1]}
-                    style={{ marginTop: '3%', marginBottom: '3%' }}
-                >
-                    <GridItem>
-                        <LineGraph />
-                    </GridItem>
-                    <GridItem>
-                        <PieGraph />
-                    </GridItem>
-                    <GridItem>
-                        <PieGraph />
-                    </GridItem>
-                </Grid>
-                <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(1, 1fr)']} >
-                    <GridItem>
-                        <Table />
-                    </GridItem>
-                </Grid>
-            </Box>
-        </>
-    );
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    async function getUsers() {
+      try {
+        const response = await axios.get(
+          "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-dashboard-data"
+        );
+        console.log("res", response.data);
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    getUsers();
+  }, []);
+
+  if (!users) {
+  
+    return <div width="100vw">Loading...</div>;
+  }
+
+  return (
+    <>
+      <Box
+        p={[2, 4, 4]}
+        marginLeft={["0%", "3%", "3%"]}
+        width={["100%", "auto", "auto"]}
+      >
+        <Grid
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(3, 1fr)",
+            "repeat(7, 1fr)",
+          ]}
+          gap={2}
+          width={"100%"}
+          margin="0 auto"
+          padding={0}
+        >
+          <Card width="200px" maxWidth="400px" margin="auto">
+            <CardHeader textAlign="center">
+              <Text fontSize="md" fontWeight="medium">
+                Total Users
+              </Text>
+            </CardHeader>
+            <CardBody textAlign="center">
+              <StatGroup>
+                <Stat>
+                  <StatNumber>{users.totalUsers}</StatNumber>
+                </Stat>
+              </StatGroup>
+            </CardBody>
+          </Card>
+          <Card width="200px" maxWidth="400px" margin="auto">
+            <CardHeader textAlign="center">
+              <Text fontSize="md" fontWeight="medium">
+                Total Clients
+              </Text>
+            </CardHeader>
+            <CardBody textAlign="center">
+              <StatGroup>
+                <Stat>
+                  <StatNumber>{users.noOfClients}</StatNumber>
+                </Stat>
+              </StatGroup>
+            </CardBody>
+          </Card>
+          <Card width="200px" maxWidth="400px" margin="auto">
+            <CardHeader textAlign="center">
+              <Text fontSize="md" fontWeight="medium">
+                Total Therapists
+              </Text>
+            </CardHeader>
+            <CardBody textAlign="center">
+              <StatGroup>
+                <Stat>
+                  <StatNumber>{users.noOfTherapists}</StatNumber>
+                </Stat>
+              </StatGroup>
+            </CardBody>
+          </Card>
+          <Card width="200px" maxWidth="400px" margin="auto">
+            <CardHeader textAlign="center">
+              <Text fontSize="md" fontWeight="medium">
+                Clients Reported
+              </Text>
+            </CardHeader>
+            <CardBody textAlign="center">
+              <StatGroup>
+                <Stat>
+                  <StatNumber>{users.clientAccountReported}</StatNumber>
+                </Stat>
+              </StatGroup>
+            </CardBody>
+          </Card>
+          <Card width="200px" maxWidth="400px" margin="auto">
+            {" "}            
+            <CardHeader textAlign="center">
+              <Text fontSize="md" fontWeight="medium">
+                Therapists Reported
+              </Text>
+            </CardHeader>
+            <CardBody textAlign="center">
+              <StatGroup>
+                <Stat>
+                  <StatNumber>{users.therapistAccountReported}</StatNumber>
+                </Stat>
+              </StatGroup>
+            </CardBody>
+          </Card>
+          <Card width="200px" maxWidth="400px" margin="auto">
+            <CardHeader textAlign="center">
+              <Text fontSize="md" fontWeight="medium">
+                Posts Reported
+              </Text>
+            </CardHeader>
+            <CardBody textAlign="center">
+              <StatGroup>
+                <Stat>
+                  <StatNumber>{users.postsReported}</StatNumber>
+                </Stat>
+              </StatGroup>
+            </CardBody>
+          </Card>
+          {/* </SimpleGrid> */}
+        </Grid>
+
+        <Grid
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(4, 1fr)",
+          ]}
+          gap={[4, 4, 4, 1]}
+          style={{ marginTop: "3%", marginBottom: "3%" }}
+        >
+          <GridItem>
+            <LineGraph />
+          </GridItem>
+          <GridItem>
+            <PieGraph />
+          </GridItem>
+          <GridItem>
+            <ReportedPieGraph />
+          </GridItem>
+        </Grid>
+        <Grid
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+          ]}
+        >
+          <GridItem>
+            <Table />
+          </GridItem>
+        </Grid>
+      </Box>
+    </>
+  );
 }
 export default DashboardBody;
