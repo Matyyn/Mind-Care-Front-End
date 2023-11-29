@@ -54,7 +54,6 @@ function PostTab() {
       mt="10"
       p="4"
       borderRadius="lg"
-      width="100vw" 
       boxShadow="md"
     >
       <h2

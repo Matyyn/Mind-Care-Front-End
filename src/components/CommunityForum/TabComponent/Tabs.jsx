@@ -12,7 +12,9 @@ function Tabss() {
     setActiveTab('Post Tab');
   };
 
-
+  const handleImageTab = () => {
+    setActiveTab('Image Tab');
+  };
 
   return (
     <Box className="forum">
@@ -25,10 +27,17 @@ function Tabss() {
             onClick={handlePostTab}
           >
             Post
-          </Tab>          
+          </Tab>
+          <Tab
+            className={activeTab === 'Image Tab' ? 'active' : ''}
+            onClick={handleImageTab}
+          >
+            Image
+          </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>{activeTab === 'Post Tab' && <PostTab />}</TabPanel>          
+          <TabPanel>{activeTab === 'Post Tab' && <PostTab />}</TabPanel>
+          <TabPanel>{activeTab === 'Image Tab' && <ImageTab />}</TabPanel>
         </TabPanels>
       </Tabs>
       {/* <PersonalNavigator /> */}

@@ -63,7 +63,7 @@ const SideBar = ({therapist}) => {
               </Link>
               <Link
                 style={{ marginBottom: "7%" }}
-                to="/VC"
+                to=""
                 // onClick={handleLogout}
               >
                 Messages

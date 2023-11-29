@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import { setArray } from "../redux/slices/accountsReducer";
 import { useSelector } from "react-redux";
 import { deleteItemFromStore } from "../redux/actions/deleteAccountsActions";
-import axios from "axios";
+
 
 const data = [
   {
@@ -61,22 +61,23 @@ function AccountsTable() {
   //     title:'Accounts',
   //     message:'One Record Removed',
   //     duration:4000,
-  //     native:true,
+  //     native:true,  
   //   })
   // }
   //for redux
-  const [data, setData] = useState([]);
-
   const dispatch = useDispatch();
-  useEffect(() => {    
+  useEffect(() => {
+    // Dispatch the action to set the array in the Redux store when the component mounts
     dispatch(setArray(data));
   }, [dispatch]);
 
   const myArray = useSelector((state) => state.myReducer.myArray);
   const handleDelete = (itemId) => {
+    // Dispatch the deleteItemFromStore action with the item ID to remove it from the array
     dispatch(deleteItemFromStore(itemId));
   };
   const handleStatusChange = (rowId, newStatus) => {
+    // Find the row in the myArray state with the given rowId
     const updatedArray = myArray.map((row) => {
       if (row.id === rowId) {
         return { ...row, status: newStatus };
@@ -84,24 +85,10 @@ function AccountsTable() {
       return row;
     });
 
+    // Dispatch the action to update the myArray state with the updatedArray
     dispatch(setArray(updatedArray));
   };
-
-  useEffect(() => {
-    async function getReportedAccounts() {
-      try {
-        const response = await axios.get(
-          "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-accounts"
-        );
-        const { clientAccounts, therapistAccount } = response.data;
-        setData([...clientAccounts, ...therapistAccount]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    getReportedAccounts();
-  }, []);
-
+  //ends here
   const [sortedBy, setSortedBy] = useState(null);
   const [sortDesc, setSortDesc] = useState(false);
   const [nameFilter, setNameFilter] = useState("");
@@ -115,7 +102,9 @@ function AccountsTable() {
       setSortDesc(false);
     }
   };
-
+  // Define the image URL
+  const imageUrl =
+    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z_YOZX-RaLTolqYCiDrwB93GLJpQ_XoP0-g-KH06jGtYJXfg";
   const filteredData = myArray.filter((row) => {
     const nameMatch = row.name.toLowerCase().includes(nameFilter.toLowerCase());
     const statusMatch = row.status
@@ -145,7 +134,7 @@ function AccountsTable() {
     <div width={"auto"}>
       <Stack style={{ flexDirection: "row" }} marginRight={"2%"}>
         <Text fontSize="2xl" style={{ fontWeight: "bold", marginLeft: "2%" }}>
-          Reported Accounts
+          Appointments
         </Text>
         <Text
           fontSize="md"
@@ -217,10 +206,7 @@ function AccountsTable() {
               <Th onClick={() => handleSort("NoOfReports")} fontSize={"15"}>
                 No of Reports
               </Th>
-              <Th
-                onClick={() => handleSort("accountReportedBy")}
-                fontSize={"15"}
-              >
+              <Th onClick={() => handleSort("accountReportedBy")} fontSize={"15"}>
                 Account Reported By
               </Th>
               <Th onClick={() => handleSort("status")} fontSize={"15"}>
@@ -249,8 +235,8 @@ function AccountsTable() {
                 </Td>
                 <Td padding={0} paddingLeft={"2%"}>
                   <Select
-                    value={row.status}
-                    onChange={(e) => handleStatusChange(row.id, e.target.value)}
+                   value={row.status}
+            onChange={(e) => handleStatusChange(row.id, e.target.value)}
                   >
                     <option value="completed">Completed</option>
                     <option value="cancelled">Cancelled</option>
@@ -266,9 +252,7 @@ function AccountsTable() {
                     fontSize={"20"}
                     color={"black"}
                     size="md"
-                    onClick={() => {
-                      handleDelete(row.name);
-                    }}
+                    onClick={() => {handleDelete(row.name)}}
                   />
                 </Td>
               </Tr>

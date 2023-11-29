@@ -10,34 +10,42 @@ import {
     YAxis,
     ScatterChart, Scatter,ResponsiveContainer 
   } from "recharts";
-  import React, { useEffect,useState } from 'react';
+  import React, { PureComponent } from 'react';
   import { } from 'recharts';
-  import axios from 'axios';
   
+  const scattereddata = [
+    { age: 12,clients:10 },
+    { age: 16,clients:15 },
+    { age: 20,clients:20 },
+    { age: 25,clients:30 },
+    { age: 30,clients:80 },
+    { age: 35,clients:25 },
+    { age: 40,clients:50 },
+    { age: 45,clients:40 },
+    { age: 50,clients:70 },
+    { age: 55,clients:30 },
+    { age: 60,clients:60 },
+  ];
+    
+  const data = [
+    { monthname: "Jan", clients: 132},
+    { monthname: "Feb", clients: 132},
+    { monthname: "March", clients: 312},
+    { monthname: "April", clients: 302},
+    { monthname: "May", clients: 132},
+    { monthname: "June", clients: 222},
+    { monthname: "July", clients: 320},
+    { monthname: "Aug", clients: 50},
+    { monthname: "Sep", clients: 50},
+    { monthname: "Oct", clients: 50},
+    { monthname: "Nov", clients: 50},
+    { monthname: "Dec", clients: 50},
+  ];
 
   const RechartsExample = () => {
-    const [users, setUsers] = useState(0)
-    
-    useEffect(() => {
-      async function getUsers() {
-        try {
-          const response = await axios.get('https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-dashboard-data');
-          console.log('res',response.data);  
-          setUsers(response.data.noOfClients+response.data.noOfTherapists)
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      }  
-      getUsers();
-    }, []);
-    const totalUsers = [{
-      monthname: "Nov",
-      clients: users
-    }];
-    console.log(totalUsers)
     return (
       <Flex style={{flexDirection:"row"}}width={'auto'}>      
-      <LineChart width={650} height={300} data={totalUsers} margin={{
+      <LineChart width={650} height={300} data={data} margin={{
             top: 20,
             right: 20,
             bottom:20,
