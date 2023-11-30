@@ -36,7 +36,7 @@ function DashboardBody() {
       try {
         const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`);
         const appointments = response.data.data;
-
+        console.log(appointments)
         setTotalClients(response.data.data.length);
 
         const appointmentCharges = appointments.map(

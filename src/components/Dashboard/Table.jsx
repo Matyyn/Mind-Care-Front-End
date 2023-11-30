@@ -278,8 +278,7 @@ function AppointmentsData() {
     );
   useEffect(() => {
     async function getProfiles() {
-      try {
-        console.log(therapistInfo._id)
+      try {        
         const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`);
         if (response.data && response.data.data) {
           console.log("Response data:", response.data.data);

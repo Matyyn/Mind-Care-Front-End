@@ -13,9 +13,9 @@ const ReportedPieGraph = () => {
     async function getUsers() {
       try {
         const response = await axios.get('https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-dashboard-data');
-        console.log('res', response.data);
-        setTherapist(response.data.clientAccountReported);
-        setClients(response.data.therapistAccountReported);
+        console.log('res', response.data.data);
+        setTherapist(response.data.data.clientAccountReported);
+        setClients(response.data.data.therapistAccountReported);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

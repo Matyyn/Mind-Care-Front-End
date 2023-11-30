@@ -22,8 +22,8 @@ import {
       async function getUsers() {
         try {
           const response = await axios.get('https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-dashboard-data');
-          console.log('res',response.data);  
-          setUsers(response.data.noOfClients+response.data.noOfTherapists)
+          console.log('res',response.data.data);  
+          setUsers(response.data.data.noOfClients+response.data.data.noOfTherapists)
         } catch (error) {
           console.error('Error fetching data:', error);
         }

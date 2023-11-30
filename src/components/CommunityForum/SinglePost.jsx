@@ -189,11 +189,12 @@ function SinglePost({ post, upvote, downvote }) {
     <div
       style={{
         maxHeight: "550px",
-        overflowY: "scroll",
+        overflowY: "scroll",        
       }}
+
     >
-      <Card style={{ margin: 10 }}>
-        <Flex justifyContent="space-between" margin={5}>
+      <Card >
+        <Flex justifyContent="space-between">
           <Link to={"/therapistprofile"}>
             <Flex alignItems="center">
               <Avatar
@@ -443,9 +444,15 @@ function SinglePost({ post, upvote, downvote }) {
                                   />
                                 </Avatar>
                                 <p style={{ marginTop: "1rem" }}>
-                                  {reply.therapistId.firstName}{" "}
-                                  {reply.therapistId.lastName}
-                                </p>
+                                {reply.therapistId
+                                  ? `${reply.therapistId.firstName} ${reply.therapistId.lastName}`
+                                  : ''}
+                                {reply.therapistId && reply.clientId ? ':' : ''}
+                                {reply.clientId
+                                  ? `${reply.clientId.firstName} ${reply.clientId.lastName}`
+                                  : ''}
+                              </p>
+
                               </Link>
                               <ButtonGroup gap="4">
                                 {post.tags.map((tag) => (

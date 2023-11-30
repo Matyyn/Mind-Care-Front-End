@@ -14,11 +14,11 @@ const BarGraph = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`);
-        console.log('Response', response.data);
+        console.log('Response', response.data.data);
 
         // ... (same as before)
 
-        setAppointmentData(data);
+        setAppointmentData(response.data.data);
         setLoading(false); // Set loading to false once data is loaded
       } catch (error) {
         console.error('Error fetching data', error);

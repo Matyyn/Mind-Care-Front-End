@@ -86,10 +86,21 @@ function Stats() {
               gap={4}
             >
               <GridItem >
-                <Card maxW="100%" height="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
-                  color: 'white',height:'auto'  
-                }}boxShadow='lg' size={'md'} paddingBottom={'2%'}>
+              <Card
+                  maxW="90%"
+                  height="100%"
+                  backgroundColor={"white"}
+                  color={colors.secondary}
+                  _hover={{
+                    bg: colors.secondary,
+                    color: "white",
+                    transform: "scale(1.1)",
+                  }}
+                  boxShadow="lg"
+                  size={"md"}
+                  paddingBottom={"2%"}
+                  transition="transform 0.2s"
+                >
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
@@ -127,10 +138,21 @@ function Stats() {
                 </Card>
               </GridItem>
               <GridItem >
-              <Card maxW="100%" height="100%"backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
-                  color: 'white',height:'auto'
-                }}boxShadow='lg' size={'md'}paddingBottom={'2%'}>
+              <Card
+                  maxW="90%"
+                  height="100%"
+                  backgroundColor={"white"}
+                  color={colors.secondary}
+                  _hover={{
+                    bg: colors.secondary,
+                    color: "white",
+                    transform: "scale(1.1)",
+                  }}
+                  boxShadow="lg"
+                  size={"md"}
+                  paddingBottom={"2%"}
+                  transition="transform 0.2s"
+                >
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
@@ -170,10 +192,21 @@ function Stats() {
                 </Card>
               </GridItem>
               <GridItem >
-              <Card maxW="100%"   height="100%" backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
-                  color: 'white',height:'auto'
-                }}boxShadow='lg' size={'md'} paddingBottom={'2%'}>
+              <Card
+                  maxW="90%"
+                  height="100%"
+                  backgroundColor={"white"}
+                  color={colors.secondary}
+                  _hover={{
+                    bg: colors.secondary,
+                    color: "white",
+                    transform: "scale(1.1)",
+                  }}
+                  boxShadow="lg"
+                  size={"md"}
+                  paddingBottom={"2%"}
+                  transition="transform 0.2s"
+                >
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
@@ -212,10 +245,21 @@ function Stats() {
                 </Card>
               </GridItem>
               <GridItem >
-              <Card maxW="100%" height="100%"backgroundColor={"white"} color={colors.secondary} _hover={{
-                  bg: colors.secondary,
-                  color: 'white',height:'auto'
-                }}boxShadow='lg' size={'md'} marginBottom={'2%'} paddingBottom={'2%'}>
+              <Card
+                  maxW="90%"
+                  height="100%"
+                  backgroundColor={"white"}
+                  color={colors.secondary}
+                  _hover={{
+                    bg: colors.secondary,
+                    color: "white",
+                    transform: "scale(1.1)",
+                  }}
+                  boxShadow="lg"
+                  size={"md"}
+                  paddingBottom={"2%"}
+                  transition="transform 0.2s"
+                >
                   <CardBody>
                     <Stack mt="6" spacing="3">
                       <Center>
@@ -276,12 +320,13 @@ function Stats() {
             <Button
               bg={colors.primary}
               variant="outline"
+              color={'white'}
               style={{              
               marginTop:'4%'
             }}                          
             _hover={{
-              bg: colors.secondary,
-              borderColor: colors.secondary,
+              bg: colors.primary,
+              borderColor: colors.primary,
               color:'white'
             }}
             size='md'

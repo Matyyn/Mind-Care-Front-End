@@ -55,8 +55,8 @@ const ClientTable = () => {
         const response = await axios.get(
           "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-accounts"
         );
-        console.log(response.data);
-        const { clientAccounts, therapistAccount } = response.data;
+        console.log(response.data.data);
+        const { clientAccounts, therapistAccount } = response.data.data;
 
         const combinedData = [
           ...clientAccounts.map((account) => ({

@@ -29,8 +29,8 @@ const CommentsTable = () => {
         const response = await axios.get(
           "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-comments"
         );
-        console.log(response.data);
-        setData(response.data);
+        console.log('comments',response.data.data);
+        setData(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -166,7 +166,7 @@ const CommentsTable = () => {
               <Tr key={post._id}>
                 <Td textAlign="center">{post.postId.title}</Td>
                 <Td textAlign="center">{post.postId.body}</Td>
-                <Td textAlign="center">{post.postId.tags.join(", ")}</Td>
+                <Td textAlign="center">{post.postId.tags.join(",")}</Td>
                 <Td textAlign="center">
                   {new Date(post.postId.createdAt).toLocaleString()}
                 </Td>

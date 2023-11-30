@@ -29,7 +29,7 @@ const PostTable = ({}) => {
         const response = await axios.get(
           "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-posts"
         );
-        setData(response.data);
+        setData(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

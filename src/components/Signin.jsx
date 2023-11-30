@@ -44,14 +44,15 @@ async function handleSubmit(values, resetForm)  {
   try {  
     console.log(values)
       const result = await axios.post('/login', values);    
-     console.log(result.data.data)    
-    if(result.status === 200){
-      let accessToken=result.data.accessToken
-      let refreshToken = result.data.refreshToken    
+     console.log(result.status)    
+    if(result.status === 200){      
+      let accessToken=result.data.data.accessToken
+      let refreshToken = result.data.data.refreshToken    
       // Store tokens in local storage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);  
-      dispatch(setUser(result.data.data))
+      console.log('result',result.data.data.data)
+      dispatch(setUser(result.data.data.data))
 
       toast({
         title: "You have logined Successfully",
@@ -59,7 +60,14 @@ async function handleSubmit(values, resetForm)  {
         duration: 2000,
         isClosable: true,
       });
-      navigate('/dashboard');
+      if(result.data.data.data.isBlocked === false){
+        navigate('/dashboard');
+        // navigate('/contactadmin');        
+      }
+      else{
+         navigate('/contactadmin');        
+      }
+       //navigate('/dashboard');
     }  
     else if (values.email.toLowerCase() === 'admin@gmail.com' && values.password === 'admin123') {
       toast({

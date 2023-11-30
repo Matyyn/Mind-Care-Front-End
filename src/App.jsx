@@ -2,6 +2,7 @@ import { ChakraProvider, Button, Divider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditProfile from "./components/EditProfile/EditProfile"
 import LandingPage from "./components/LandingPage";
+import Messages from "./components/Messaging";
 //import SessionsList from "./components/VideoCall/sessionsList";
 import SignUpform from "./components/Signup";
 import Signin from "./components/Signin";
@@ -10,6 +11,7 @@ import ViewPosts from "./components/AdminFolder/ReportedPostsDashboard"
 import AboutUs from "./components/landingPageComponents/AboutUs";
 import Pricing from "./components/landingPageComponents/Pricing";
 import FAQs from "./components/landingPageComponents/FAQs";
+import ContactAdmin from "./components/contactadmin";
 import ForgotPassword from "./components/ForgotPassword";
 import ViewTherapistProfile from "./components/ViewTherapistPofile";
 import Dashboard from "./components/Dashboard";
@@ -44,6 +46,7 @@ function App() {
           <Route path="/" element={<LandingPage/>} />
           <Route path="/signin" element={<Signin/>} />
           <Route path="/signup" element={<Test/>} />
+          <Route path="/contactadmin" element={<ContactAdmin/>} />
           <Route element={<ProtectedRoutes/>}>
             <Route path="/settings" element={<EditProfile/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
@@ -51,6 +54,7 @@ function App() {
             <Route path="/therapistprofile" element={<ViewTherapistProfile/>}/>
             <Route path="/Admin" element={<Admin/>}/>
             <Route path="/forum" element={<Forum />} />
+            <Route path="/messages" element={<Messages />} />            
             <Route path="/postquestion" element={<PostQuestion />} />
             <Route path="/postTab" element={<PostTab />} />
             <Route path="/tabs" element={<Tabs/>} />            
