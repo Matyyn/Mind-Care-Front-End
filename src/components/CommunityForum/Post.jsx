@@ -16,13 +16,13 @@ function Post() {
 
   useEffect(() => {
     axios.get("/posts").then((response) => {
-      console.log("post: ", response.data.data);
-      setPostData(response.data.data);
+      console.log("post: ", response.data);
+      setPostData(response.data);
     });
   }, []);
 
   return (
-    <Box>
+    <Box width={'100vw'}>
       {postData.map((post) => {
         const { upvote, downvote } = voteStates[post._id] || {
           upvote: false,

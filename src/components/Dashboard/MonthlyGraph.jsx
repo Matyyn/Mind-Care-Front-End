@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import colors from "../Colors";
-import { Flex } from "@chakra-ui/react";
+import { Flex,Spinner, } from "@chakra-ui/react";
 import {
   CartesianGrid,
   Legend,
@@ -16,19 +16,17 @@ import { useSelector } from "react-redux";
 
 const RechartsExample = () => {
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
-  const [appointmentData, setAppointmentData] = useState([]);
-
+  const [appointmentData, setAppointmentData] = useState([{ monthname: 'Jan', clients: 0 }]);
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
     async function getAppointmentData() {
       try {
         const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`);
-        const appointments = response.data.data;
-        console.log(appointments)
+        const appointments = response.data.data;        
 
         const transformedData = appointments.map((appointment) => {
           const month = new Date(appointment.appointmentDate).getMonth();
           const monthName = new Intl.DateTimeFormat("en-US", { month: "short" }).format(new Date(0, month));
-
           return { monthname: monthName, clients: 1 };
         });
 
@@ -43,15 +41,22 @@ const RechartsExample = () => {
         }, []);
 
         setAppointmentData(summarizedData);
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching data:", error);
-      }
+        setLoading(false); }
+      // } catch (error) {
+      //   console.error("Error fetching data:", error);
+      // }
     }
     getAppointmentData();
   }, [therapistInfo._id]);
 
   return (
     <Flex style={{ flexDirection: "row" }} width={"auto"}>
+      {loading ? (
+        <Spinner size="lg" />
+      ) : (
       <LineChart
         width={450}
         height={300}
@@ -77,6 +82,7 @@ const RechartsExample = () => {
         <Tooltip />
         <Legend />
       </LineChart>
+      )}
     </Flex>
   );
 };

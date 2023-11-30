@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card, Box,
+  Card,
+  Box,
   CardHeader,
   IconButton,
   CardBody,
-  CardFooter, Flex, HStack,
+  CardFooter,
+  Flex,
+  HStack,
   Text,
   ButtonGroup,
   Button,
@@ -19,13 +22,18 @@ import Comment from "../CommunityForum/Comment";
 import Reply from "../CommunityForum/Reply";
 import { useSelector } from "react-redux";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
-import {AiOutlineLike,AiFillLike,AiOutlineDislike,AiTwotoneDislike} from "react-icons/ai"
+import {
+  AiOutlineLike,
+  AiFillLike,
+  AiOutlineDislike,
+  AiTwotoneDislike,
+} from "react-icons/ai";
 
 function SinglePost({ post, upvote, downvote }) {
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
+  console.log("therapistInfo: ", therapistInfo);
   console.log("post single post: ", post);
   useEffect(() => {
-    console.log("hello");
     console.log("posts in single post: ", post);
   }, []);
   const therapistLocal = therapistInfo;
@@ -40,9 +48,9 @@ function SinglePost({ post, upvote, downvote }) {
   };
 
   const dateConversion = (createdAt) => {
-    const date = new Date(createdAt); // Create a Date object from the ISO string
+    const date = new Date(createdAt);
     const year = date.getFullYear();
-    const month = date.getMonth() + 1; // Months are 0-based, so add 1
+    const month = date.getMonth() + 1;
     const day = date.getDate();
     const hours = date.getHours();
     const minutes = date.getMinutes();
@@ -85,7 +93,7 @@ function SinglePost({ post, upvote, downvote }) {
     if (result.length > 0) return true;
     return false;
   };
-  const getCommentDownvoteStatus = (comment) => { };
+  const getCommentDownvoteStatus = (comment) => {};
 
   const addCommentUpvote = (postId, therapistId, commentId) => {
     const commentSelected = {
@@ -100,7 +108,7 @@ function SinglePost({ post, upvote, downvote }) {
       });
   };
 
-  const removeCommentUpvote = () => { };
+  const removeCommentUpvote = () => {};
 
   const addUpvote = async (postId, therapistId) => {
     console.log("HWyyyyy");
@@ -188,11 +196,16 @@ function SinglePost({ post, upvote, downvote }) {
         <Flex justifyContent="space-between" margin={5}>
           <Link to={"/therapistprofile"}>
             <Flex alignItems="center">
-              <Avatar size={"md"} src={post.therapistId.picture}>
+              <Avatar
+                size={"md"}
+                // src={post.therapistId.picture}
+              >
                 <AvatarBadge boxSize="1.25em" bg="green.500" />
               </Avatar>
               <Text ml="2" fontSize={21}>
-                {post.therapistId.firstName} {post.therapistId.lastName}
+                {post.therapistId && `${post.therapistId.firstName} ${post.therapistId.lastName}`}
+                {/* {post.therapistId && post.clientId && ' || '} */}
+                {post.clientId && `${post.clientId.firstName} ${post.clientId.lastName}`}
               </Text>
             </Flex>
           </Link>
@@ -204,10 +217,10 @@ function SinglePost({ post, upvote, downvote }) {
                   tag === "Anxiety"
                     ? "purple"
                     : tag === "Depression"
-                      ? "pink"
-                      : tag === "Advice"
-                        ? "orange"
-                        : "gray"
+                    ? "pink"
+                    : tag === "Advice"
+                    ? "orange"
+                    : "gray"
                 }
                 size="sm"
                 fontSize={20}
@@ -218,7 +231,9 @@ function SinglePost({ post, upvote, downvote }) {
           </ButtonGroup>
         </Flex>
         <Box ml={5}>
-          <Text fontWeight="700" fontSize={22}>{post.title}</Text>
+          <Text fontWeight="700" fontSize={22}>
+            {post.title}
+          </Text>
           {post.body.length < 300 ? (
             <Text fontSize={20}>{post.body}</Text>
           ) : (
@@ -236,9 +251,7 @@ function SinglePost({ post, upvote, downvote }) {
           )}
         </Box>
         <Flex direction="column" ml={5}>
-          <Text fontSize="md">
-            {dateConversion(post.createdAt)}
-          </Text>
+          <Text fontSize="md">{dateConversion(post.createdAt)}</Text>
           <HStack spacing={4} mt={2}>
             {getUpvoteStatus(post) ? (
               <IconButton
@@ -270,14 +283,14 @@ function SinglePost({ post, upvote, downvote }) {
                 onClick={() => addDownvote(post._id, post.therapistId._id)}
               />
             )}
-            {post.therapistId._id === therapistLocal._id && (
+            {post.therapistId && post.therapistId._id === therapistLocal._id && (
               <IconButton
-                icon={<DeleteIcon />}
-                colorScheme="red"
-                fontSize={20}
-                onClick={() => deletePost(post._id)}
-              />
-            )}
+              icon={<DeleteIcon />}
+              colorScheme="red"
+              fontSize={20}
+              onClick={() => deletePost(post._id)}
+            />
+              )}
             <Comment postId={post._id} therapistLocal={therapistLocal} />
           </HStack>
         </Flex>
@@ -313,12 +326,17 @@ function SinglePost({ post, upvote, downvote }) {
                       }}
                     >
                       <Link>
-                        <Avatar size={"md"} src={comment.therapistId.picture}>
+                        <Avatar
+                          size={"md"}
+                          // src={post.therapistId.picture}
+                        >
                           <AvatarBadge boxSize="1.25em" bg="green.500" />
                         </Avatar>
-                        <p style={{ marginTop: "1rem" }}>
-                          {comment.therapistId.firstName}{" "}
-                          {comment.therapistId.lastName}
+                        <p style={{ marginTop: "1rem" }}>                          
+
+                          {comment.therapistId && `${comment.therapistId.firstName} ${comment.therapistId.lastName}`}
+                {/* {post.therapistId && post.clientId && ' || '} */}
+                            {comment.clientId && `${comment.clientId.firstName} ${comment.clientId.lastName}`}
                         </p>
                       </Link>
                       <ButtonGroup gap="4">
@@ -329,10 +347,10 @@ function SinglePost({ post, upvote, downvote }) {
                               tag === "Anxiety"
                                 ? "purple"
                                 : tag === "Depression"
-                                  ? "pink"
-                                  : tag === "Advice"
-                                    ? "orange"
-                                    : "gray"
+                                ? "pink"
+                                : tag === "Advice"
+                                ? "orange"
+                                : "gray"
                             }
                             size="sm"
                           >
@@ -345,9 +363,8 @@ function SinglePost({ post, upvote, downvote }) {
                       <Text>{comment.body}</Text>
                     </CardBody>
                     <CardFooter>
-                      <div style={{ display: "flex", flexDirection: "row" }} >
+                      <div style={{ display: "flex", flexDirection: "row" }}>
                         {getCommentUpvoteStatus(comment) ? (
-
                           <IconButton
                             icon={<AiFillLike />}
                             colorScheme="teal"
@@ -356,7 +373,6 @@ function SinglePost({ post, upvote, downvote }) {
                             onClick={() => removeCommentUpvote(post._id)}
                           />
                         ) : (
-
                           <IconButton
                             icon={<AiOutlineLike />}
                             colorScheme="teal"
@@ -367,7 +383,8 @@ function SinglePost({ post, upvote, downvote }) {
                                 post._id,
                                 post.therapistId._id,
                                 comment._id
-                              )}
+                              )
+                            }
                           />
                         )}
                         {getCommentDownvoteStatus(post) ? (
@@ -378,7 +395,6 @@ function SinglePost({ post, upvote, downvote }) {
                             mr={4}
                             onClick={() => removeDownvote(post._id)}
                           />
-
                         ) : (
                           <IconButton
                             icon={<AiOutlineDislike />}
@@ -419,7 +435,7 @@ function SinglePost({ post, upvote, downvote }) {
                               <Link to={"/therapistprofile"}>
                                 <Avatar
                                   size={"md"}
-                                  src={reply.therapistId.picture}
+                                  // src={reply.therapistId.picture}
                                 >
                                   <AvatarBadge
                                     boxSize="1.25em"
@@ -439,10 +455,10 @@ function SinglePost({ post, upvote, downvote }) {
                                       tag === "Anxiety"
                                         ? "purple"
                                         : tag === "Depression"
-                                          ? "pink"
-                                          : tag === "Advice"
-                                            ? "orange"
-                                            : "gray"
+                                        ? "pink"
+                                        : tag === "Advice"
+                                        ? "orange"
+                                        : "gray"
                                     }
                                     size="sm"
                                   >
@@ -455,17 +471,16 @@ function SinglePost({ post, upvote, downvote }) {
                               <Text fontSize={16}>Reply: {reply.body}</Text>
                             </CardBody>
                             <CardFooter>
-                              
                               {/* <DeleteIcon
                                 onClick={() => deleteComment(reply._id)}
                               />   */}
                               <IconButton
-                        icon={<DeleteIcon />}
-                        colorScheme="red"
-                        fontSize={20}
-                        mr={4}
-                        onClick={() =>  deleteComment(reply._id)} 
-                      />
+                                icon={<DeleteIcon />}
+                                colorScheme="red"
+                                fontSize={20}
+                                mr={4}
+                                onClick={() => deleteComment(reply._id)}
+                              />
                               <Reply
                                 commentId={comment._id}
                                 postId={post._id}
