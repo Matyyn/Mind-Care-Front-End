@@ -82,11 +82,6 @@ export default function WithSubnavigation() {
             fontSize={"25"}
           />
 
-    <Link to={"/therapistprofile"} >
-      <Avatar size={"md"}>
-        <AvatarBadge boxSize="1.25em" bg="green.500" />
-      </Avatar>
-    </Link>
         </Stack>
       </Flex>
 

@@ -55,19 +55,19 @@ const SideBar = ({therapist}) => {
               <Link style={{ marginBottom: "7%" }} to="/AdminComments">
                Reported Comments
               </Link>
-              <Link
+              {/* <Link
                 style={{ marginBottom: "7%" }}
                 to="/Appeals"              
               >
                 Appeals
-              </Link>
-              <Link
+              </Link> */}
+              {/* <Link
                 style={{ marginBottom: "7%" }}
                 to="/VC"
                 // onClick={handleLogout}
               >
                 Messages
-              </Link>  
+              </Link>   */}
               <Link
                 style={{ marginBottom: "7%" }}
                 to="/AdminSignIn"

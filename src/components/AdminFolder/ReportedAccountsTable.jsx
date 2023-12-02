@@ -49,39 +49,40 @@ const ClientTable = () => {
         : true
     );
 
-  useEffect(() => {
-    async function getReportedAccounts() {
-      try {
-        const response = await axios.get(
-          "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-accounts"
-        );
-        console.log(response.data.data);
-        const { clientAccounts, therapistAccount } = response.data.data;
-
-        const combinedData = [
-          ...clientAccounts.map((account) => ({
-            ...account,
-            name: `${account.firstName} ${account.lastName}`,
-          })),
-          ...therapistAccount.map((account) => ({
-            ...account,
-            name: `${account.firstName} ${account.lastName}`,
-          })),
-        ];
-
-        setData(combinedData);
-
-        const initialStatus = {};
-        combinedData.forEach((account) => {
-          initialStatus[account._id] = account.isBlocked ? "Blocked" : "Active";
-        });
-        setStatus(initialStatus);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+    useEffect(() => {
+      async function getReportedAccounts() {
+        try {
+          const response = await axios.get(
+            "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-accounts"
+          );
+          console.log(response);
+          const { clientAccounts, therapistAccount } = response.data.data;
+          const combinedData = [
+            ...clientAccounts.map((account) => ({
+              ...account,
+              name: `${account.firstName} ${account.lastName}`,
+              role: 'client', // added role
+            })),
+            ...therapistAccount.map((account) => ({
+              ...account,
+              name: `${account.firstName} ${account.lastName}`,
+              role: 'therapist', // added role
+            })),
+          ];
+    
+          setData(combinedData);
+    
+          const initialStatus = {};
+          combinedData.forEach((account) => {
+            initialStatus[account._id] = account.isBlocked ? "Blocked" : "Active";
+          });
+          setStatus(initialStatus);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
       }
-    }
-    getReportedAccounts();
-  }, []);
+      getReportedAccounts();
+    }, []);
 
   const handleStatusChange = (accountId, value) => {
     setStatus((prevStatus) => ({
@@ -167,7 +168,6 @@ const ClientTable = () => {
             <Th textAlign="center">Email</Th>
             <Th textAlign="center">Reinstatement</Th>
             <Th textAlign="center">Violation</Th>
-            <Th textAlign="center">Status</Th>
             <Th textAlign="center">Actions</Th>
           </Tr>
         </Thead>
@@ -185,7 +185,7 @@ const ClientTable = () => {
                 <Td textAlign="center">{account.email}</Td>
                 <Td textAlign="center">{account.reInstatement}</Td>
                 <Td textAlign="center">{account.violation}</Td>
-                <Td textAlign="center">
+                {/* <Td textAlign="center">
                   <Select
                     value={status[account._id] || ""}
                     onChange={(e) =>
@@ -195,15 +195,40 @@ const ClientTable = () => {
                     <option value="Active">Active</option>
                     <option value="Blocked">Blocked</option>
                   </Select>
-                </Td>
+                </Td> */}
                 <Td textAlign="center">
-                  <Button
-                    colorScheme="green"
-                    size="sm"
-                    onClick={() => handleSave(account._id)}
-                  >
-                    Save
-                  </Button>
+                  {account.isBlocked ? (
+                    <Button
+                      colorScheme="green"
+                      size="sm"
+                      onClick={async() => {
+                        console.log(account)
+                        const response = await axios.post(`https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/block-account/${account._id}`,{
+                          isBlocked: false,
+                          role: account.role                
+
+                        })
+                        console.log(response)
+                      }}
+                    >
+                      Unblock Account
+                    </Button>
+                  ) : (
+                    <Button
+                      colorScheme="red"
+                      size="sm"
+                      onClick={async() => {
+                        console.log(account)
+                        const response = await axios.post(`https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/block-account/${account._id}`,{
+                          isBlocked: true,   
+                          role: account.role              
+                        })
+                        console.log(response)
+                      }}
+                    >
+                      Block Account
+                    </Button>
+                  )}
                 </Td>
               </Tr>
             ))

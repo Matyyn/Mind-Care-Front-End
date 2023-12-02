@@ -92,7 +92,7 @@ function AccountsTable() {
       try {
         const response = await axios.get(
           "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-accounts"
-        );
+        );        
         const { clientAccounts, therapistAccount } = response.data;
         setData([...clientAccounts, ...therapistAccount]);
       } catch (error) {
@@ -223,9 +223,9 @@ function AccountsTable() {
               >
                 Account Reported By
               </Th>
-              <Th onClick={() => handleSort("status")} fontSize={"15"}>
+              {/* <Th onClick={() => handleSort("status")} fontSize={"15"}>
                 Status
-              </Th>
+              </Th> */}
               <Th fontSize={"15"}>Actions</Th>
             </Tr>
           </Thead>

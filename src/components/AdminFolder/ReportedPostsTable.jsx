@@ -29,6 +29,7 @@ const PostTable = ({}) => {
         const response = await axios.get(
           "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-posts"
         );
+        console.log(response.data.data);
         setData(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -146,8 +147,8 @@ const PostTable = ({}) => {
           <Tr>
             <Th textAlign="center">Title</Th>
             <Th textAlign="center">Body</Th>
-            <Th textAlign="center">Tags</Th>
-            <Th textAlign="center">Created At</Th>
+            <Th textAlign="center">Violation</Th>
+            <Th textAlign="center">Reported At</Th>
             <Th textAlign="center">No of Reports</Th>
             {/* <Th textAlign="center">Status</Th> */}
             <Th textAlign="center">Actions</Th>
@@ -165,7 +166,7 @@ const PostTable = ({}) => {
               <Tr key={post._id}>
                 <Td textAlign="center">{post.postId.title}</Td>
                 <Td textAlign="center">{post.postId.body}</Td>
-                <Td textAlign="center">{post.postId.tags.join(", ")}</Td>
+                <Td textAlign="center">{post.violation}</Td>
                 <Td textAlign="center">
                   {new Date(post.postId.createdAt).toLocaleString()}
                 </Td>

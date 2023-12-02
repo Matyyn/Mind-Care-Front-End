@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Drawer,
   DrawerBody,
@@ -8,20 +8,23 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Stack
-} from "@chakra-ui/react"
-import { HamburgerIcon } from "@chakra-ui/icons"
-const SideBar = ({therapist}) => {  
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  Stack,
+} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+
+import { HamburgerIcon } from "@chakra-ui/icons";
+const SideBar = ({ therapist }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   //console.log('data', therapist)
-  const btnRef = React.useRef()
+  const btnRef = React.useRef();
   const handleLogout = () => {
     // Clear tokens from local storage
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+
     // Navigate to the signin page
-    navigate('/signin');
+    navigate("/signin");
   };
   return (
     <>
@@ -41,12 +44,14 @@ const SideBar = ({therapist}) => {
             <Stack
               style={{
                 flexDirection: "column",
-                justifyContent: "space-between"
-              }}>
-               <Link
+                justifyContent: "space-between",
+              }}
+            >
+              <Link
                 style={{ marginBottom: "7%" }}
                 to="/dashboard"
-                state={therapist}>
+                state={therapist}
+              >
                 Appointments
               </Link>
               <Link
@@ -61,12 +66,49 @@ const SideBar = ({therapist}) => {
               >
                 Requests
               </Link> */}
-              <Link style={{ marginBottom: "7%" }} to="/messages" 
-              state={therapist}
+              <Link
+                style={{ marginBottom: "7%" }}
+                to="/messages"
+                state={therapist}
               >
                 Messages
               </Link>
-              <Link style={{ marginBottom: "7%" }} to="/forum" >
+              <Menu placement="left">
+                <MenuButton
+                  style={{ textAlign: "left", marginBottom: "7%" }}
+                  _hover={{ border: "none", textDecoration: "none" }}
+                  _active={{ border: "none", textDecoration: "none" }}
+                  _focus={{
+                    outline: "none",
+                    border: "none",
+                    boxShadow: "none",
+                  }}
+                  focusBorderColor="none"
+                  focusBoxShadow="none"
+                  rightIcon={<ChevronDownIcon />}
+                >
+                  TeleAppointments
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>
+                    <Link
+                      style={{ marginBottom: "7%" }}
+                      to="/completedSessions"
+                    >
+                      Messages
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      style={{ marginBottom: "7%" }}
+                      to="/VC"
+                    >
+                      Video Call
+                    </Link>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+              <Link style={{ marginBottom: "7%" }} to="/forum">
                 Forum
               </Link>
               <Link
@@ -82,11 +124,12 @@ const SideBar = ({therapist}) => {
                 onClick={handleLogout}
               >
                 Logout
-              </Link>            </Stack>
+              </Link>
+            </Stack>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
     </>
-  )
-}
-export default SideBar
+  );
+};
+export default SideBar;

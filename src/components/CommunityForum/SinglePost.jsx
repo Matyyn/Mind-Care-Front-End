@@ -15,36 +15,62 @@ import {
   AvatarBadge,
   Link,
   Input,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Select,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { DeleteIcon } from "@chakra-ui/icons";
 import Comment from "../CommunityForum/Comment";
 import Reply from "../CommunityForum/Reply";
 import { useSelector } from "react-redux";
-import { BiUpvote, BiDownvote } from "react-icons/bi";
 import {
   AiOutlineLike,
   AiFillLike,
   AiOutlineDislike,
   AiTwotoneDislike,
 } from "react-icons/ai";
+import { log } from "@tensorflow/tfjs";
 
 function SinglePost({ post, upvote, downvote }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClose = () => setIsOpen(false);
+  const onOpen = () => setIsOpen(true);
+
+  const [accountType, setAccountType] = useState("");
+  const [violationType, setViolationType] = useState("");  
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
-  console.log("therapistInfo: ", therapistInfo);
-  console.log("post single post: ", post);
-  useEffect(() => {
-    console.log("posts in single post: ", post);
-  }, []);
+  // ////console.log("therapistInfo: ", therapistInfo);
+  // ////console.log("post single post: ", post);
+  // useEffect(() => {
+  //   ////console.log("posts in single post: ", post);
+  // }, []);
   const therapistLocal = therapistInfo;
-  console.log("therapistlocal id: ", therapistLocal._id);
+  ////console.log("therapistlocal id: ", therapistLocal._id);
   const [postData, setPostData] = useState([]);
   const [voteStates, setVoteStates] = useState({});
   const [isReadMore, setIsReadMore] = useState(true);
-  const [isReplying, setIsReplying] = useState(false);
 
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
+  };
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const [isReportClosed, setIsReportClosed] = useState(true);
+
+  const onOpened = () => {
+    setIsReportOpen(true);
+    setIsReportClosed(false);
+  };
+
+  const onClosed = () => {
+    setIsReportOpen(false);
+    setIsReportClosed(true);
   };
 
   const dateConversion = (createdAt) => {
@@ -59,17 +85,17 @@ function SinglePost({ post, upvote, downvote }) {
     const formattedDate = `${year}-${String(month).padStart(2, "0")}-${String(
       day
     )}`;
-    console.log(formattedDate);
+    ////console.log(formattedDate);
     return formattedDate;
   };
 
   const getUpvoteStatus = (post) => {
-    // console.log("type: ", type);
+    // ////console.log("type: ", type);
     const result = post.upvotes.filter((upvote) => {
       return upvote.therapistId == therapistLocal._id;
     });
-    console.log("-----result-----");
-    console.log(result);
+    ////console.log("-----result-----");
+    ////console.log(result);
     if (result.length > 0) return true;
     return false;
   };
@@ -78,8 +104,8 @@ function SinglePost({ post, upvote, downvote }) {
     const result = post.downvotes.filter((downvote) => {
       return downvote.therapistId == therapistLocal._id;
     });
-    console.log("-----result-----");
-    console.log(result);
+    ////console.log("-----result-----");
+    ////console.log(result);
     if (result.length > 0) return true;
     return false;
   };
@@ -88,8 +114,8 @@ function SinglePost({ post, upvote, downvote }) {
     const result = comment.upvotes.filter((upvote) => {
       return upvote.therapistId == therapistLocal._id;
     });
-    console.log("-----result-----");
-    console.log(result);
+    ////console.log("-----result-----");
+    ////console.log(result);
     if (result.length > 0) return true;
     return false;
   };
@@ -104,20 +130,20 @@ function SinglePost({ post, upvote, downvote }) {
     axios
       .post(`/upvote-comments/${commentId}`, commentSelected)
       .then((response) => {
-        console.log("response: ", response);
+        ////console.log("response: ", response);
       });
   };
 
   const removeCommentUpvote = () => {};
 
   const addUpvote = async (postId, therapistId) => {
-    console.log("HWyyyyy");
+    ////console.log("HWyyyyy");
     const postSelected = {
       postId: postId,
       therapistId: therapistId,
     };
     axios.post(`/upvote-post/${postId}`, postSelected).then((response) => {
-      console.log("response: ", response);
+      ////console.log("response: ", response);
     });
   };
 
@@ -127,21 +153,21 @@ function SinglePost({ post, upvote, downvote }) {
         return upvote._id;
       }
     });
-    console.log("upvote Id after: ", upvoteId._id);
+    ////console.log("upvote Id after: ", upvoteId._id);
     axios.delete(`/upvote-post/${postId}/${upvoteId._id}`).then((response) => {
       const deletedPost = response.data;
-      console.log("upvote undone: ", deletedPost);
+      ////console.log("upvote undone: ", deletedPost);
     });
   };
 
   const addDownvote = async (postId, therapistId) => {
-    console.log("HWyyyyy");
+    ////console.log("HWyyyyy");
     const postSelected = {
       postId: postId,
       therapistId: therapistId,
     };
     axios.post(`/downvote-post/${postId}`, postSelected).then((response) => {
-      console.log("response: ", response);
+      ////console.log("response: ", response);
     });
   };
 
@@ -151,12 +177,12 @@ function SinglePost({ post, upvote, downvote }) {
         return downvote._id;
       }
     });
-    console.log("upvote Id after: ", downvoteId._id);
+    ////console.log("upvote Id after: ", downvoteId._id);
     axios
       .delete(`/downvote-post/${postId}/${downvoteId._id}`)
       .then((response) => {
         const deletedPost = response.data;
-        console.log("downvote undone: ", deletedPost);
+        ////console.log("downvote undone: ", deletedPost);
       });
   };
 
@@ -174,12 +200,12 @@ function SinglePost({ post, upvote, downvote }) {
       });
   };
   const deleteComment = (commentId) => {
-    console.log("inside delete comment function");
-    console.log("comment id: ", commentId);
+    ////console.log("inside delete comment function");
+    ////console.log("comment id: ", commentId);
     axios
       .delete(`/comments/${commentId}`)
       .then((response) => {
-        console.log("response comments deleted: ", response);
+        ////console.log("response comments deleted: ", response);
       })
       .catch((error) => {
         console.error(error);
@@ -189,12 +215,11 @@ function SinglePost({ post, upvote, downvote }) {
     <div
       style={{
         maxHeight: "550px",
-        overflowY: "scroll",        
+        overflowY: "scroll",
       }}
-
     >
-      <Card >
-        <Flex justifyContent="space-between">
+      <Card>
+        <Flex justifyContent="space-between" m={5}>
           <Link to={"/therapistprofile"}>
             <Flex alignItems="center">
               <Avatar
@@ -204,9 +229,11 @@ function SinglePost({ post, upvote, downvote }) {
                 <AvatarBadge boxSize="1.25em" bg="green.500" />
               </Avatar>
               <Text ml="2" fontSize={21}>
-                {post.therapistId && `${post.therapistId.firstName} ${post.therapistId.lastName}`}
+                {post.therapistId &&
+                  `${post.therapistId.firstName} ${post.therapistId.lastName}`}
                 {/* {post.therapistId && post.clientId && ' || '} */}
-                {post.clientId && `${post.clientId.firstName} ${post.clientId.lastName}`}
+                {post.clientId &&
+                  `${post.clientId.firstName} ${post.clientId.lastName}`}
               </Text>
             </Flex>
           </Link>
@@ -229,7 +256,103 @@ function SinglePost({ post, upvote, downvote }) {
                 {tag}
               </Button>
             ))}
+            <Button onClick={onOpened}>Report</Button>
           </ButtonGroup>
+
+          <Modal isOpen={isReportOpen} onClose={onClosed}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Report</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Select
+                  value={accountType}
+                  placeholder="Select Report Type"
+                  onChange={(e) => setAccountType(e.target.value)}
+                >
+                  <option value="post">Post</option>
+                  <option value="account">Account</option>
+                </Select>
+                <Select
+                  value={violationType}
+                  onChange={(e) => setViolationType(e.target.value)}
+                  placeholder="Select Violation Type"
+                >
+                  <option value="spam">Spam</option>
+                  <option value="harassment">Harassment</option>
+                  <option value="inappropriateContent">
+                    Inappropriate Content
+                  </option>
+                </Select>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  colorScheme="red"
+                  onClick={async () => {  
+                    console.log("account type: ", accountType)                
+                    console.log("ae: ", violationType)                
+                    if (accountType === "post") {
+                      console.log('hi')
+                      if (post.clientId) {
+                        const response = await axios.post(
+                          "/report-post/" +
+                            post._id,
+                          {
+                            violation: violationType,
+                            clientId: post.clientId._id,
+                            postId: post._id,
+                          }
+                        );
+                        console.log("Reponse:", response)
+                        //console.log("Reported post:", post._id);
+                      } else {
+                        const response = await axios.post(
+                          "/report-post/" +
+                            post._id,
+                          {
+                            violation: violationType,
+                            therapistId: post.therapistId._id,
+                            postId: post._id,
+                          }
+                        );
+                        console.log("response", response);
+                      }
+                    } else {
+                      if (post.clientId) {
+                        const response = await axios.post(
+                          "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/report-account/" +
+                            post.clientId._id,
+                          {
+                            violation: violationType,
+                            role:"client",
+                            isBlocked:false
+
+                          }
+                        );
+                        
+                        console.log("Reported account:", post.clientId._id);
+                      } else {
+                        const response = await axios.post(
+                          "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/report-account/" +
+                            post.therapistId._id,
+                          {
+                            violation: violationType,
+                            role:"therapist",
+                            isBlocked:false
+                          }
+                        );     
+                        console.log("Reported account:", response);                   
+                        console.log("Reported account:", post.therapistId._id);
+                      }
+                    
+                  }                  
+                  }}
+                >
+                  Report
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </Flex>
         <Box ml={5}>
           <Text fontWeight="700" fontSize={22}>
@@ -284,13 +407,14 @@ function SinglePost({ post, upvote, downvote }) {
                 onClick={() => addDownvote(post._id, post.therapistId._id)}
               />
             )}
-            {post.therapistId && post.therapistId._id === therapistLocal._id && (
-              <IconButton
-              icon={<DeleteIcon />}
-              colorScheme="red"
-              fontSize={20}
-              onClick={() => deletePost(post._id)}
-            />
+            {post.therapistId &&
+              post.therapistId._id === therapistLocal._id && (
+                <IconButton
+                  icon={<DeleteIcon />}
+                  colorScheme="red"
+                  fontSize={20}
+                  onClick={() => deletePost(post._id)}
+                />
               )}
             <Comment postId={post._id} therapistLocal={therapistLocal} />
           </HStack>
@@ -306,7 +430,7 @@ function SinglePost({ post, upvote, downvote }) {
               return <Text key={comment._id}>{comment}</Text>;
             })} */}
             {post.comments.map((comment) => {
-              console.log("therapist name: ", comment);
+              ////console.log("therapist name: ", comment);
               return (
                 <div>
                   <Card
@@ -333,11 +457,12 @@ function SinglePost({ post, upvote, downvote }) {
                         >
                           <AvatarBadge boxSize="1.25em" bg="green.500" />
                         </Avatar>
-                        <p style={{ marginTop: "1rem" }}>                          
-
-                          {comment.therapistId && `${comment.therapistId.firstName} ${comment.therapistId.lastName}`}
-                {/* {post.therapistId && post.clientId && ' || '} */}
-                            {comment.clientId && `${comment.clientId.firstName} ${comment.clientId.lastName}`}
+                        <p style={{ marginTop: "1rem" }}>
+                          {comment.therapistId &&
+                            `${comment.therapistId.firstName} ${comment.therapistId.lastName}`}
+                          {/* {post.therapistId && post.clientId && ' || '} */}
+                          {comment.clientId &&
+                            `${comment.clientId.firstName} ${comment.clientId.lastName}`}
                         </p>
                       </Link>
                       <ButtonGroup gap="4">
@@ -358,7 +483,59 @@ function SinglePost({ post, upvote, downvote }) {
                             {tag}
                           </Button>
                         ))}
+                        <Button onClick={onOpen}>Report</Button>
                       </ButtonGroup>
+
+                      <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                          <ModalHeader>Report</ModalHeader>
+                          <ModalCloseButton />
+                          <ModalBody>                    
+                          <Select                  
+                            value={violationType}
+                            onChange={(e) => setViolationType(e.target.value)}
+                          >
+                            <option value="spam">Spam</option>
+                            <option value="harassment">Harassment</option>
+                            <option value="inappropriateContent">
+                              Inappropriate Content
+                            </option>
+                          </Select>
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button colorScheme="red" onClick={async()=>{
+                              console.log(comment)
+                              if (comment.clientId) {
+                                const response = await axios.post(
+                                  "/report-comments/" +
+                                    comment._id,
+                                  {
+                                    violation: violationType,
+                                    clientId: comment.clientId._id,
+                                    commentId: comment._id,
+                                  }
+                                );
+                                console.log("Reported post:", response)
+                                //console.log("Reported post:", post._id);
+                              } else {
+                                const response = await axios.post(
+                                  "/report-comments/" +
+                                    comment._id,
+                                  {
+                                    violation: violationType,
+                                    therapistId: comment.therapistId._id,
+                                    commentId: comment._id,
+                                  }
+                                );
+                                console.log("Reported post:", post._id);
+                              }
+                            }}>
+                              Report
+                            </Button>
+                          </ModalFooter>
+                        </ModalContent>
+                      </Modal>
                     </CardHeader>
                     <CardBody>
                       <Text>{comment.body}</Text>
@@ -444,15 +621,16 @@ function SinglePost({ post, upvote, downvote }) {
                                   />
                                 </Avatar>
                                 <p style={{ marginTop: "1rem" }}>
-                                {reply.therapistId
-                                  ? `${reply.therapistId.firstName} ${reply.therapistId.lastName}`
-                                  : ''}
-                                {reply.therapistId && reply.clientId ? ':' : ''}
-                                {reply.clientId
-                                  ? `${reply.clientId.firstName} ${reply.clientId.lastName}`
-                                  : ''}
-                              </p>
-
+                                  {reply.therapistId
+                                    ? `${reply.therapistId.firstName} ${reply.therapistId.lastName}`
+                                    : ""}
+                                  {reply.therapistId && reply.clientId
+                                    ? ":"
+                                    : ""}
+                                  {reply.clientId
+                                    ? `${reply.clientId.firstName} ${reply.clientId.lastName}`
+                                    : ""}
+                                </p>
                               </Link>
                               <ButtonGroup gap="4">
                                 {post.tags.map((tag) => (

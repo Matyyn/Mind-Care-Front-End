@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from './Navbar'
 //import { setnotifications } from "../redux/slices/notificationsReducer";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { addAcceptedAppointment } from "../redux/slices/selectedAccounts";
-import { FaEye } from "react-icons/fa";
 import Graphs from '../Graphs'
 import StressGraph from './StressGraph'
-import { useSelector } from "react-redux";
 import colors from "../Colors";
 import {
   Box,
@@ -251,6 +250,7 @@ export default function Simple() {
   useEffect(() => {
     async function getProfiles() {
       const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`)
+
       setAllUsers(response.data.data)
       //console.log('response', response.data.data)
     }
@@ -349,7 +349,8 @@ export default function Simple() {
     <>
       <Navbar />
       {user ? (
-        <><Box p={4}>
+        <>
+        <Box p={4}>
           <Stack flexDirection={'row'} justifyContent={'space-between'}>
             <Text fontSize={20} fontWeight={"500"} marginLeft={7}>
               Client Name: {selectedUserInfo.clientId.firstName} {selectedUserInfo.clientId.lastName}

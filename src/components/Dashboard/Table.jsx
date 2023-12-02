@@ -250,40 +250,40 @@ import { useSelector } from "react-redux";
 
 function AppointmentsData() {
   const [appointments, setAppointments] = useState([]);
-  const [sorted, setSorted] = useState(appointments);
   const [filter, setFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [searched, setSearched] = useState('');
   const [searchTerm, setSearchTerm] = useState("");
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
+
   const handleNameFilterChange = (value) => {
-    setNameFilter(value);
+    setFilter(value);
   };
 
   const handleStatusFilterChange = (value) => {
     setStatusFilter(value);
   };
-  
+
   const filteredData = appointments
     .filter((account) =>
-      nameFilter ? account.name.includes(nameFilter) : true
+      filter ? account.clientId.firstName.includes(filter) || account.clientId.lastName.includes(filter) : true
     )
     .filter((account) =>
-      statusFilter ? status[account._id] === statusFilter : true
+      statusFilter ? account.status === statusFilter : true
     )
     .filter((account) =>
       searchTerm
-        ? account.name.toLowerCase().includes(searchTerm.toLowerCase())
+        ? `${account.clientId.firstName} ${account.clientId.lastName}`.toLowerCase().includes(searchTerm.toLowerCase())
         : true
     );
+
   useEffect(() => {
-    async function getProfiles() {
-      try {        
+    async function getAppointments() {
+      try {
         const response = await axios.get(`/appointments-therapist/${therapistInfo._id}`);
+        console.log("Response data:", response.data.data);
         if (response.data && response.data.data) {
-          console.log("Response data:", response.data.data);
           setAppointments(response.data.data);
-          setSorted(response.data.data);
         } else {
           console.error("Invalid response data structure:", response.data);
         }
@@ -291,16 +291,17 @@ function AppointmentsData() {
         console.error("Error fetching data:", error);
       }
     }
-    
-    getProfiles();
+
+    getAppointments();
   }, []);
+
   const handleSearchTermChange = (value) => {
     setSearchTerm(value);
   };
 
   return (
     <div width={'auto'}>
-        <Stack style={{ flexDirection: "row" }} marginRight={"2%"}>
+      <Stack style={{ flexDirection: "row" }} marginRight={"2%"}>
         <Text
           fontSize="lg"
           style={{ fontWeight: "bold", marginLeft: "2%", marginTop: "1%" }}
@@ -358,84 +359,76 @@ function AppointmentsData() {
           />
         </InputGroup>
       </Stack>
-      <div className="Tables" >
+      <div className="Tables">
         <Table marginTop={"3%"} marginLeft={'1%'}>
           <Thead>
             <Tr>
-            <Th textAlign="center">
-                Client Name
-              </Th>
-              <Th textAlign="center">
-                Gender
-              </Th>
-              <Th textAlign="center">
-                Problem Desc
-              </Th>
-              <Th textAlign="center">
-                Appointment Time & Date
-              </Th>
-              <Th textAlign="center">
-                Status
-              </Th>
-              <Th textAlign="center">Actions</Th>
+              <Th textAlign="center">Client Name</Th>
+              <Th textAlign="center">Gender</Th>
+              <Th textAlign="center">Problem Desc</Th>
+              <Th textAlign="center">Appointment Time & Date</Th>
+              <Th textAlign="center">Status</Th>
+              
               <Th textAlign="center">Therapist Remarks</Th>
             </Tr>
           </Thead>
           <Tbody>
-            { filteredData.length === 0 ? (
+            {filteredData.length === 0 ? (
               <Tr>
                 <Td colSpan={6} textAlign="center">
-                  No appoinments data available
+                  No appointments data available
                 </Td>
               </Tr>
-            ) : (appointments.map((row, index) => (
-              <Tr key={index}>
-                <Td padding={0} paddingLeft={"2%"}>
-                  {row.clientId.firstName} {row.clientId.lastName}
-                </Td>
-                <Td padding={0} paddingLeft={"2%"}>
-                  {row.clientId.gender}
-                </Td>
-                <Td padding={0} paddingLeft={"2%"}>
-                  {row.problemDescription}
-                </Td>
-                <Td padding={0} paddingLeft={"2%"}>
-                  {row.appointmentDate.split('T')[0]}{row.appointmentTime.split('T')[1]}
-                </Td>
-                <Td padding={0} paddingLeft={"1%"}>
-                  {row.status}
-                </Td>
-                <Td padding={0} paddingLeft={"1%"}>
-                  <Button
-                    leftIcon={<FaEdit />}
-                    variant={"underlay"}
-                    size="md"
-                    fontSize={"20"}
-                    color={"black"}
-                    width={"8"}
-                    mr={2}
-                  />
-                  <Button
-                    leftIcon={<FaRegTrashAlt />}
-                    variant={"underlay"}
-                    width={"8"}
-                    padding={0}
-                    fontSize={"20"}
-                    color={"black"}
-                    size="md"
-                  />
-                </Td>
-                <Td paddingLeft={7} >
-                  <Button
-                    backgroundColor={"blue.400"}
-                    color={"white"}
-                    size={'sm'}
-                  >
-                    View Remarks
-                  </Button>
-                </Td>
-              </Tr>
-            )))}
+            ) : (
+              appointments.map((row, index) => (
+                <Tr key={index}>
+                  <Td padding={0} paddingLeft={"2%"} textAlign="center">
+                    {row.clientId.firstName} {row.clientId.lastName}
+                  </Td>
+                  <Td padding={0} paddingLeft={"2%"} textAlign="center">
+                    {row.clientId.gender}
+                  </Td>
+                  <Td padding={0} paddingLeft={"2%"} textAlign="center">
+                    {row.problemDescription}
+                  </Td>
+                  <Td padding={0} paddingLeft={"2%"} textAlign="center">
+                    {row.appointmentDate.split('T')[0]}{row.appointmentTime.split('T')[1]}
+                  </Td>
+                  <Td padding={0} paddingLeft={"1%"} textAlign="center">
+                    {row.status}
+                  </Td>
+                  {/* <Td padding={0} paddingLeft={"1%"}>
+                    <Button
+                      leftIcon={<FaEdit />}
+                      variant={"underlay"}
+                      size="md"
+                      fontSize={"20"}
+                      color={"black"}
+                      width={"8"}
+                      mr={2}
+                    />
+                    <Button
+                      leftIcon={<FaRegTrashAlt />}
+                      variant={"underlay"}
+                      width={"8"}
+                      padding={0}
+                      fontSize={"20"}
+                      color={"black"}
+                      size="md"
+                    />
+                  </Td> */}
+                  <Td paddingLeft={7} textAlign="center">
+                    <Button
+                      backgroundColor={"blue.400"}
+                      color={"white"}
+                      size={'sm'}
+                    >
+                      View Remarks
+                    </Button>
+                  </Td>
+                </Tr>
+              ))
+            )}
           </Tbody>
         </Table>
       </div>

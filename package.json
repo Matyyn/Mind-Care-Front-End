@@ -65,6 +65,7 @@
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-firebase-image-upload-control": "^2.0.0",
+    "react-ga4": "^2.1.0",
     "react-icons": "^4.8.0",
     "react-pdf": "^6.2.2",
     "react-redux": "^8.1.1",

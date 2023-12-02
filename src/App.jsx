@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditProfile from "./components/EditProfile/EditProfile"
 import LandingPage from "./components/LandingPage";
 import Messages from "./components/Messaging";
+import UserMessages from "./components/ClientFolder/UserMessages";
 //import SessionsList from "./components/VideoCall/sessionsList";
 import SignUpform from "./components/Signup";
 import Signin from "./components/Signin";
@@ -35,8 +36,16 @@ import { store , persistor } from '../src/components/redux/store'
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { Provider } from 'react-redux'
 import ProtectedRoutes from "./utils/protectedRoutes";
+import CompletedSessions from "./components/ClientFolder/CompletedSessions";
 
+import ReactGA from "react-ga4";
+import { useEffect } from "react";
+
+ReactGA.initialize("G-473NZBR34V");
 function App() {
+  useEffect (() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname+window.location.search,title:"MindCare" });
+  },[])
   return (
     <ChakraProvider >
       <Provider store={store}>
@@ -48,7 +57,7 @@ function App() {
           <Route path="/signup" element={<Test/>} />
           <Route path="/contactadmin" element={<ContactAdmin/>} />
           <Route element={<ProtectedRoutes/>}>
-            <Route path="/settings" element={<EditProfile/>}/>
+            <Route path="/settings" element={<EditProfile/>}/>            
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/therapistprofile" element={<ViewTherapistProfile/>}/>
@@ -58,6 +67,8 @@ function App() {
             <Route path="/postquestion" element={<PostQuestion />} />
             <Route path="/postTab" element={<PostTab />} />
             <Route path="/tabs" element={<Tabs/>} />            
+            <Route path="/completedSessions" element={<CompletedSessions/>} />
+            <Route path="/VC" element={<VideoCall/>}/>
           </Route>
           <Route path="/aboutus" element={<AboutUs/>} />
           <Route path="/pricing" element={<Pricing/>} />
@@ -66,7 +77,6 @@ function App() {
           <Route path="/AdminPosts" element={<ViewPosts/>}/>
           <Route path="/AdminComments" element={<ViewComments/>}/>
           <Route path="/Appeals" element={<Appeals/>}/>  
-          <Route path="/VC" element={<VideoCall/>}/>
           <Route path="/AdminSignIn" element={<AdminSignin/>}/>          
         </Routes>
       </Router>
