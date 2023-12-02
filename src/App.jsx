@@ -44,7 +44,7 @@ import { useEffect } from "react";
 ReactGA.initialize("G-473NZBR34V");
 function App() {
   useEffect (() => {
-    ReactGA.send({ hitType: "pageview", page: window.location.pathname+window.location.search,title:"MindCare" });
+    ReactGA.send('pageview');
   },[])
   return (
     <ChakraProvider >
