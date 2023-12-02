@@ -46,6 +46,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^10.10.0",
     "fs": "^0.0.1-security",
+    "ga": "^0.0.2",
     "html2canvas": "^1.4.1",
     "install": "^0.13.0",
     "jspdf": "^2.5.1",

@@ -38,7 +38,7 @@ import { Provider } from 'react-redux'
 import ProtectedRoutes from "./utils/protectedRoutes";
 import CompletedSessions from "./components/ClientFolder/CompletedSessions";
 
-import ReactGA from "react-ga4";
+import ReactGA from "react-ga";
 import { useEffect } from "react";
 
 ReactGA.initialize("G-473NZBR34V", { debug: true });
