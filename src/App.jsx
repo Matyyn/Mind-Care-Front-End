@@ -41,7 +41,7 @@ import CompletedSessions from "./components/ClientFolder/CompletedSessions";
 import ReactGA from "react-ga4";
 import { useEffect } from "react";
 
-ReactGA.initialize("G-473NZBR34V");
+ReactGA.initialize("G-473NZBR34V", { debug: true });
 function App() {
   useEffect (() => {
     ReactGA.send('pageview');
