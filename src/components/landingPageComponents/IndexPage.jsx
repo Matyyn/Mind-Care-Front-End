@@ -3,6 +3,8 @@ import colors from "../Colors";
 import { GridItem, Grid, Spinner, useBreakpointValue, Box, Text, Button, Stack, Image, Divider } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@chakra-ui/react";
+import ReactGA from 'react-ga4';
+
 
 function IndexPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -81,6 +83,11 @@ function IndexPage() {
                       <Button
                         borderColor={"white"}
                         size='md'
+                        onClick={ ReactGA.event({
+                          category: 'User',
+                          action: 'Clicked Button',
+                          label: 'My Button',
+                        })}
                       >
                         <Stack>
                           <Text style={{ textAlign: "left" }}>
@@ -100,6 +107,7 @@ function IndexPage() {
                           borderColor: colors.primary
                         }}
                         style={{ marginLeft: "10px" }}
+                        
                       >
                         Get Started
                       </Button>
