@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
+import ReactGA from "react-ga4";
 import colors from "../Colors";
 import IndexPage from './IndexPage'
 import BK from './BookAppointment'
@@ -111,6 +112,11 @@ const Navbar = () => {
             <Link to="/dashboard">
             <Button   mr={4}
             size='md'                          
+            onClick={ ReactGA.event({
+              category: 'Therapist',
+              action: 'Sign In',
+              label: 'My Button',
+            })}
             >
               Sign In
             </Button>
@@ -128,7 +134,13 @@ const Navbar = () => {
                 bg: colors.primary,
                 color: 'white',
                 borderColor:colors.primary
-              }}>
+              }}
+              onClick={ ReactGA.event({
+                category: 'Therapist',
+                action: 'Sign Up',
+                label: 'My Button',
+              })}
+              >
               Sign Up
             </Button>
             </Link>
@@ -159,7 +171,13 @@ const Navbar = () => {
                 bg: colors.primary,
                 color: 'white',
                 borderColor:colors.primary
-              }}>
+              }}
+              onClick={ ReactGA.event({
+                category: 'Therapist',
+                action: 'Sign Up',
+                label: 'My Button',
+              })}
+              >
               Sign Up
             </Button>
             </Link>

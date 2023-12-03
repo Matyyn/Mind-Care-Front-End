@@ -84,8 +84,8 @@ function IndexPage() {
                         borderColor={"white"}
                         size='md'
                         onClick={ ReactGA.event({
-                          category: 'User',
-                          action: 'Clicked Button',
+                          category: 'Therapit',
+                          action: 'How It Works',
                           label: 'My Button',
                         })}
                       >
@@ -101,6 +101,11 @@ function IndexPage() {
                         backgroundColor={colors.secondary}
                         color={"white"}
                         size='md'
+                        onClick={ ReactGA.event({
+                          category: 'Therapist',
+                          action: 'Get Started',
+                          label: 'My Button',
+                        })}                      
                         borderColor={colors.secondary}
                         _hover={{
                           bg: colors.primary,
@@ -185,6 +190,11 @@ function IndexPage() {
                           borderColor={"white"}
                           width={"100%"}
                           size={'md'}
+                          onClick={ ReactGA.event({
+                            category: 'Therapist',
+                            action: 'How It Works',
+                            label: 'My Button',
+                          })}                   
                         >
                           <Stack>
                             <Text fontSize={"17"} style={{ textAlign: "left" }}>
@@ -202,6 +212,11 @@ function IndexPage() {
                             bg: colors.primary,
                             borderColor: colors.primary
                           }}
+                          onClick={ ReactGA.event({
+                            category: 'Therapist',
+                            action: 'Get Started',
+                            label: 'My Button',
+                          })}                   
                         >
                           <Stack>
                             <Text

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import colors from "../Colors";
+import ReactGA from "react-ga4";
 import { SimpleGrid, GridItem, Grid } from "@chakra-ui/react";
 import {
   FaGooglePlay,
@@ -118,6 +119,11 @@ function AboutUs() {
                     borderColor={"black"}
                     size='md'
                     padding={"4%"}
+                    onClick={ ReactGA.event({
+                      category: 'User',
+                      action: 'Clicked Button',
+                      label: 'My Button',
+                    })}
                   >
                     <Stack>
                       <Text fontSize={"12"} style={{ textAlign: "left" }}>
@@ -132,6 +138,11 @@ function AboutUs() {
                     borderColor={"black"}
                     size='md'
                     padding={'4%'}
+                    onClick={ ReactGA.event({
+                      category: 'User',
+                      action: 'Clicked Button',
+                      label: 'My Button',
+                    })}
                     style={{ marginLeft: "10px" }}>
                     <Stack>
                       <Text fontSize={"12"} style={{ textAlign: "left" }}>
@@ -154,7 +165,7 @@ function AboutUs() {
                       onLoad={handleImageLoad}
                       style={{
                         display: isLoading ? "none" : "block",
-                        ...(isLoading ? {} : bounceAnimation) // Apply the animation if not loading
+                        ...(isLoading ? {} : bounceAnimation) 
                       }}
                       height="100%"
                       width="100%"
@@ -192,12 +203,22 @@ function AboutUs() {
                     mr={2}
                     mt={10}
                     borderColor="black"
+                    onClick={ ReactGA.event({
+                      category: 'User',
+                      action: 'Clicked Button',
+                      label: 'My Button',
+                    })}
                   />
                   <IconButton
                     aria-label="Facebook"
                     icon={<Icon as={FaFacebook} />}
                     isRound={true}
                     size="sm"
+                    onClick={ ReactGA.event({
+                      category: 'User',
+                      action: 'Clicked Button',
+                      label: 'My Button',
+                    })}
                     mr={2}
                     mt={10}
                     borderColor="black"
@@ -206,6 +227,11 @@ function AboutUs() {
                     aria-label="Twitter"
                     icon={<Icon as={FaTwitter} />}
                     isRound={true}
+                    onClick={ ReactGA.event({
+                      category: 'User',
+                      action: 'Clicked Button',
+                      label: 'My Button',
+                    })}
                     size="sm"
                     mt={10}
                     borderColor="black"
@@ -239,6 +265,11 @@ function AboutUs() {
                     <IconButton
                       aria-label="Facebook"
                       icon={<Icon as={RiMailSendLine} />}
+                      onClick={ ReactGA.event({
+                        category: 'User',
+                        action: 'Clicked Button',
+                        label: 'My Button',
+                      })}
                       size="md"
                       borderColor="none"
                       bg={colors.primary}

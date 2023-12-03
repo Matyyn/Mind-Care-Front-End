@@ -26,11 +26,9 @@ const PostTable = ({}) => {
   useEffect(() => {
     async function getReportedPosts() {
       try {
-        const response = await axios.get(
-          "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-posts"
-        );
-        console.log(response.data.data);
-        setData(response.data.data);
+        const response = await axios.get("https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-posts");
+        const postsWithId = response.data.data.filter(post => post.hasOwnProperty('postId'));
+        setData(postsWithId);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -89,7 +87,7 @@ const PostTable = ({}) => {
           fontSize="md"
           style={{ fontWeight: "bold", marginLeft: "2%", marginTop: "1%" }}
         >
-          Reported Accounts
+          Reported Posts
         </Text>
         <Text
           fontSize="md"

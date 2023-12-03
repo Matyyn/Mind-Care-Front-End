@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
+import ReactGA from "react-ga4";
 import colors from "../Colors";
 import { SimpleGrid, GridItem, Grid } from "@chakra-ui/react";
 import {
@@ -368,6 +369,11 @@ function BookAppointment() {
                 color: "white",
               }}
               size="md"
+              onClick={ ReactGA.event({
+                category: 'Therapist',
+                action: 'Get MindCare App',
+                label: 'My Button',
+              })}   
             >
               Get MindCare App
             </Button>

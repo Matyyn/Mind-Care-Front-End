@@ -28,9 +28,10 @@ const CommentsTable = () => {
       try {
         const response = await axios.get(
           "https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/admin/get-reported-comments"
-        );
-        console.log('comments',response.data.data);
-        setData(response.data.data);
+        );     
+        const postsWithId = response.data.data.filter(post => post.hasOwnProperty('commentId'));
+        console.log(postsWithId)
+        setData(postsWithId);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -38,49 +39,49 @@ const CommentsTable = () => {
     getReportedComments();
   }, []);
 
-  const handleSave = (postId) => {
-    console.log("Saving data for post with ID:", postId);
-  };
+  // const handleSave = (postId) => {
+  //   console.log("Saving data for post with ID:", postId);
+  // };
 
-  const handleNameFilterChange = (value) => {
-    setNameFilter(value);
-  };
+  // const handleNameFilterChange = (value) => {
+  //   setNameFilter(value);
+  // };
 
-  const handleStatusFilterChange = (value) => {
-    setStatusFilter(value);
-  };
+  // const handleStatusFilterChange = (value) => {
+  //   setStatusFilter(value);
+  // };
 
-  const handleSearchTermChange = (value) => {
-    setSearchTerm(value);
-  };
+  // const handleSearchTermChange = (value) => {
+  //   setSearchTerm(value);
+  // };
 
-  const getUniquePosts = (posts) => {
-    const uniquePosts = [];
-    const uniquePostIds = new Set();
+  // const getUniquePosts = (posts) => {
+  //   const uniquePosts = [];
+  //   const uniquePostIds = new Set();
 
-    posts.forEach((post) => {
-      if (!uniquePostIds.has(post.postId._id)) {
-        uniquePostIds.add(post.postId._id);
-        uniquePosts.push(post);
-      }
-    });
+  //   posts.forEach((post) => {
+  //     if (!uniquePostIds.has(post.postId._id)) {
+  //       uniquePostIds.add(post.postId._id);
+  //       uniquePosts.push(post);
+  //     }
+  //   });
 
-    return uniquePosts;
-  };
+  //   return uniquePosts;
+  // };
 
-  const uniquePosts = getUniquePosts(data);
+  // const uniquePosts = getUniquePosts(data);
 
-  const filteredPosts = uniquePosts
-    .filter((post) =>
-      nameFilter
-        ? post.postId.title.toLowerCase().includes(nameFilter.toLowerCase())
-        : true
-    )
-    .filter((post) =>
-      statusFilter
-        ? (post.__v > 0 ? "Removed" : "No Action") === statusFilter
-        : true
-    );
+  // const filteredPosts = uniquePosts
+  //   .filter((post) =>
+  //     nameFilter
+  //       ? post.postId.title.toLowerCase().includes(nameFilter.toLowerCase())
+  //       : true
+  //   )
+  //   .filter((post) =>
+  //     statusFilter
+  //       ? (post.__v > 0 ? "Removed" : "No Action") === statusFilter
+  //       : true
+  //   );
 
   return (
     <div width="auto">
@@ -144,11 +145,10 @@ const CommentsTable = () => {
       </Stack>
       <Table variant="simple">
         <Thead>
-          <Tr>
-            <Th textAlign="center">Title</Th>
+          <Tr>            
             <Th textAlign="center">Body</Th>
-            <Th textAlign="center">Tags</Th>
-            <Th textAlign="center">Created At</Th>
+            <Th textAlign="center">Violation</Th>
+            <Th textAlign="center">Reported At</Th>
             <Th textAlign="center">No of Reports</Th>
             {/* <Th textAlign="center">Status</Th> */}
             <Th textAlign="center">Actions</Th>
@@ -162,16 +162,15 @@ const CommentsTable = () => {
               </Td>
             </Tr>
           ) : (
-            filteredPosts.map((post) => (
-              <Tr key={post._id}>
-                <Td textAlign="center">{post.postId.title}</Td>
-                <Td textAlign="center">{post.postId.body}</Td>
-                <Td textAlign="center">{post.postId.tags.join(",")}</Td>
+            data.map((post) => (
+              <Tr>
+                {/* <Td textAlign="center">{post.postId.title}</Td> */}
+                <Td textAlign="center">{post.commentId.body}</Td>
+                <Td textAlign="center">{post.violation}</Td>
                 <Td textAlign="center">
-                  {new Date(post.postId.createdAt).toLocaleString()}
+                  {new Date(post.commentId.createdAt).toLocaleString()}
                 </Td>
-                <Td textAlign="center">{post.postId.postReport.length}</Td>
-                
+                <Td textAlign="center">{post.commentId.commentReport.length}</Td>                
                 <Td textAlign="center">
                   <Button
                     colorScheme="red"
@@ -179,7 +178,7 @@ const CommentsTable = () => {
                     onClick={() => handleSave(post.postId._id)}
                     disabled={post.__v > 0}
                   >
-                    Remove Post
+                    Remove Comment
                   </Button>
                 </Td>
               </Tr>
