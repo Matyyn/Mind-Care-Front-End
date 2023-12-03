@@ -120,8 +120,8 @@ function AboutUs() {
                     size='md'
                     padding={"4%"}
                     onClick={ ReactGA.event({
-                      category: 'User',
-                      action: 'Clicked Button',
+                      category: 'Therapist',
+                      action: 'Get It On Play Store',
                       label: 'My Button',
                     })}
                   >
@@ -139,8 +139,8 @@ function AboutUs() {
                     size='md'
                     padding={'4%'}
                     onClick={ ReactGA.event({
-                      category: 'User',
-                      action: 'Clicked Button',
+                      category: 'Therapist',
+                      action: 'Download on the App Store',
                       label: 'My Button',
                     })}
                     style={{ marginLeft: "10px" }}>
@@ -204,8 +204,8 @@ function AboutUs() {
                     mt={10}
                     borderColor="black"
                     onClick={ ReactGA.event({
-                      category: 'User',
-                      action: 'Clicked Button',
+                      category: 'Therapist',
+                      action: 'LinkedIn',
                       label: 'My Button',
                     })}
                   />
@@ -215,8 +215,8 @@ function AboutUs() {
                     isRound={true}
                     size="sm"
                     onClick={ ReactGA.event({
-                      category: 'User',
-                      action: 'Clicked Button',
+                      category: 'Therapist',
+                      action: 'Facebook',
                       label: 'My Button',
                     })}
                     mr={2}
@@ -228,8 +228,8 @@ function AboutUs() {
                     icon={<Icon as={FaTwitter} />}
                     isRound={true}
                     onClick={ ReactGA.event({
-                      category: 'User',
-                      action: 'Clicked Button',
+                      category: 'Therapist',
+                      action: 'Twitter',
                       label: 'My Button',
                     })}
                     size="sm"
@@ -266,8 +266,8 @@ function AboutUs() {
                       aria-label="Facebook"
                       icon={<Icon as={RiMailSendLine} />}
                       onClick={ ReactGA.event({
-                        category: 'User',
-                        action: 'Clicked Button',
+                        category: 'Therapist',
+                        action: 'Mail',
                         label: 'My Button',
                       })}
                       size="md"
