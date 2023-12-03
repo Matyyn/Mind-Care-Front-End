@@ -44,7 +44,7 @@ ReactGA.initialize("G-473NZBR34V", { debug: true });
 function App() {
   useEffect(() => {
     const page = window.location.pathname;
-    ReactGA.pageview(page);
+    ReactGA.send(page);
   }, []);
   return (
     <ChakraProvider >
