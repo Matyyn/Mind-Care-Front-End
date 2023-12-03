@@ -51,14 +51,16 @@ function AboutUs() {
   const showImage = useBreakpointValue({ base: false, md: false, lg: true });
   const showMarginTop = useBreakpointValue({ sm: false, md: true, lg: true });
 
-  // for spinner
+  
   const handleImageLoad = () => {
     setIsLoading(false);
   };
 
-  // Define the bounce animation CSS
+  useEffect (() => {
+    ReactGA.send('Home Page');
+  },[])
   const bounceAnimation = {
-    animation: "bounce 2s infinite",
+    animation: "bounce 3s infinite",
   };
 
   return (

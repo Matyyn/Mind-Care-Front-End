@@ -39,9 +39,12 @@ import {
 } from "@chakra-ui/icons";
 import { color } from "framer-motion";
 
+
 function Stats() {
   const [isLoading, setIsLoading] = useState(true);
-  //for spinner
+  useEffect (() => {
+    ReactGA.send('Home Page');
+  },[])
   const handleImageLoad = () => {
     setIsLoading(false);
   };

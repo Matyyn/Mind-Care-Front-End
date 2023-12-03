@@ -37,8 +37,11 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-
+import ReactGA from 'react-ga4';
 function Pricing() {
+  useEffect (() => {
+    ReactGA.send('Home Page');
+  },[])
   const showImage = useBreakpointValue({ base: false, md: false, lg: true });
   const showMarginTop = useBreakpointValue({ sm: false, md: true, lg: true });
   const [isLoading, setIsLoading] = useState(true);

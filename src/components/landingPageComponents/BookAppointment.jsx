@@ -41,7 +41,9 @@ import {
 
 function BookAppointment() {
   const [isLoading, setIsLoading] = useState(true);
-  //for spinner
+  useEffect (() => {
+    ReactGA.send('Home Page');
+  },[])
   const handleImageLoad = () => {
     setIsLoading(false);
   };

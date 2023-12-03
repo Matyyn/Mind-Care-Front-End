@@ -8,8 +8,10 @@ import ReactGA from 'react-ga4';
 
 function IndexPage() {
   const [isLoading, setIsLoading] = useState(true);
+  useEffect (() => {
+    ReactGA.send('Home Page');
+  },[])
 
-  // for spinner
   const handleImageLoad = () => {
     setIsLoading(false);
   };

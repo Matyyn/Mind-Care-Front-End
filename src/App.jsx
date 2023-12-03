@@ -42,10 +42,9 @@ import { useEffect } from "react";
 
 ReactGA.initialize("G-473NZBR34V", { debug: true });
 function App() {
-  useEffect(() => {
-    const page = window.location.pathname;
-    ReactGA.send(page);
-  }, []);
+  useEffect (() => {
+    ReactGA.send('pageview');
+  },[])
   return (
     <ChakraProvider >
       <Provider store={store}>

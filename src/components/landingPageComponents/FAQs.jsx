@@ -11,7 +11,11 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
+import ReactGA from 'react-ga4';
 function FAQs() {
+  useEffect (() => {
+    ReactGA.send('Home Page');
+  },[])
   return (
     <>
     <div className="parentDiv">
