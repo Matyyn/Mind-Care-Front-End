@@ -1,39 +1,81 @@
-import { FaRegBell, FaCog } from "react-icons/fa"
-import React from "react"
+import { FaRegBell, FaCog } from "react-icons/fa";
+import React, { useEffect } from "react";
 import colors from "../Colors";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import {
-  Box,
+  Box,Checkbox,
   Flex,
   Text,
   IconButton,
   Stack,
   Collapse,
   Icon,
-  Image,Avatar,AvatarBadge,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
+  Image,
+  Avatar,
+  AvatarBadge,
   useColorModeValue,
   useBreakpointValue,
-  useDisclosure
-} from "@chakra-ui/react"
+  useDisclosure,
+} from "@chakra-ui/react";
 import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
-  ChevronRightIcon
-} from "@chakra-ui/icons"
-import Test from "../Sidebar"
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
+import Test from "../Sidebar";
 import { useSelector } from "react-redux";
-
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from "@chakra-ui/react";
+import axios from 'axios'
 
 export default function WithSubnavigation() {
+  function timeDifference(current, previous) {
+    const msPerMinute = 60 * 1000;
+    const msPerHour = msPerMinute * 60;
+    const msPerDay = msPerHour * 24;
+
+    const elapsed = current - previous;
+
+    if (elapsed < msPerMinute) {
+        return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+
+    else if (elapsed < msPerHour) {
+        return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+
+    else if (elapsed < msPerDay ) {
+        return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+
+    else {
+        return Math.round(elapsed/msPerDay) + ' days ago';   
+    }
+}
+
   const therapistInfo = useSelector((state) => state.therapistReducer.user);
-  
-   const { isOpen, onToggle } = useDisclosure()
+  const [notifications, setNotifications] = React.useState([]);  
+  useEffect (() => {
+    async function getNotifications() {
+      const response = await axios.get("https://mind-care-backend-7dd9b4794b38.herokuapp.com/api/v1/client/notification/646a465d4febe2829a96b83c")      
+      console.log(response.data.data)
+      setNotifications(response.data.data)
+    }
+   getNotifications();    
+  },[])  
+  const { isOpen, onToggle } = useDisclosure();
   return (
-    <Box width={{ base: 'auto', md: 'auto' }}>
+    <Box width={{ base: "auto", md: "auto" }}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -60,9 +102,9 @@ export default function WithSubnavigation() {
           /> */}
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Test 
+          <Test
           // therapist={therapist}
-           />
+          />
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             //fontFamily={"inter"}
@@ -84,27 +126,49 @@ export default function WithSubnavigation() {
           justify={"flex-end"}
           direction={"row"}
           spacing={6}
-        >
-          <IconButton
-            aria-label="notifications"
-            icon={<FaRegBell />}
-            variant="ghost"
-            colorScheme="gray"
-            mr={3}
-            fontSize={"25"}
-          />
+        >          
+          <Popover>
+            <PopoverTrigger>
+                  <IconButton
+                  aria-label="notifications"
+                  icon={<FaRegBell />}
+                  variant="ghost"
+                  colorScheme="gray"
+                  mr={3}
+                  fontSize={"25"}
+                />
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverHeader>Notifications!</PopoverHeader>
+              <PopoverBody>
+                {notifications.map((notification, index) => (
+                  <Box key={index} mb={2}>
+                    <Checkbox colorScheme="green" size="lg">
+                      <Box ml={2}>
+                        <Text fontWeight="bold" fontSize={16}>{notification.notificationTitle}</Text>
+                        <Text fontSize={16}>{notification.notificationBody}</Text>
+                        <Text fontSize="xs">{timeDifference(Date.now(), new Date(notification.notificationTime).getTime())}</Text>
+                      </Box>
+                    </Checkbox>
+                  </Box>
+                ))}
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
 
-    <Link to={"/therapistProfile"}>
-      <Avatar size={"md"} >
-        <AvatarBadge boxSize="1.25em" bg="green.500"/>
-        <Image
-      src={therapistInfo.picture}
-      alt="Therapist Image"
-      borderRadius="full"
-      boxSize="100%"
-    />
-      </Avatar>
-    </Link>
+          <Link to={"/therapistProfile"}>
+            <Avatar size={"md"}>
+              <AvatarBadge boxSize="1.25em" bg="green.500" />
+              <Image
+                src={therapistInfo.picture}
+                alt="Therapist Image"
+                borderRadius="full"
+                boxSize="100%"
+              />
+            </Avatar>
+          </Link>
         </Stack>
       </Flex>
 
@@ -112,17 +176,17 @@ export default function WithSubnavigation() {
         <MobileNav />
       </Collapse>
     </Box>
-  )
+  );
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200")
-  const linkHoverColor = useColorModeValue("blue.800", "yellow")
-  const popoverContentBgColor = useColorModeValue("white", "gray.800")
+  const linkColor = useColorModeValue("gray.600", "gray.200");
+  const linkHoverColor = useColorModeValue("blue.800", "yellow");
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map(navItem => (
+      {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
@@ -134,7 +198,7 @@ const DesktopNav = () => {
                 color={linkColor}
                 _hover={{
                   textDecoration: "underline",
-                  color: linkHoverColor
+                  color: linkHoverColor,
                 }}
               >
                 {navItem.label}
@@ -151,7 +215,7 @@ const DesktopNav = () => {
                 minW={"sm"}
               >
                 <Stack>
-                  {navItem.children.map(child => (
+                  {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
                 </Stack>
@@ -161,8 +225,8 @@ const DesktopNav = () => {
         </Box>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
@@ -198,8 +262,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
         </Flex>
       </Stack>
     </Link>
-  )
-}
+  );
+};
 
 const MobileNav = () => {
   return (
@@ -208,15 +272,15 @@ const MobileNav = () => {
       p={4}
       display={{ md: "none" }}
     >
-      {NAV_ITEMS.map(navItem => (
+      {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -227,7 +291,7 @@ const MobileNavItem = ({ label, children, href }) => {
         justify={"space-between"}
         align={"center"}
         _hover={{
-          textDecoration: "underline"
+          textDecoration: "underline",
         }}
       >
         <Text
@@ -257,7 +321,7 @@ const MobileNavItem = ({ label, children, href }) => {
           align={"start"}
         >
           {children &&
-            children.map(child => (
+            children.map((child) => (
               <Link key={child.label} py={2} href={child.href}>
                 {child.label}
               </Link>
@@ -265,7 +329,7 @@ const MobileNavItem = ({ label, children, href }) => {
         </Stack>
       </Collapse>
     </Stack>
-  )
-}
+  );
+};
 
-const NAV_ITEMS = []
+const NAV_ITEMS = [];

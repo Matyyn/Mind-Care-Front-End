@@ -37,7 +37,7 @@ import io from "socket.io-client";
 
 export default function Simple() {
   const toast = useToast();  
-  const [user, setUser] = useState(localStorage.getItem('state'));
+  const [user, setUser] = useState(false);
   const [allUsers, setAllUsers] = useState([]);  
   const [refresh, setRefresh] = useState(false);
   const [showMore, setShowMore] = useState(false);

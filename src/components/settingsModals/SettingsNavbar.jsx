@@ -77,14 +77,14 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <IconButton
+          {/* <IconButton
             aria-label="notifications"
             icon={<FaRegBell />}
             variant="ghost"
             colorScheme="gray"
             mr={3}
             fontSize={"25"}
-          />
+          /> */}
 
           <Image
             src="src\assets\Images\depression.png"

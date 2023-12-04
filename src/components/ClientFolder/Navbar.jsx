@@ -83,7 +83,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <IconButton
+          {/* <IconButton
             aria-label="notifications"
             icon={<FaRegBell />}
             variant="ghost"
@@ -91,7 +91,7 @@ export default function WithSubnavigation() {
             mr={3}
             fontSize={"25"}
             onClick={handleNotificationsClick}
-          />
+          /> */}
           <Link to={"/therapistprofile"}>
             <Avatar size={"md"} >
               <AvatarBadge boxSize="1.25em" bg="green.500" />

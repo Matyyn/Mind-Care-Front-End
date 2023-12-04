@@ -13,14 +13,14 @@ function PersonalNavigator() {
   return (
     <div className="drawer">
       <div className="tray">
-        <IconButton
+        {/* <IconButton
           aria-label="notifications"
           icon={<FaRegBell />}
           variant="ghost"
           colorScheme="gray"
           mr={3}
           fontSize={"25"}
-        />
+        /> */}
 
         <Link to={"/therapistprofile"}>
           <Avatar

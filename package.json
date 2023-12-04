@@ -80,6 +80,7 @@
     "tesseract.js": "^4.1.1",
     "uuid": "^9.0.0",
     "victory-chart": "^36.6.8",
+    "vite-plugin-pwa": "^0.17.2",
     "word-extractor": "^1.0.4",
     "yup": "^1.0.2"
   },
